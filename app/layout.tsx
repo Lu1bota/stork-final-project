@@ -32,6 +32,7 @@ export default function RootLayout({
       <body className={`${fontsLato.variable} ${fontsComfortaa.variable}`}>
         <TanStackProvider>
           <main>{children}</main>
+          <div id="modal-root" />
         </TanStackProvider>
       </body>
     </html>

@@ -1,0 +1,74 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.dialog {
+  background: #fff;
+  color: #111;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  transform: translateY(4px);
+  opacity: 0;
+  animation: fadeInUp 160ms ease-out forwards;
+}
+
+.title {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.primary,
+.secondary {
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.secondary {
+  background: #f2f3f5;
+  color: #111;
+}
+
+.primary {
+  background: #2f80ed;
+  color: #fff;
+}
+
+.primary:focus,
+.secondary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.25);
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
