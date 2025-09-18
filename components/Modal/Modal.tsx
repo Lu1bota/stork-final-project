@@ -1,53 +1,46 @@
 "use client";
 
 import { useEffect } from "react";
-import styles from "./Modal.module.css";
+import css from "./Modal.module.css";
 
 
 export type ModalProps = {
-  isOpen: boolean;
-  title: string;
-  onClose: () => void;
   children: React.ReactNode;
+  title: string;
+  close?: () => void;
 };
 
-export default function Modal({
-  isOpen,
-  title,
-  onClose,
-  children,
-}: ModalProps) {
-  // Закриття по клавіші Escape (проста реалізація, без керування фокусом)
+export default function Modal({ children, title, close }: ModalProps) {
+  // Закриття по клавіші Escape (проста реалізація)
   useEffect(() => {
-    if (!isOpen) return;
+    if (!close) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") close();
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [isOpen, onClose]);
-
-  // Якщо модалка закрита — нічого не рендеримо
-  if (!isOpen) return null;
+  }, [close]);
 
   return (
     // Бекдроп. Клік по ньому закриває модалку
-    <div className={styles.backdrop} onClick={onClose}>
+    <div className={css.backdrop} onClick={close ? () => close() : undefined}>
       {/* Вміст модалки. Зупиняємо спливання кліку, щоб не закривати по кліку всередині */}
-      <div className={styles.dialog} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.header}>
-          <h2 className={styles.title}>{title}</h2>
-          <button
-            type="button"
-            className={styles.close}
-            aria-label="Закрити"
-            onClick={onClose}
-          >
-            ✕
-          </button>
+      <div className={css.dialog} onClick={(e) => e.stopPropagation()}>
+        <div className={css.header}>
+          <h2 className={css.title}>{title}</h2>
+          {close && (
+            <button
+              type="button"
+              className={css.close}
+              aria-label="Закрити"
+              onClick={close}
+            >
+              ✕
+            </button>
+          )}
         </div>
 
-        <div className={styles.content}>{children}</div>
+        <div className={css.content}>{children}</div>
       </div>
     </div>
   );
