@@ -1,12 +1,12 @@
 .page {
     display: flex;
     flex-direction: column;
-    padding: 16px;
-    gap: 32px;
+    
 }
 
 @media (min-width: 768px) {
     .page {
+    
       flex-direction: row;
       align-items: stretch;
       justify-content: center;
@@ -15,13 +15,13 @@
 
   @media (min-width: 1024px) {
     .page {
-      max-width: 1200px;
-      margin: 0 auto;
+      margin: 0;
     }
   }
 
   .left {
     flex: 1;
+    padding: 0px 64px;
   }
   
   .right {
@@ -38,12 +38,14 @@
   }
 
   .title {
-    font-size: 36px;
+font-family: var(--second-family);
+font-weight: 700;
+font-size: 48px;
+line-height: 120%;
+letter-spacing: 0.01em;
+text-align: center;
+color: var(--color-scheme-text);
     margin-bottom: 20px;
-    font-family: var(--second-family);
-    font-weight: 700;
-    text-align: center;
-    color: var(--color-scheme-text);
   }
 
   @media (min-width: 1024px) {
@@ -59,13 +61,6 @@
   }
 
 
-
-
-
-
-
-
-  /* ==== Поля вводу ==== */
 .input,
 .select {
   padding: 12px;
@@ -87,7 +82,7 @@
   margin-top: 4px;
 }
 
-/* ==== Кнопка ==== */
+
 .button {
   background-color: var(--color-pastel-pink);
   color: var(--color-neutral-darkest);
@@ -109,9 +104,11 @@
   cursor: not-allowed;
 }
 
-/* ==== Завантаження аватарки ==== */
+
 .upload {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .avatarButton {
@@ -150,6 +147,7 @@
 
 .avatarIcon {
   font-size: 28px;
+
 }
 
 .hiddenInput {

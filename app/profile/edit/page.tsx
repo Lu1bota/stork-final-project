@@ -12,7 +12,7 @@ export default function OnboardingPage () {
 <OnboardingForm/>
 </div>
 <div className={styles.right}>
-<img src="/seedling.png" alt="Росток" className={styles.image}/>
+<img src="/seedling.png" alt="Росток" width={720} height={900} className={styles.image}/>
 </div>
   </main>
     )

@@ -1,12 +1,14 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import {useMutation} from '@tanstack/react-query';
 import { useRouter } from "next/navigation";
 import {toast} from 'react-hot-toast';
 import { saveProfile } from '../../../lib/api';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import styles from './OnboardingForm.module.css'
 
 
@@ -18,6 +20,7 @@ const validationSchema = Yup.object({
 
   export default function OnboardingForm() {
     const router = useRouter();
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
     const mutation = useMutation<unknown, Error, FormData>({
@@ -33,12 +36,12 @@ const validationSchema = Yup.object({
 
     return (
         <Formik
-      initialValues={{ gender: '', dueDate: '', avatar: null }}
+      initialValues={{ gender: '', dueDate: null, avatar: null }}
       validationSchema={validationSchema}
       onSubmit={(values) => {
         const formData = new FormData();
         formData.append('gender', values.gender);
-        formData.append('dueDate', values.dueDate);
+        formData.append('dueDate', values.dueDate?.toISOString() || '');
         if (avatarFile) {
           formData.append('avatar', avatarFile);
         }
@@ -46,10 +49,10 @@ const validationSchema = Yup.object({
         mutation.mutate(formData);
       }}
     >
-      {({ setFieldValue }) => (
+      {({ setFieldValue, values }) => (
         <Form className={styles.form}>
         <div className={styles.upload}>
-          <label htmlFor="avatar" className={styles.avatarButton}>
+          <label htmlFor="avatar" className={styles.avatarLabel}>
             <div className={styles.avatarPreview}>
               {avatarFile ? (
                 <img
@@ -58,12 +61,15 @@ const validationSchema = Yup.object({
                   className={styles.avatarImage}
                 />
               ) : (
-                <span className={styles.avatarIcon}>📷</span>
+                <img src="/avatar-upload.svg" alt="avatar upload" className={styles.avatarIcon} />
               )}
             </div>
-            Завантажити фото
+            <button type="button" onClick={() => fileInputRef.current?.click()} >
+                Завантажити фото
+                </button>
           </label>
           <input
+          ref={fileInputRef}
             id="avatar"
             type="file"
             accept="image/*"
@@ -75,8 +81,7 @@ const validationSchema = Yup.object({
             }}
           />
         </div>
-
-          <div className={styles.field}>
+        <div className={styles.field}>
             <Field as="select" name="gender" className={styles.select}>
               <option value="">Оберіть стать</option>
               <option value="male">Хлопчик</option>
@@ -86,8 +91,24 @@ const validationSchema = Yup.object({
             <ErrorMessage name="gender" component="div" className={styles.error} />
           </div>
 
-          <div className={styles.field}>
-            <Field type="date" name="dueDate" className={styles.input} />
+        <div className={styles.field}>
+            <Field name="dueDate">
+              {({ field, form }: any) => (
+                <DatePicker
+                  selected={field.value}
+                  onChange={(date: Date | null) => {
+                    setFieldValue('dueDate', date);
+                  }}
+                  dateFormat="dd.MM.yyyy"
+                  placeholderText="Оберіть дату"
+                  maxDate={new Date()}
+                  className={styles.input}
+                  showMonthDropdown
+                  showYearDropdown
+                  dropdownMode="select"
+                />
+              )}
+            </Field>
             <ErrorMessage name="dueDate" component="div" className={styles.error} />
           </div>
 
