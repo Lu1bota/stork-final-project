@@ -12,9 +12,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import styles from './OnboardingForm.module.css'
 
 
+
 const validationSchema = Yup.object({
     gender: Yup.string().required('Оберіть стать дитини'),
-    dueDate: Yup.date().required('Оберіть дату'),
+    dueDate: Yup.date().nullable().required('Оберіть дату'),
     avatar: Yup.mixed().nullable(),
   });
 
@@ -64,7 +65,7 @@ const validationSchema = Yup.object({
                 <img src="/avatar-upload.svg" alt="avatar upload" className={styles.avatarIcon} />
               )}
             </div>
-            <button type="button" onClick={() => fileInputRef.current?.click()} >
+            <button type="button" className={styles.uploadButton} onClick={() => fileInputRef.current?.click()} >
                 Завантажити фото
                 </button>
           </label>
@@ -82,6 +83,7 @@ const validationSchema = Yup.object({
           />
         </div>
         <div className={styles.field}>
+        <label htmlFor="gender" className={styles.label}>Стать дитини</label>
             <Field as="select" name="gender" className={styles.select}>
               <option value="">Оберіть стать</option>
               <option value="male">Хлопчик</option>
@@ -92,6 +94,7 @@ const validationSchema = Yup.object({
           </div>
 
         <div className={styles.field}>
+        <label htmlFor="born date" className={styles.label}>Планова дата пологів</label>
             <Field name="dueDate">
               {({ field, form }: any) => (
                 <DatePicker
@@ -101,7 +104,7 @@ const validationSchema = Yup.object({
                   }}
                   dateFormat="dd.MM.yyyy"
                   placeholderText="Оберіть дату"
-                  maxDate={new Date()}
+                  calendarClassName={styles.calendar}
                   className={styles.input}
                   showMonthDropdown
                   showYearDropdown
