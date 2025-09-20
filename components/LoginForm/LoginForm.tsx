@@ -17,8 +17,8 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function LoginForm() {
-  const handleSubmit = (values, actions) => {
-    actions.resetForm();
+  const handleSubmit = () => {
+
   };
 
   return (
