@@ -111,7 +111,7 @@ export default function RegistrationForm() {
           </Form>
         )}
       </Formik>
-      <img src="" alt="Storks picture" />
+      {/* <img src="" alt="Storks picture" /> */}
     </Container>
   );
 }

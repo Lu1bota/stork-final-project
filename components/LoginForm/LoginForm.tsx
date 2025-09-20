@@ -78,7 +78,7 @@ export default function LoginForm() {
           </Form>
         )}
       </Formik>
-      <img src="" alt="Stork's eggs picture" />
+      {/* <img src="" alt="Stork's eggs picture" /> */}
     </Container>
   );
 }
