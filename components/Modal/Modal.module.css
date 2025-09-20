@@ -105,19 +105,6 @@
   color: #000;
 }
 
-/* Кнопка "Ні" за макетом */
-.btnNo {
-  width: 268px;
-  background: var(--Color-Scheme-Foreground-Alt, rgba(254, 241, 219, 1));
-  border-bottom: 4px solid var(--Color-Scheme-Accent, rgba(254, 236, 204, 1));
-}
-
-/* Кнопка "Так" (Secondary) */
-.btnYes {
-  width: 268px;
-  background: var(--Opacity-Neutral-Darkest-5, rgba(0, 0, 0, 0.05));
-  border-bottom: 4px solid var(--Opacity-Neutral-Darkest-15, rgba(0, 0, 0, 0.15));
-}
 
 @media (min-width: 768px) {
   .dialog {

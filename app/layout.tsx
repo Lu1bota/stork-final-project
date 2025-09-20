@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato, Comfortaa } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import { BreadcrumbsGuard } from "@/components/Breadcrumbs";
 
 const fontsLato = Lato({
   variable: "--font-lato",
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${fontsLato.variable} ${fontsComfortaa.variable}`}>
         <TanStackProvider>
+          <BreadcrumbsGuard homeLabel="Мій день" separator={<span> / </span>} capitalize />
           <main>{children}</main>
         </TanStackProvider>
       </body>
