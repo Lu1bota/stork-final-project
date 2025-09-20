@@ -1,6 +1,8 @@
 import { nextServer } from "./api";
 import { User } from "@/types/user";
 import { useAuthStore } from "../store/authStore";
+import { CreateTaskRequest, Task } from "@/types/task.js";
+import { DiaryEntry, Emotion } from "@/types/diary.js";
 
 export type RegisterRequest = {
     name: string;
@@ -70,6 +72,79 @@ export const updateMe = async (payload: UpdateUserRequest): Promise<User> => {
     return data;
 }
 
+// TASKS
+
+export const getTasks = async (): Promise<Task[]> => {
+    const { data } = await nextServer.get<{ status: number; message: string; data: Task[]}>('/tasks', {
+        headers: getAuthHeaders(),
+    });
+    return data.data;
+}
+
+export const createTask = async (payload: CreateTaskRequest): Promise<Task> => {
+    const { data } = await nextServer.post<{ status: number; message: string; data: Task }>('/tasks', payload, {
+        headers: getAuthHeaders(),
+    });
+    return data.data;
+}
+
+export const setTaskCompleted = async (taskId: string, completed: boolean): Promise<Task> => {
+    const { data } = await nextServer.patch<{ status: number; message: string; data: Task }>(`/tasks/${taskId}/complited`,
+        { completed },
+        { headers: getAuthHeaders() }
+    );
+    return data.data;
+}
+
+// DIARIES
+
+export const getDiaryEntries = async (): Promise<DiaryEntry[]> => {
+    const { data } = await nextServer.get<{ status: number; message: string; data: DiaryEntry[]}>('/diaries', {
+        headers: getAuthHeaders(),
+    });
+    return data.data;
+}
+
+export type CreateDiaryRequest = {
+  title: string;
+  description: string;
+  date?: string;
+  emotions: string[];
+}
+
+export const createDiaryEntry = async (payload: CreateDiaryRequest): Promise<DiaryEntry> => {
+    const { data } = await nextServer.post<{ status: number; message: string; data: DiaryEntry }>('/diaries', payload, {
+        headers: getAuthHeaders(),
+    });
+    return data.data;
+}
+    
+export type UpdateDiaryRequest = {
+    title?: string;
+    description?: string;
+    date?: string;
+    emotions?: string[];
+}
+
+export const updateDiaryEntry = async (entryId: string, payload: UpdateDiaryRequest): Promise<DiaryEntry> => {
+    const { data } = await nextServer.patch<{ status: number; message: string; data: DiaryEntry }>(`/diaries/${entryId}`, payload, {
+        headers: getAuthHeaders(),
+    });
+    return data.data;
+}
+
+export const deleteDiaryEntry = async (entryId: string): Promise<void> => {
+    await nextServer.delete(`/diaries/${entryId}`, {
+        headers: getAuthHeaders(),
+    });
+}
+
+export const getEmotions = async (): Promise<Emotion[]> => {
+    const { data } = await nextServer.get<{ status: number; message: string; data: Emotion[] }>('/emotions', {
+        headers: getAuthHeaders(),
+    });
+    return data.data;
+}
 // WEEKS
 
 export const getPublicWeekInfo = async () => {
