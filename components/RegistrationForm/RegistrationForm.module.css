@@ -80,7 +80,7 @@
 .inputError::placeholder {
   color: var(--color-red);
 }
-
+ 
 .error {
   font-weight: 400;
   font-size: 12px;
