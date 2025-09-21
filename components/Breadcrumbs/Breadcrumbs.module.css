@@ -1,12 +1,50 @@
-.container {}
 
-.list { list-style: none; padding: 0; margin: 0; display: flex; gap: 8px; }
+.container { display: inline-block; }
 
-.item {}
-.link {}
-.active {}
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+  gap: 12px;
+}
 
-.sepItem { padding: 0 4px; }
-.sep { padding: 0 4px; }
+.container { display: inline-block; }      /* ширина по контенту (~147px) */
+.list { min-height: 24px; }  
+
+.link {
+  font-family: var(--font-lato), system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px; 
+  line-height: 160%;
+  letter-spacing: 0;
+  text-align: center;
+  color: #7f7f7f;
+  text-decoration: none;
+}
+
+.link:visited { color: #7f7f7f; background: transparent; opacity: 1; }
+
+.home {
+  color: #000; /* Лелека */
+}
+
+.home:visited { color: #000; background: transparent; opacity: 1; }
+
+.active { color: #7f7f7f; }
+
+.sepItem { padding: 0; display: inline-flex; }
+.sep { display: inline-flex; align-items: center; justify-content: center; }
+.sepIcon { width: 24px; height: 24px; }
+
+@media (min-width: 768px) {
+  .list { gap: 16px; }
+}
+
+@media (min-width: 1200px) {
+  .list { gap: 24px; }
+}
 
 

@@ -7,7 +7,6 @@ import styles from "./Breadcrumbs.module.css";
 
 export type BreadcrumbsProps = {
   className?: string;
-  separator?: ReactNode;
   capitalize?: boolean;
   homeHref?: string;
   homeLabel?: ReactNode;
@@ -15,7 +14,6 @@ export type BreadcrumbsProps = {
 
 export default function Breadcrumbs({
   className,
-  separator = <span className={styles.sep}>/</span>,
   capitalize = true,
   homeHref = "/",
   homeLabel = "Мій день",
@@ -32,11 +30,19 @@ export default function Breadcrumbs({
     <nav aria-label="breadcrumb" className={`${styles.container} ${className || ""}`.trim()}>
       <ol className={styles.list}>
         <li className={styles.item}>
-          <Link href={homeHref} className={styles.link}>
+          <Link href={homeHref} className={`${styles.link} ${styles.home}`}>
             {homeLabel}
           </Link>
         </li>
-        {segments.length > 0 && <li className={styles.sepItem}>{separator}</li>}
+        {segments.length > 0 && (
+          <li className={styles.sepItem}>
+            <span className={styles.sep}>
+              <svg className={styles.sepIcon} viewBox="0 0 24 24" aria-hidden>
+                <path d="M9 6l6 6-6 6" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </li>
+        )}
         {segments.map((seg, idx) => {
           hrefAccumulator += `/${seg}`;
           const isLast = idx === segments.length - 1;
@@ -49,7 +55,15 @@ export default function Breadcrumbs({
                   {makeLabel(seg)}
                 </Link>
               )}
-              {!isLast && <span className={styles.sepItem}>{separator}</span>}
+              {!isLast && (
+                <span className={styles.sepItem}>
+                  <span className={styles.sep}>
+                    <svg className={styles.sepIcon} viewBox="0 0 24 24" aria-hidden>
+                      <path d="M9 6l6 6-6 6" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </span>
+              )}
             </li>
           );
         })}

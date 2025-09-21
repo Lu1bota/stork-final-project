@@ -32,7 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${fontsLato.variable} ${fontsComfortaa.variable}`}>
         <TanStackProvider>
-          <BreadcrumbsGuard homeLabel="Мій день" separator={<span> / </span>} capitalize />
+          <BreadcrumbsGuard homeLabel="Лелека" capitalize />
           <main>{children}</main>
         </TanStackProvider>
       </body>
