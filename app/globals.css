@@ -54,6 +54,9 @@
   --color-french-pass-lighter: #e5fafe;
   --color-french-pass-lightest: #fbfefe;
   --color-red: #c60000;
+
+  --font-family: "Lato", sans-serif;
+  --second-family: "Comfortaa", sans-serif;
 }
 
 html,
