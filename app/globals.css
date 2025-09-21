@@ -64,7 +64,7 @@ body {
 body {
   color: var(--color-neutral-darkest);
   background: var(--color-white);
-  font-family: var(----font-lato), var(----font-comfortaa), sans-serif;
+  font-family: var(--font-lato), var(--font-comfortaa), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
