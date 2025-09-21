@@ -88,7 +88,7 @@
 
 
 .uploadButton {
-  border-bottom: 1px solid var(--opacity-neutral-darkest-15);
+ border: none;
   border-radius: 100px;
   padding: 8px 20px;
   width: 162px;
@@ -104,6 +104,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
 }
 
 @media (min-width: 1024px) {
@@ -241,6 +242,6 @@
 .calendar {
   background-color: rgb(255, 255, 255);
   border: 2px solid var(--color-scheme-foreground-alt);
-  border-radius: 12px;
-  padding: 10px;
+  border-radius: 14px;
+  padding: 18px;
 }

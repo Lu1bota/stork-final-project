@@ -106,8 +106,6 @@ const validationSchema = Yup.object({
                   placeholderText="Оберіть дату"
                   calendarClassName={styles.calendar}
                   className={styles.input}
-                  showMonthDropdown
-                  showYearDropdown
                   dropdownMode="select"
                 />
               )}
@@ -122,5 +120,4 @@ const validationSchema = Yup.object({
       )}
     </Formik>
     );
-
   }

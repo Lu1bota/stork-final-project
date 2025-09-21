@@ -7,25 +7,25 @@ import OnboardingForm from "./OnboardingForm";
 export default function OnboardingPage() {
   return (
     <div className={styles.container}>
-      <div className={styles.navbar}>
+     
+      <div className={styles.page}>
+        <div className={styles.left}>
+        <div className={styles.navbar}>
         <img src="/logo.svg" alt="logo" width={105} height={45} />
       </div>
-
-      <main className={styles.page}>
-        <div className={styles.left}>
           <h1 className={styles.title}>Давайте познайомимось ближче</h1>
           <OnboardingForm />
         </div>
         <div className={styles.right}>
           <img
             src="/seedling.png"
-            alt="Росток"
+            alt="Паросток"
             width={720}
             height={900}
             className={styles.image}
           />
         </div>
-      </main>
+      </div>
     </div>
   );
 }
