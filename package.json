@@ -17,7 +17,11 @@
     "formik": "^2.4.6",
     "next": "15.5.3",
     "react": "19.1.0",
+    "react-datepicker": "^8.7.0",
     "react-dom": "19.1.0",
+    "react-hot-toast": "^2.6.0",
+    "uikit": "^3.23.13",
+    "yup": "^1.7.1",
     "zustand": "^5.0.8"
   },
   "devDependencies": {

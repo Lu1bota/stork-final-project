@@ -3,11 +3,11 @@
 import React from "react";
 import styles from "./OnboardingForm.module.css";
 import OnboardingForm from "./OnboardingForm";
+import Image from 'next/image';
 
 export default function OnboardingPage() {
   return (
     <div className={styles.container}>
-     
       <div className={styles.page}>
         <div className={styles.left}>
         <div className={styles.navbar}>
@@ -17,12 +17,13 @@ export default function OnboardingPage() {
           <OnboardingForm />
         </div>
         <div className={styles.right}>
-          <img
+          <Image
             src="/seedling.png"
             alt="Паросток"
             width={720}
             height={900}
             className={styles.image}
+            priority
           />
         </div>
       </div>

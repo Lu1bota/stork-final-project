@@ -6,10 +6,10 @@ import * as Yup from 'yup';
 import {useMutation} from '@tanstack/react-query';
 import { useRouter } from "next/navigation";
 import {toast} from 'react-hot-toast';
-import { saveProfile } from '../../../lib/api';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './OnboardingForm.module.css'
+import { nextServer } from "@/lib/api/api";
 
 
 
@@ -25,7 +25,7 @@ const validationSchema = Yup.object({
     const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
     const mutation = useMutation<unknown, Error, FormData>({
-        mutationFn: saveProfile,
+        mutationFn: nextServer,
         onSuccess: () => {
         toast.success('Дані збережено');
       router.push('/my-day');
@@ -50,10 +50,9 @@ const validationSchema = Yup.object({
         mutation.mutate(formData);
       }}
     >
-      {({ setFieldValue, values }) => (
+      {({ setFieldValue }) => (
         <Form className={styles.form}>
         <div className={styles.upload}>
-          <label htmlFor="avatar" className={styles.avatarLabel}>
             <div className={styles.avatarPreview}>
               {avatarFile ? (
                 <img
@@ -68,7 +67,6 @@ const validationSchema = Yup.object({
             <button type="button" className={styles.uploadButton} onClick={() => fileInputRef.current?.click()} >
                 Завантажити фото
                 </button>
-          </label>
           <input
           ref={fileInputRef}
             id="avatar"
@@ -84,32 +82,39 @@ const validationSchema = Yup.object({
         </div>
         <div className={styles.field}>
         <label htmlFor="gender" className={styles.label}>Стать дитини</label>
-            <Field as="select" name="gender" className={styles.select}>
-              <option value="">Оберіть стать</option>
-              <option value="male">Хлопчик</option>
-              <option value="female">Дівчинка</option>
-              <option value="unknown">Ще не знаю</option>
-            </Field>
+        <Field name="gender">
+      {({ field, meta }: any) => (
+        <select
+          {...field}
+          className={`${styles.select} ${meta.touched && meta.error ? styles.inputError : ''}`}
+        >
+          <option value="">Оберіть стать</option>
+          <option value="male">Хлопчик</option>
+          <option value="female">Дівчинка</option>
+          <option value="unknown">Ще не знаю</option>
+        </select>
+      )}
+    </Field>
             <ErrorMessage name="gender" component="div" className={styles.error} />
           </div>
 
         <div className={styles.field}>
         <label htmlFor="born date" className={styles.label}>Планова дата пологів</label>
-            <Field name="dueDate">
-              {({ field, form }: any) => (
-                <DatePicker
-                  selected={field.value}
-                  onChange={(date: Date | null) => {
-                    setFieldValue('dueDate', date);
-                  }}
-                  dateFormat="dd.MM.yyyy"
-                  placeholderText="Оберіть дату"
-                  calendarClassName={styles.calendar}
-                  className={styles.input}
-                  dropdownMode="select"
-                />
-              )}
-            </Field>
+        <Field name="dueDate">
+      {({ field, meta }: any) => (
+        <DatePicker
+          selected={field.value}
+          onChange={(date: Date | null) => {
+            setFieldValue('dueDate', date);
+          }}
+          dateFormat="dd.MM.yyyy"
+          placeholderText="Оберіть дату"
+          calendarClassName={styles.calendar}
+          className={`${styles.input} ${meta.touched && meta.error ? styles.inputError : ''}`}
+          dropdownMode="select"
+        />
+      )}
+    </Field>
             <ErrorMessage name="dueDate" component="div" className={styles.error} />
           </div>
 

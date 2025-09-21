@@ -31,7 +31,7 @@
 
 @media (min-width: 1024px) {
   .right {
-    flex: 1;
+   
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,7 +54,7 @@
 
 .navbar {
  padding: 13.5px 64px;
- 
+ display: block;
 }
 
 
@@ -104,6 +104,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  padding: 0;
+  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
 
 }
 
@@ -138,6 +140,7 @@
   width: 335px;
   height: 40px;
   background: var(--color-neutral-lightest);
+
 }
 
 .input,
@@ -184,6 +187,7 @@
   width: 335px;
   height: 42px;
   background: var(--color-scheme-foreground-alt);
+  margin-bottom: 29.5px;
 }
 
 .button:hover {
@@ -203,6 +207,7 @@
 @media (min-width: 1024px) {
   .button {
     height: 46px;
+    margin-bottom: 57px;
   }
 }
 
@@ -241,7 +246,13 @@
 
 .calendar {
   background-color: rgb(255, 255, 255);
-  border: 2px solid var(--color-scheme-foreground-alt);
+  border: 4px solid var(--color-scheme-foreground-alt);
   border-radius: 14px;
-  padding: 18px;
+
+  
 }
+
+.inputError {
+    border: 2px solid red !important;
+    background: var(--opacity-neutral-darkest-5);;
+  }
