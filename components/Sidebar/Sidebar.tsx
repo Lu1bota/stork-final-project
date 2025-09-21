@@ -131,7 +131,7 @@ type SidebarProps = {
 };
 
 const navItems = [
-  { href: "/", label: "Мій день", icon: "today" },
+  { href: "/today", label: "Мій день", icon: "today" },
   { href: "/journey", label: "Подорож", icon: "conversion_path" },
   { href: "/diary", label: "Щоденник", icon: "book" },
   { href: "/profile", label: "Профіль", icon: "account_circle" },

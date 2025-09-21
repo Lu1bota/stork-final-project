@@ -1,0 +1,90 @@
+.dashboardContainer {
+  /* Забезпечує відступи та центрування контенту */
+  max-width: 1128px;
+  margin: 0 auto;
+
+  background-color: #ffffff; /* Задній фон */
+}
+
+.dashboardMain {
+  /* Використовуємо Grid для створення макету */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Три рівні колонки */
+  grid-template-rows: auto;
+  gap: 32px; /* Відступи між картками */
+  margin-top: 32px;
+}
+
+/* Налаштування розмірів та позицій окремих блоків */
+.greetingBlock {
+  /* Заголовок займає всю ширину */
+  grid-column: 1 / -1;
+  background-color: #f3f4f6;
+  border-radius: 16px;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  width: 674px;
+  height: 648px;
+}
+
+/* .statusBlock,
+.babyTodayCard {
+  grid-column: span 1; 
+} */
+
+/* .tasksReminderCard {
+  grid-column: span 1; 
+  grid-row: span 2; 
+}
+
+.momTipCard {
+  grid-column: span 2; 
+}
+
+.feelingCheckCard {
+  grid-column: span 1; 
+}
+
+
+.card {
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.cardPink {
+  background-color: #fff1f2;
+}
+
+.cardYellow {
+  background-color: #fef9c3;
+}
+
+.cardBlue {
+  background-color: #eff6ff;
+}
+
+.cardGray {
+  background-color: #f3f4f6;
+}
+
+
+@media (max-width: 768px) {
+  .dashboardMain {
+    grid-template-columns: 1fr; 
+  }
+
+  
+  .greetingBlock,
+  .statusBlock,
+  .babyTodayCard,
+  .tasksReminderCard,
+  .momTipCard,
+  .feelingCheckCard {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+} */

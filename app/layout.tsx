@@ -3,6 +3,7 @@ import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import "./globals.css";
 import { Lato, Comfortaa } from "next/font/google";
+import Container from "@/components/Container/Container";
 
 const fontsLato = Lato({
   variable: "--font-lato",
@@ -38,11 +39,18 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   const isAuthenticated = await getAuthStatus();
 
   return (
-    <html lang="en">
+    <html lang="uk">
       <body className={`${fontsLato.variable} ${fontsComfortaa.variable}`}>
         <TanStackProvider>
-          <Sidebar initialAuthStatus={isAuthenticated} />
-          <main>{children}</main>
+          <div style={{ display: "flex", minHeight: "100vh" }}>
+            {/* Ліворуч Sidebar */}
+            <Sidebar initialAuthStatus={isAuthenticated} />
+
+            {/* Праворуч контент */}
+            <main style={{ flex: 1, padding: "20px 0" }}>
+              <Container>{children}</Container>
+            </main>
+          </div>
         </TanStackProvider>
       </body>
     </html>

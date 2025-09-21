@@ -1,0 +1,22 @@
+.breadcrumbsContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Відступ між елементами */
+  font-family: var(--font-lato);
+  font-size: 14px;
+  color: #6b7280; /* Сірий колір тексту */
+}
+
+.link {
+  text-decoration: none;
+  transition: color 0.2s;
+  color: #6b7280;
+}
+
+.link:hover {
+  color: #313131; /* Темніший колір при наведенні */
+}
+
+.icon {
+  fill: #6b7280; /* Колір іконки */
+}
