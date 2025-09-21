@@ -1,4 +1,4 @@
-import RegistrationForm from "../../../components/RegistrationForm/RegistrationForm.tsx";
+import RegistrationForm from "../../../components/RegistrationForm/RegistrationForm";
 
 const AuthPage = () => {
   return <RegistrationForm />;
