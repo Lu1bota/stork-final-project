@@ -4,6 +4,10 @@ import Link from "next/link";
 import * as Yup from "yup";
 import css from "./RegistrationForm.module.css";
 import Container from "../Container/Container";
+import Image from "next/image";
+import { register } from "@/lib/api/clientApi";
+import { useRouter } from "next/navigation";
+
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().max(32).required("Імʼя є обовʼязковим"),
@@ -18,16 +22,26 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function RegistrationForm() {
-  const handleSubmit = () => {
+  const router = useRouter();
+  const handleSubmit = async (values: {
+    name: string;
+    email: string;
+    password: string;
+  }) => {
+    try {
+      await register(values);
+      router.push("/onboarding");
+    } catch {
+      alert("Ця пошта вже використовується"); 
+    }
   };
 
   return (
-    <Container>
+    <Container className={css.container}>
       <Link href="/" className={css.logo}>
-        <svg>
-          <path d="" />
+        <svg className={css.logoIcon}>
+          <use xlinkHref="/sprite.svg#company-logo" />
         </svg>
-        <span className={css.logoPart}>LELEKA</span>
       </Link>
 
       <h1 className={css.title}>Реєстрація</h1>
@@ -41,7 +55,7 @@ export default function RegistrationForm() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, isSubmitting }) => (
           <Form className={css.form}>
             <div className={css.fieldGroup}>
               <label htmlFor="name" className={css.label}>
@@ -98,8 +112,12 @@ export default function RegistrationForm() {
                 className={css.error}
               />
             </div>
-            <button className={css.submitBtn} type="submit">
-              Зареєструватись
+            <button
+              className={css.submitBtn}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Зачекайте..." : "Зареєструватись"}
             </button>
             <p className={css.ensureText}>
               Вже маєте аккаунт?{" "}
@@ -110,7 +128,13 @@ export default function RegistrationForm() {
           </Form>
         )}
       </Formik>
-      {/* <img src="" alt="Storks picture" /> */}
+      <Image
+        className={css.img}
+        src="/auth/A beautifully detailed, stylized watercolor illustration of two storks building a nest together. One stork is gently placing a delicate twig. The style is minimalist and clean, with soft, bleeding watercolor textures and fine ink lines. The color p.jpg"
+        alt="Stork illustration"
+        width={720}
+        height={900}
+      />
     </Container>
   );
 }

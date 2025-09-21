@@ -4,6 +4,10 @@ import * as Yup from "yup";
 import Link from "next/link";
 import css from "./LoginForm.module.css";
 import Container from "../Container/Container";
+import Image from "next/image";
+import { login } from "@/lib/api/clientApi";
+import { useRouter } from "next/navigation";
+
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -17,17 +21,23 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function LoginForm() {
-  const handleSubmit = () => {
+    const router = useRouter();
 
+  const handleSubmit = async (values: { email: string; password: string }) => {
+    try {
+      await login(values);
+      router.push("/");
+    } catch {
+      alert("Невірна пошта або пароль"); 
+    }
   };
 
   return (
-    <Container>
+    <Container className={css.container}>
       <Link href="/" className={css.logo}>
-        <svg>
-          <path d="" />
+        <svg className={css.logoIcon}>
+          <use xlinkHref="/sprite.svg#company-logo" />
         </svg>
-        <span className={css.logoPart}>LELEKA</span>
       </Link>
 
       <h1 className={css.title}>Вхід</h1>
@@ -40,7 +50,7 @@ export default function LoginForm() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, isSubmitting }) => (
           <Form className={css.form}>
             <Field
               type="email"
@@ -66,8 +76,12 @@ export default function LoginForm() {
               className={css.error}
             />
 
-            <button className={css.submitBtn} type="submit">
-              Увійти
+            <button
+              className={css.submitBtn}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Зачекайте..." : "Увійти"}
             </button>
             <p className={css.ensureText}>
               Немає аккаунту?{" "}
@@ -78,7 +92,13 @@ export default function LoginForm() {
           </Form>
         )}
       </Formik>
-      {/* <img src="" alt="Stork's eggs picture" /> */}
+      <Image
+        className={css.img}
+        src="/auth/A cozy watercolor illustration showing a close-up view of a warm nest with three smooth, pastel-colored eggs. The style uses rich, layered watercolor washes to create depth and comforting textures in the nest. A soft, warm, ambient glow from the eg.jpg"
+        alt="Stork's eggs illustration"
+        width={720}
+        height={900}
+      />
     </Container>
   );
 }

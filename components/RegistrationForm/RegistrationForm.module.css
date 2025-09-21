@@ -1,7 +1,16 @@
+.container {
+  
+}
+
 .logo {
   padding-left: 4.4px;
   padding-top: 7.8px;
   padding-bottom: 7.8px;
+}
+
+.logoIcon {
+  width: 100px;
+  height: 40px;
 }
 
 .title {
