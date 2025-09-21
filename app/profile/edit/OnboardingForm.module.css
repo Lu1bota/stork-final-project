@@ -3,6 +3,7 @@
   flex-direction: column;
 }
 
+
 @media (min-width: 768px) {
   .page {
     flex-direction: row;
@@ -16,6 +17,7 @@
     margin: 0;
   }
 }
+
 
 .left {
   flex: 1;
@@ -55,11 +57,6 @@
  
 }
 
-@media (min-width: 1024px) {
-    .navbar {
-    
-    }
-}
 
 .title {
   font-family: var(--second-family);
@@ -69,8 +66,26 @@
   letter-spacing: 0.01em;
   text-align: center;
   color: var(--color-scheme-text);
-  margin-bottom: 20px;
+  margin-bottom: 32px;
+  margin-top: 29.5px;
+  
 }
+
+
+@media (min-width: 768px) {
+    .title {
+        margin: 109.5px 112px 32px;
+      
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .title {
+        margin: 57px 56px 32px;
+    }
+}
+
 
 .uploadButton {
   border-bottom: 1px solid var(--opacity-neutral-darkest-15);
