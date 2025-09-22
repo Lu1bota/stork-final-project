@@ -36,7 +36,7 @@ export default function LoginForm() {
     <Container className={css.container}>
       <Link href="/" className={css.logo}>
         <Image
-          src="/logo/Frame 269.png"
+          src="/logo/Frame_269.png"
           alt="Лелека"
           width={95}
           height={30}
@@ -105,7 +105,7 @@ export default function LoginForm() {
       </div>
       <Image
         className={css.img}
-        src="/auth/A cozy watercolor illustration showing a close-up view of a warm nest with three smooth, pastel-colored eggs. The style uses rich, layered watercolor washes to create depth and comforting textures in the nest. A soft, warm, ambient glow from the eg.jpg"
+        src="/auth/stork's_eggs.jpg"
         alt="Stork's eggs illustration"
         width={720}
         height={948}

@@ -39,7 +39,7 @@ export default function RegistrationForm() {
     <Container className={css.container}>
       <Link href="/" className={css.logo}>
         <Image
-          src="/logo/Frame 269.png"
+          src="/logo/Frame_269.png"
           alt="Лелека"
           width={95}
           height={30}
@@ -140,7 +140,7 @@ export default function RegistrationForm() {
       </div>
       <Image
         className={css.img}
-        src="/auth/A beautifully detailed, stylized watercolor illustration of two storks building a nest together. One stork is gently placing a delicate twig. The style is minimalist and clean, with soft, bleeding watercolor textures and fine ink lines. The color p.jpg"
+        src="/auth/storks_picture.jpg"
         alt="Stork illustration"
         width={720}
         height={948}
