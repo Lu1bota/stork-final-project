@@ -32,8 +32,8 @@
   height: 37px;
   background-color: var(--opacity-neutral-darkest-5);
   transition:
-  border-color 0.3s ease,
-  box-shadow 0.3s ease;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .input::placeholder {
@@ -126,11 +126,6 @@
 
 /* 📲 Tablet */
 @media screen and (min-width: 768px) {
-  .logo {
-    /* position: absolute;
-    left: 0; */
-  }
-
   .title {
     margin-top: 280px;
   }
