@@ -1,4 +1,4 @@
-/* ========== MOBILE (по умолчанию) ========== */
+/* ========== MOBILE ========== */
 .avatarContainer {
   display: flex;
   flex-direction: column;
@@ -6,16 +6,52 @@
   text-align: center;
   gap: 12px;
   padding: 16px;
-  background-color: #f9f9f9;
   max-width: 100%;
+  color:  #000;
+
 }
+.profileWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  
+  width: 100%;
+  max-width: 644px;
+  padding: 16px 24px 16px;
+  margin: 0 auto;
+}
+
+
+/* Breadcrumbs */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  padding-left: 8px;
+}
+
+.breadcrumbActive {
+  font-weight: 400;
+  color: #7f7f7f;;
+}
+
+/* .breadcrumbLink {
+  text-decoration: none;
+  color: #0077cc;
+  transition: color 0.2s ease;
+} */
+
+/* .breadcrumbLink:hover {
+  color: #005fa3;
+} */
 
 .avatarWrapper {
   width: 96px;
   height: 96px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid #ddd;
+  background-color: rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,27 +77,25 @@
 
 .userEmail {
   font-size: 14px;
-  color: #555;
   margin: 0;
 }
 
 .uploadButton {
-  background-color: #ccc;
-  color: white;
-  border: none;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: rgba(0, 0, 0, 0.15);
   padding: 10px 16px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 100px;
   font-size: 14px;
   transition: background-color 0.3s;
 }
 
-/* .uploadButton:hover {
-  background-color: #45a049;
-} */
+.uploadButton:hover {
+  transform: scale(1.10);;
+}
 
-/* ========== TABLET (от 600px) ========== */
-@media (min-width: 600px) {
+/* ========== TABLET  ========== */
+@media (min-width: 768px) {
   .avatarContainer {
     flex-direction: row;
     align-items: center;
@@ -93,8 +127,8 @@
   }
 }
 
-/* ========== DESKTOP (от 1024px) ========== */
-@media (min-width: 1024px) {
+/* ========== DESKTOP  ========== */
+@media (min-width: 1440px) {
   .avatarContainer {
     max-width: 800px;
     margin: 0 auto;

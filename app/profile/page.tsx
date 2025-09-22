@@ -37,7 +37,7 @@ import ProfileEditForm from "@/components/profile/ProfileEditForm";
 // }
 
 export default function ProfilePage() {
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/user/111")
@@ -62,8 +62,8 @@ export default function ProfilePage() {
   if (!user) return <p>Завантаження...</p>;
 
   return (
-    <div style={{ padding: "20px", maxWidth: "500px", margin: "0 auto" }}>
-      <h1>Сторінка профілю</h1>
+    <div style={{ maxWidth: "644px", marginLeft: "312px" }}>
+      
       <ProfileAvatar user={user} />
       <ProfileEditForm user={user} />
     </div>

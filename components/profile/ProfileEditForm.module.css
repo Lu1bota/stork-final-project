@@ -3,8 +3,7 @@
   flex-direction: column;
   gap: 16px;
   max-width: 100%;
-  margin: 0 auto;
-  padding: 16px;
+  
 }
 
 .formGroup {
@@ -22,16 +21,17 @@
 .input, .select, .date {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  border: transparent;
+  border-radius: 12px;
   font-size: 14px;
+  background-color: #f2f2f2;
+  color: rgba(0, 0, 0, 0.6);
 }
 
-.input:focus {
-  outline: none;
-  border-color: #0070f3;
-  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.2);
-}
+.input:focus,
+.input:hover {
+    border-color: red;
+  }
 
 .error {
   font-size: 12px;
@@ -40,36 +40,33 @@
 }
 .buttonContainer {
     display: flex;
-    justify-content: space-between;
-    
-
+    justify-content: flex-end;
+    gap: 16px;
+    flex-wrap: wrap; 
 }
 
-.submitButtonGray {
-  background-color: #ccc;
-  margin-right: 16px;
-      padding: 12px 16px;
-    border: none;
+.submitButtonGray,
+.submitButtonPink {
+    padding: 12px 16px;
+    border: 4px;
     border-radius: 16px;
-    color: white;
     font-size: 15px;
     cursor: pointer;
     transition: background 0.2s ease;
+}
+.submitButtonGray {
+  background-color: #f2f2f2;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
 }
 
 .submitButtonPink {
-  background-color: pink;
-      padding: 12px 16px;
-    border: none;
-    border-radius: 16px;
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
-    transition: background 0.2s ease;
+  background-color: var(--color-pastel-pink);
+  box-shadow: 0 2px 2px #cca2a8;;
 }
-/* .submitButton:hover {
-  background-color: ;
-} */
+.submitButtonGray:hover,
+.submitButtonPink:hover {
+  transform: scale(1.10);
+}
 
 /* планшет */
 @media (min-width: 768px) {
@@ -89,7 +86,7 @@
 /* десктоп */
 @media (min-width: 1024px) {
   .form {
-    max-width: 500px;
+    max-width: 644px;
     padding: 24px;
   }
 }
