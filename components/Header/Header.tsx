@@ -35,7 +35,7 @@ const Header = ({ initialAuthStatus }: HeaderProps) => {
         </Link>
         <button className={styles.burgerMenu} onClick={toggleSidebar}>
           <svg width={24} height={24} aria-hidden="true">
-            <use href="/icons.svg#menu" />
+            <use href="/public/sprite.svg#close"></use>
           </svg>
         </button>
       </header>
