@@ -7,6 +7,7 @@ import Container from "../Container/Container";
 import Image from "next/image";
 import { login } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 
 const validationSchema = Yup.object().shape({
@@ -28,7 +29,7 @@ export default function LoginForm() {
       await login(values);
       router.push("/");
     } catch {
-      alert("Невірна пошта або пароль"); 
+      toast.error("Невірна пошта або пароль"); 
     }
   };
 

@@ -7,6 +7,7 @@ import Container from "../Container/Container";
 import Image from "next/image";
 import { register } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().max(32).required("Імʼя є обовʼязковим"),
@@ -31,7 +32,7 @@ export default function RegistrationForm() {
       await register(values);
       router.push("/onboarding");
     } catch  {
-      alert("Ця пошта вже використовується");
+      toast.error("Ця пошта вже використовується");
     }
   };
 
