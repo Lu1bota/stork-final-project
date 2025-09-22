@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
-import Sidebar from "@/components/Sidebar/Sidebar";
+import Header from "@/components/Header/Header";
 import "./globals.css";
 import { Lato, Comfortaa } from "next/font/google";
 import Container from "@/components/Container/Container";
@@ -28,29 +28,19 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-// Асинхронна функція для перевірки автентифікації на сервері
-async function getAuthStatus() {
-  const cookieStore = await cookies(); // <--- Виправлення тут
-  const token = cookieStore.get("auth_token");
-  return !!token;
-}
-
 export default async function RootLayout({ children }: RootLayoutProps) {
-  const isAuthenticated = await getAuthStatus();
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token");
+  const isAuthenticated = !!token;
 
   return (
     <html lang="uk">
       <body className={`${fontsLato.variable} ${fontsComfortaa.variable}`}>
         <TanStackProvider>
-          <div style={{ display: "flex", minHeight: "100vh" }}>
-            {/* Ліворуч Sidebar */}
-            <Sidebar initialAuthStatus={isAuthenticated} />
-
-            {/* Праворуч контент */}
-            <main style={{ flex: 1, padding: "20px 0" }}>
-              <Container>{children}</Container>
-            </main>
-          </div>
+          <Header initialAuthStatus={isAuthenticated} />
+          <main style={{ flex: 1, padding: "20px 0" }}>
+            <Container>{children}</Container>
+          </main>
         </TanStackProvider>
       </body>
     </html>

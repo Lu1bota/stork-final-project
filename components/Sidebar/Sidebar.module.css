@@ -1,141 +1,9 @@
-/* .sidebar {
-  width: 312px;
-  height: 100vh;
-  background-color: #fff;
-  padding: 30px 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
-}
-
-.logoSection {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 40px;
-}
-
-.logoText {
-  font-family: "Comfortaa", sans-serif;
-  font-weight: 500;
-  font-size: 20px;
-}
-
-.navMenu {
-  flex-grow: 1;
-}
-
-.navMenu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.navItem {
-  display: flex;
-  width: 262px;
-  height: 40px;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 16px;
-  border-radius: 10px;
-  transition:
-    background-color 0.2s,
-    color 0.2s;
-  text-decoration: none;
-  color: #313131;
-}
-
-.navItem span {
-  font-weight: 500;
-}
-
-.navItem:hover {
-  background-color: var(--color-pastel-pink-lighter);
-}
-
-.active .navItem {
-  background-color: var(--color-pastel-pink-lighter);
-  color: var(--color-neutral-darkest);
-  font-weight: 700;
-}
-
-.userProfile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-top: 24px;
-  border-top: 1px solid #e0e0e0;
-}
-
-.avatar {
-  border-radius: 50%;
-}
-
-.userInfo {
-  display: flex;
-  flex-direction: column;
-}
-
-.userName {
-  font-weight: 500;
-  color: var(--color-neutral-darkest);
-}
-
-.userEmail {
-  font-size: 12px;
-  color: #888;
-}
-
-.logoutButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-left: auto;
-}
-
-.authLinks {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.authLinkItem {
-  font-weight: 500;
-  color: #313131;
-  text-decoration: none;
-  padding: 8px 0;
-  border-radius: 8px;
-  transition: background-color 0.2s;
-}
-
-.authLinkItem:hover {
-  background-color: #f0f0f0;
-}
-
-.activeLink {
-  background-color: var(--color-pastel-pink-lighter);
-  border-left: 4px solid var(--leleka-purple);
-}
-
-/* Переконайтеся, що стилі для .navItem не перебивають activeLink */
-/* .navItem {
-  
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  transition: background-color 0.2s;
-  cursor: pointer;
-} */
-
+/* mobile (up to 768px): dropping sidebar */
 .sidebar {
-  width: 312px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
   background-color: #fff;
   padding: 30px 24px;
@@ -143,6 +11,30 @@
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  z-index: 100;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* tablet (from 768px) */
+@media screen and (min-width: 768px) {
+  .sidebar {
+    width: 300px;
+  }
+}
+
+/* Desktop (from 1440px): permanent sidebar */
+@media screen and (min-width: 1440px) {
+  .sidebar {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border-right: 1px solid #e0e0e0;
+  }
 }
 
 .logoSection {
@@ -171,7 +63,6 @@
   gap: 8px;
 }
 
-/* Цей клас стилізує посилання навігації */
 .navItem {
   display: flex;
   width: 262px;
@@ -195,25 +86,33 @@
   background-color: var(--color-pastel-pink-lighter);
 }
 
-/*
- * Видаляємо старий селектор .active .navItem.
- * Натомість, ми додаємо клас, який буде застосовуватися
- * безпосередньо до <Link> елемента, щоб уникнути помилок.
- * Він буде містити всі стилі активного стану,
- * включаючи колір, який ви бажаєте.
- */
 .activeLink {
   background-color: var(--color-pastel-pink-lighter);
   color: var(--color-neutral-darkest);
   font-weight: 700;
 }
 
+.bottomSection {
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
 .userProfile {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding-top: 24px;
-  border-top: 1px solid #e0e0e0;
+}
+
+.initialsAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-pastel-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
 }
 
 .avatar {
