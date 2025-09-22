@@ -1,13 +1,3 @@
-.container {
-  
-}
-
-.logo {
-  padding-left: 4.4px;
-  padding-top: 7.8px;
-  padding-bottom: 7.8px;
-}
-
 .logoIcon {
   width: 100px;
   height: 40px;
@@ -15,14 +5,14 @@
 
 .title {
   margin-top: 140px;
-  margin-bottom: 32px;
-  font-family: var(--second-family);
+  margin-bottom: 16px;
   font-weight: 700;
   font-size: 36px;
   line-height: 1.2;
   letter-spacing: 0.01em;
   text-align: center;
   color: var(--color-scheme-text);
+  font-family: var(--second-family);
 }
 
 .form {
@@ -143,6 +133,10 @@
   font-family: var(--font-family);
 }
 
+.img {
+  display: none;
+}
+
 /* 📲 Tablet */
 @media screen and (min-width: 768px) {
   .title {
@@ -156,10 +150,19 @@
   .submitBtn {
     width: 480px;
   }
+
+  .img {
+    display: none;
+  }
 }
 
 /* 💻 Desktop */
 @media screen and (min-width: 1440px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+  }
+  
   .title {
     margin-top: 177px;
     font-size: 48px;
@@ -187,5 +190,11 @@
   .ensureTextPart {
     font-size: 16px;
     line-height: 1.6;
+  }
+
+  .img {
+    display: block;
+    right: 0;
+    position: absolute;
   }
 }

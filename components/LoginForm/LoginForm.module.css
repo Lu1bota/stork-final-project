@@ -1,22 +1,11 @@
-.container {
-  
-}
-
-.logo {
-  padding-left: 4.4px;
-  padding-top: 7.8px;
-  padding-bottom: 7.8px;
-}
-
 .logoIcon {
-  stroke: #33ADC1;
-  width: 95px;
-  height: 29px;
+  width: 100px;
+  height: 40px;
 }
 
 .title {
   margin-top: 221px;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   font-weight: 700;
   font-size: 36px;
   line-height: 1.2;
@@ -31,6 +20,7 @@
   flex-direction: column;
   gap: 16px;
   justify-content: center;
+  align-items: center;
   height: 100%;
 }
 
@@ -42,8 +32,8 @@
   height: 37px;
   background-color: var(--opacity-neutral-darkest-5);
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  border-color 0.3s ease,
+  box-shadow 0.3s ease;
 }
 
 .input::placeholder {
@@ -66,11 +56,14 @@
 }
 
 .error {
+  display: block;
   font-weight: 400;
   font-size: 12px;
   line-height: 1.6;
   color: var(--color-red);
   font-family: var(--font-family);
+  text-align: left;
+  width: 100%;
 }
 
 .inputError {
@@ -127,23 +120,41 @@
   font-family: var(--font-family);
 }
 
+.img {
+  display: none;
+}
+
 /* 📲 Tablet */
-@media (min-width: 577px) {
-  .input {
-    width: 480px;
+@media screen and (min-width: 768px) {
+  .logo {
+    /* position: absolute;
+    left: 0; */
   }
 
   .title {
     margin-top: 280px;
   }
 
+  .input {
+    width: 480px;
+  }
+
   .submitBtn {
     width: 480px;
+  }
+
+  .img {
+    display: none;
   }
 }
 
 /* 💻 Desktop */
-@media (min-width: 992px) {
+@media screen and (min-width: 1440px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+  }
+
   .title {
     margin-top: 266px;
     font-size: 48px;
@@ -165,5 +176,12 @@
 
   .ensureTextPart {
     font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .img {
+    display: block;
+    right: 0;
+    position: absolute;
   }
 }
