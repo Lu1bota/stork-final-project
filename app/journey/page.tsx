@@ -2,10 +2,10 @@ import Container from "../../components/Container/Container";
 import Greating from "../../components/GreatingBlock/GreetingBlock";
 import WeekSelector from "../../components/WeekSelector/WeekSelector";
 import JourneyDetails from "../../components/JourneyDetails/JourneyDetails";
-import { getWeeks } from "@/lib/api/api";
+import { getPublicWeekInfo } from "@/lib/api/clientApi";
 
 export default async function JourneyPage() {
-  const weeks = await getWeeks();
+  const weeks = await getPublicWeekInfo();
   console.log("weeks:", weeks);
   return (
     <>

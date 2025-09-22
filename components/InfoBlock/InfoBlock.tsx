@@ -4,11 +4,11 @@ export default function InfoBlock() {
   return (
     <div className={css.info_wrapper}>
       <div className={css.comparison}>
-        <img
+        {/* <img
           className={css.comparison_img}
           src=""
           alt="Фото порівняння здитиною."
-        />
+        /> */}
         <p className={css.comparison_descr}>
           Ваш малюк зараз розміром з Авокадо
         </p>

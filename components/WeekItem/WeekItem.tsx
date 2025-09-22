@@ -1,5 +1,15 @@
 import css from "./WeekItem.module.css";
-import { WeekBaby } from "@/lib/api/api";
+
+export type WeekBaby = {
+  week: number;
+  analogy: string;
+  size: number;
+  weight: number;
+  activity: string;
+  development: string;
+  fact: string;
+  img: string;
+};
 
 type Props = {
   item: WeekBaby;
