@@ -10,13 +10,34 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import styles from './OnboardingForm.module.css'
 import { nextServer } from "@/lib/api/api";
+import dynamic from 'next/dynamic';
+import { FieldInputProps, FieldMetaProps } from 'formik';
 
-
+interface FormValues {
+    gender: string;
+    dueDate: Date | null;
+    avatar: File | null;
+  }
 
 const validationSchema = Yup.object({
     gender: Yup.string().required('Оберіть стать дитини'),
     dueDate: Yup.date().nullable().required('Оберіть дату'),
     avatar: Yup.mixed().nullable(),
+  });
+
+  const initialValues: FormValues = {
+    gender: '',
+    dueDate: null,
+    avatar: null,
+  };
+  const genderMap: Record<string, 'boy' | 'girl' | 'null'> = {
+    male: 'boy',
+    female: 'girl',
+    unknown: 'null',
+  };
+
+  const GenderSelect = dynamic(() => import('../../components/OnboardingGenderSelect'), {
+    ssr: false,
   });
 
   export default function OnboardingForm() {
@@ -25,7 +46,8 @@ const validationSchema = Yup.object({
     const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
     const mutation = useMutation<unknown, Error, FormData>({
-        mutationFn: nextServer,
+        mutationFn: (formData) =>
+            nextServer.patch('/users/me', formData),
         onSuccess: () => {
         toast.success('Дані збережено');
       router.push('/my-day');
@@ -36,20 +58,30 @@ const validationSchema = Yup.object({
     });
 
     return (
-        <Formik
-      initialValues={{ gender: '', dueDate: null, avatar: null }}
-      validationSchema={validationSchema}
-      onSubmit={(values) => {
-        const formData = new FormData();
-        formData.append('gender', values.gender);
-        formData.append('dueDate', values.dueDate?.toISOString() || '');
-        if (avatarFile) {
-          formData.append('avatar', avatarFile);
-        }
-
-        mutation.mutate(formData);
-      }}
-    >
+        <Formik<FormValues>
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={(values) => {
+          const formData = new FormData();
+          if (values.dueDate) {
+            formData.append('dueDate', values.dueDate.toISOString());
+          }
+        
+          const genderMap: Record<string, 'boy' | 'girl' | 'null'> = {
+            male: 'boy',
+            female: 'girl',
+            unknown: 'null',
+          };
+        
+          formData.append('gender', genderMap[values.gender] || 'null');
+        
+          if (avatarFile) {
+            formData.append('avatar', avatarFile);
+          }
+        
+          mutation.mutate(formData);
+        }}
+      >
       {({ setFieldValue }) => (
         <Form className={styles.form}>
         <div className={styles.upload}>
@@ -80,28 +112,11 @@ const validationSchema = Yup.object({
             }}
           />
         </div>
-        <div className={styles.field}>
-        <label htmlFor="gender" className={styles.label}>Стать дитини</label>
-        <Field name="gender">
-      {({ field, meta }: any) => (
-        <select
-          {...field}
-          className={`${styles.select} ${meta.touched && meta.error ? styles.inputError : ''}`}
-        >
-          <option value="">Оберіть стать</option>
-          <option value="male">Хлопчик</option>
-          <option value="female">Дівчинка</option>
-          <option value="unknown">Ще не знаю</option>
-        </select>
-      )}
-    </Field>
-            <ErrorMessage name="gender" component="div" className={styles.error} />
-          </div>
-
+        <GenderSelect />
         <div className={styles.field}>
         <label htmlFor="born date" className={styles.label}>Планова дата пологів</label>
         <Field name="dueDate">
-      {({ field, meta }: any) => (
+      {({ field, meta }: { field: FieldInputProps<Date | null>, meta: FieldMetaProps<Date | null> }) => (
         <DatePicker
           selected={field.value}
           onChange={(date: Date | null) => {

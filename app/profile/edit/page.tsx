@@ -5,6 +5,7 @@ import styles from "./OnboardingForm.module.css";
 import OnboardingForm from "./OnboardingForm";
 import Image from 'next/image';
 
+
 export default function OnboardingPage() {
   return (
     <div className={styles.container}>

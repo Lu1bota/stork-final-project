@@ -1,0 +1,11 @@
+.react-select__control {
+  font-size: 14px;
+  min-height: 42px;
+  border-radius: 70px;
+  background-color: rgb(255, 149, 0);
+}
+
+.react-select__menu {
+  font-size: 14px;
+}
+  
