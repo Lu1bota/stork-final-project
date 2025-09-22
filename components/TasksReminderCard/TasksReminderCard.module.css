@@ -1,5 +1,5 @@
 .card {
-  background: #fff4f6;
+  background: var(--color-pastel-pink-lighter);
   border-radius: 32px;
   padding: 24px;
   display: flex;
@@ -58,7 +58,7 @@
   width: 6px;
 }
 .listWrapper::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: var(--opacity-neutral-darkest-10);
   border-radius: 6px;
 }
 .listWrapper {
@@ -78,16 +78,16 @@
 }
 
 .taskRow:hover {
-  background: rgba(31, 41, 55, 0.03);
+  background: var(--opacity-neutral-darkest-5);
 }
 
 /* custom checkbox */
 .checkbox {
   width: 18px;
   height: 18px;
-  border: 1px solid #000000;
+  border: 1px solid var(--color-neutral-darkest);
   border-radius: 4px;
-  background: #ffffff;
+  background: var(--color-white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,14 +98,14 @@
 }
 
 .checkbox.checked {
-  background: #000000;
-  border-color: #000000;
+  background: var(--color-neutral-darkest);
+  border-color: var(--color-neutral-darkest);
 }
 
 .checkIcon {
   width: 12px;
   height: 12px;
-  fill: #ffffff;
+  fill: var(--color-white);
 }
 
 /* task content */
@@ -141,7 +141,6 @@
 }
 
 /* empty Task list */
-
 .emptyTask {
   font-family: var(--font-family);
   font-weight: 400;
@@ -176,8 +175,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 4px solid #ffcbd3;
-  background-color: #ffdae0;
+  border-bottom: 4px solid var(--color-pastel-pink);
+  background-color: var(--color-pastel-pink-light);
   border-radius: 100px;
   width: 173px;
   height: 42px;

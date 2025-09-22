@@ -86,7 +86,7 @@ export default function TasksReminderCard({
 
   const handleCreateNewTask = async () => {
     if (!isAuthenticated) {
-      router.push("/login");
+      router.push("/register");
       return;
     }
 

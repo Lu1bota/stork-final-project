@@ -19,7 +19,7 @@ export default function FeelingCheckCard({
 
   const handleMakeEntry = () => {
     if (!isAuthenticated) {
-      router.push("/login");
+      router.push("/register");
       return;
     }
 
