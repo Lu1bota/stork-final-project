@@ -1,67 +1,86 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 import css from "./Modal.module.css";
+import clsx from "clsx";
 
-
-export type ModalProps = {
+interface ModalProps {
   children: React.ReactNode;
   title: string;
-  close: () => void;
-};
+  onClose: () => void;
+  className?: string;
+}
 
-export default function Modal({ children, title, close }: ModalProps) {
-  // Закриття по клавіші Escape (проста реалізація)
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [close]);
+export default function Modal({
+  children,
+  title,
+  onClose,
+  className,
+}: ModalProps) {
+  const [isClosing, setIsClosing] = useState(false);
 
-  // Портал у document.body
-  const [portalEl, setPortalEl] = useState<HTMLDivElement | null>(null);
+  function startClosing() {
+    setIsClosing(true);
+  }
+
+  function handleAnimationEnd() {
+    if (isClosing) {
+      onClose();
+    }
+  }
+
+  function handleBackdrop(event: React.MouseEvent<HTMLDivElement>) {
+    if (event.target === event.currentTarget) {
+      startClosing();
+    }
+  }
+
   useEffect(() => {
-    const el = document.createElement("div");
-    el.setAttribute("data-modal-portal", "");
-    document.body.appendChild(el);
-    setPortalEl(el);
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        startClosing();
+      }
+    }
+    document.addEventListener("keydown", handleEscape);
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.removeChild(el);
-      setPortalEl(null);
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "";
     };
-  }, []);
+  }, [onClose]);
 
-  if (!portalEl) return null;
-
-  return ReactDOM.createPortal(
-    <div className={css.backdrop} onClick={close}>
+  return createPortal(
+    <div
+      className={css.backdrop}
+      role="dialog"
+      aria-modal="true"
+      onClick={handleBackdrop}
+    >
       <div
-        className={css.dialog}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-        onClick={(e) => e.stopPropagation()}
+        className={clsx(css.modal, className, {
+          [css.open]: !isClosing,
+          [css.close]: isClosing,
+        })}
+        onAnimationEnd={handleAnimationEnd}
       >
-        <div className={css.header}>
-          <h2 id="modal-title" className={css.title}>{title}</h2>
-          <button
-            type="button"
-            className={css.close}
-            aria-label="Закрити"
-            onClick={close}
-          >
-            <svg className={css.closeIcon} width="24" height="24" aria-hidden>
-              <use href="/sprite.svg#close" />
-            </svg>
-          </button>
-        </div>
-        <div className={css.content}>{children}</div>
+        <h2 id="modal-title" className={css.title}>
+          {title}
+        </h2>
+        <button
+          type="button"
+          className={css.closeBtn}
+          aria-label="Закрити"
+          onClick={startClosing}
+        >
+          <svg className={css.closeIcon} width="32" height="32" aria-hidden>
+            <use href="/sprite.svg#close" />
+          </svg>
+        </button>
+        {children}
       </div>
     </div>,
-    portalEl
+    document.body
   );
 }
 
