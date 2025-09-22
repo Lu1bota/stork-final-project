@@ -30,18 +30,22 @@ export default function RegistrationForm() {
     try {
       await register(values);
       router.push("/onboarding");
-    } catch (error) {
+    } catch  {
       alert("Ця пошта вже використовується");
-      console.log(error);
     }
   };
 
   return (
     <Container className={css.container}>
       <Link href="/" className={css.logo}>
-        <svg className={css.logoIcon}>
-          <use xlinkHref="/sprite.svg#company-logo" />
-        </svg>
+        <Image
+          src="/logo/Frame 269.png"
+          alt="Лелека"
+          width={95}
+          height={30}
+          priority
+          className={css.logoIcon}
+        />
       </Link>
 
       <div>
@@ -57,7 +61,7 @@ export default function RegistrationForm() {
           {({ errors, touched, isSubmitting }) => (
             <Form className={css.form}>
               <h1 className={css.title}>Реєстрація</h1>
-              
+
               <div className={css.fieldGroup}>
                 <label htmlFor="name" className={css.label}>
                   Імʼя*

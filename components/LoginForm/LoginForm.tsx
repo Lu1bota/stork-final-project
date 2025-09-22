@@ -35,9 +35,14 @@ export default function LoginForm() {
   return (
     <Container className={css.container}>
       <Link href="/" className={css.logo}>
-        <svg className={css.logoIcon}>
-          <use xlinkHref="/sprite.svg#company-logo" />
-        </svg>
+        <Image
+          src="/logo/Frame 269.png"
+          alt="Лелека"
+          width={95}
+          height={30}
+          priority
+          className={css.logoIcon}
+        />
       </Link>
 
       <div>
@@ -52,7 +57,7 @@ export default function LoginForm() {
           {({ errors, touched, isSubmitting }) => (
             <Form className={css.form}>
               <h1 className={css.title}>Вхід</h1>
-  
+
               <Field
                 type="email"
                 name="email"
@@ -61,8 +66,12 @@ export default function LoginForm() {
                   errors.email && touched.email ? css.inputError : ""
                 }`}
               />
-              <ErrorMessage name="email" component="div" className={css.error} />
-  
+              <ErrorMessage
+                name="email"
+                component="div"
+                className={css.error}
+              />
+
               <Field
                 type="password"
                 name="password"
@@ -76,7 +85,7 @@ export default function LoginForm() {
                 component="div"
                 className={css.error}
               />
-  
+
               <button
                 className={css.submitBtn}
                 type="submit"

@@ -1,6 +1,21 @@
+/* .logoSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+} */
+
 .logoIcon {
-  width: 100px;
-  height: 40px;
+  margin-left: 4.4px;
+  margin-right: 5.6px;
+  margin-bottom: 7.8px;
+  margin-top: 7.8px;
+}
+
+.logoText {
+  font-family: "Comfortaa", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 .title {
@@ -162,7 +177,7 @@
     display: flex;
     flex-direction: row;
   }
-  
+
   .title {
     margin-top: 177px;
     font-size: 48px;
