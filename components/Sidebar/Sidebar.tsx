@@ -2,20 +2,18 @@
 
 // import Link from "next/link";
 // import Image from "next/image";
+// import styles from "./Sidebar.module.css";
 // import { useState } from "react";
 // import { usePathname } from "next/navigation";
-// import styles from "./Sidebar.module.css";
 
-// type User = {
-//   name: string;
-//   email: string;
-//   avatar?: string;
-// } | null;
+// // type User = {
+// //   name: string;
+// //   email: string;
+// //   avatar?: string;
+// // } | null;
 
 // type SidebarProps = {
 //   initialAuthStatus: boolean;
-//   isSidebarOpen: boolean;
-//   onClose: () => void;
 // };
 
 // const navItems = [
@@ -25,137 +23,115 @@
 //   { href: "/profile", label: "Профіль", icon: "account_circle" },
 // ];
 
-// const user: User = {
+// const user = {
 //   name: "Ганна",
 //   email: "hanna@gmail.com",
 //   avatar: "/user-avatar.png",
 // };
 
-// const getInitials = (name: string) => {
-//   const parts = name.split(" ");
-//   return parts.map((part) => part[0]).join("");
-// };
-
-// const Sidebar = ({
-//   initialAuthStatus,
-//   isSidebarOpen,
-//   onClose,
-// }: SidebarProps) => {
+// const Sidebar = ({ initialAuthStatus }: SidebarProps) => {
 //   const pathname = usePathname();
-//   const [isAuthenticated] = useState(initialAuthStatus);
+//   const [isAuthenticated, setIsAuthenticated] = useState(initialAuthStatus);
+//   const [isMenuOpen, setIsMenuOpen] = useState(false); // Стан для керування видимістю
 
 //   const handleLogout = () => {
 //     console.log("Відкрити ConfirmationModal та вийти з системи");
+//     setIsAuthenticated(false);
 //   };
 
-//   const getNavLinkHref = (itemHref: string) => {
-//     return isAuthenticated ? itemHref : "/auth/register";
+//   // ПРИВІТ, Данило!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Це імітація того, що має робити Header
+//   const toggleMenu = () => {
+//     setIsMenuOpen(!isMenuOpen);
 //   };
 
 //   return (
-//     <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}>
-//       <div className={styles.logoSection}>
-//         <Image
-//           src="/stork-logo.svg"
-//           alt="Лелека"
-//           width={48}
-//           height={48}
-//           priority
-//         />
-//         <p className={styles.logoText}>Лелека</p>
-//       </div>
+//     <>
+//       {/* Ця кнопка тимчасова для тестування, поки поки ти не додав Header*/}
+//       <button onClick={toggleMenu}>Бургер</button>
 
-//       <nav className={styles.navMenu}>
-//         <ul>
-//           {navItems.map((item) => (
-//             <li key={item.href}>
-//               <Link
-//                 href={getNavLinkHref(item.href)}
-//                 className={`${styles.navItem} ${pathname === item.href ? styles.activeLink : ""}`}
-//                 onClick={onClose}
-//               >
-//                 <svg width={24} height={24} aria-hidden="true">
-//                   <use href={`/icons.svg#${item.icon}`} />
-//                 </svg>
-//                 <span>{item.label}</span>
-//               </Link>
-//             </li>
-//           ))}
-//         </ul>
-//       </nav>
+//       <aside className={`${styles.sidebar} ${isMenuOpen ? styles.show : ""}`}>
+//         <div className={styles.logoSection}>
+//           <Image
+//             src="/stork-logo.svg"
+//             alt="Лелека"
+//             width={48}
+//             height={48}
+//             priority
+//           />
+//           <p className={styles.logoText}>Лелека</p>
+//         </div>
 
-//       <div className={styles.bottomSection}>
-//         {isAuthenticated ? (
-//           <div className={styles.userProfile}>
-//             {user.avatar ? (
-//               <Image
-//                 src={user.avatar}
-//                 alt={user.name}
-//                 width={40}
-//                 height={40}
-//                 className={styles.avatar}
-//               />
-//             ) : (
-//               <div className={styles.initialsAvatar}>
-//                 <span>{getInitials(user.name)}</span>
+//         <nav className={styles.navMenu}>
+//           <ul>
+//             {navItems.map((item) => (
+//               <li key={item.href}>
+//                 <Link
+//                   href={isAuthenticated ? item.href : "/auth/register"}
+//                   className={`${styles.navItem} ${pathname === item.href ? styles.activeLink : ""}`}
+//                 >
+//                   <svg width={24} height={24} aria-hidden="true">
+//                     <use href={`/icons.svg#${item.icon}`} />
+//                   </svg>
+//                   <span>{item.label}</span>
+//                 </Link>
+//               </li>
+//             ))}
+//           </ul>
+//         </nav>
+
+//         <div className={styles.bottomSection}>
+//           {isAuthenticated ? (
+//             <div className={styles.userProfile}>
+//               {user.avatar && (
+//                 <Image
+//                   src={user.avatar}
+//                   alt={user.name}
+//                   width={40}
+//                   height={40}
+//                   className={styles.avatar}
+//                 />
+//               )}
+//               <div className={styles.userInfo}>
+//                 <span className={styles.userName}>{user.name}</span>
+//                 <span className={styles.userEmail}>{user.email}</span>
 //               </div>
-//             )}
-//             <div className={styles.userInfo}>
-//               <span className={styles.userName}>{user.name}</span>
-//               <span className={styles.userEmail}>{user.email}</span>
+//               <button onClick={handleLogout} className={styles.logoutButton}>
+//                 <svg width={24} height={24} aria-hidden="true">
+//                   <use href="/icons.svg#logout" />
+//                 </svg>
+//               </button>
 //             </div>
-//             <button onClick={handleLogout} className={styles.logoutButton}>
-//               <svg width={24} height={24} aria-hidden="true">
-//                 <use href="/icons.svg#logout" />
-//               </svg>
-//             </button>
-//           </div>
-//         ) : (
-//           <div className={styles.authLinks}>
-//             <Link
-//               href="/auth/login"
-//               className={styles.authLinkItem}
-//               onClick={onClose}
-//             >
-//               Login
-//             </Link>
-//             <Link
-//               href="/auth/register"
-//               className={styles.authLinkItem}
-//               onClick={onClose}
-//             >
-//               Register
-//             </Link>
-//           </div>
-//         )}
-//       </div>
-//     </aside>
+//           ) : (
+//             <div className={styles.authLinks}>
+//               <Link href="/auth/login" className={styles.authLinkItem}>
+//                 Увійти
+//               </Link>
+//               <Link href="/auth/register" className={styles.authLinkItem}>
+//                 Зареєструватися
+//               </Link>
+//             </div>
+//           )}
+//         </div>
+//       </aside>
+//     </>
 //   );
 // };
 
 // export default Sidebar;
 
-//////////////////////////
+/////////////////////////////
 
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
+import styles from "./Sidebar.module.css";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import styles from "./Sidebar.module.css";
-// import "@material-symbols/svg-400";
-
-type User = {
-  name: string;
-  email: string;
-  avatar?: string;
-} | null;
+import { useMediaQuery } from "react-responsive";
 
 type SidebarProps = {
   initialAuthStatus: boolean;
-  isSidebarOpen: boolean;
-  onClose: () => void;
 };
 
 const navItems = [
@@ -165,118 +141,120 @@ const navItems = [
   { href: "/profile", label: "Профіль", icon: "account_circle" },
 ];
 
-const user: User = {
+const user = {
   name: "Ганна",
   email: "hanna@gmail.com",
   avatar: "/user-avatar.png",
 };
 
-const getInitials = (name: string) => {
-  const parts = name.split(" ");
-  return parts.map((part) => part[0]).join("");
-};
-
-const Sidebar = ({
-  initialAuthStatus,
-  isSidebarOpen,
-  onClose,
-}: SidebarProps) => {
+const Sidebar = ({ initialAuthStatus }: SidebarProps) => {
   const pathname = usePathname();
-  const [isAuthenticated] = useState(initialAuthStatus);
+  const [isAuthenticated, setIsAuthenticated] = useState(initialAuthStatus);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isMobileOrTablet = useMediaQuery({ maxWidth: 1439 });
 
   const handleLogout = () => {
     console.log("Відкрити ConfirmationModal та вийти з системи");
+    setIsAuthenticated(false);
   };
 
-  const getNavLinkHref = (itemHref: string) => {
-    return isAuthenticated ? itemHref : "/auth/register";
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
-  const isLinkActive = (href: string) => {
-    if (href === "/") {
-      return pathname === href;
+  const handleLinkClick = () => {
+    if (isMobileOrTablet) {
+      setIsMenuOpen(false);
     }
-    return pathname.startsWith(href);
   };
 
   return (
-    <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}>
-      <div className={styles.logoSection}>
-        <Image
-          src="/stork-logo.svg"
-          alt="Лелека"
-          width={48}
-          height={48}
-          priority
-        />
-        <p className={styles.logoText}>Лелека</p>
-      </div>
+    <>
+      {/* Ця кнопка тепер знаходиться поза сайдбаром */}
+      {isMobileOrTablet && (
+        <button onClick={toggleMenu} className={styles.burgerButton}>
+          <div className={styles.burgerIcon}></div>
+          <div className={styles.burgerIcon}></div>
+          <div className={styles.burgerIcon}></div>
+        </button>
+      )}
 
-      <nav className={styles.navMenu}>
-        <ul>
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={getNavLinkHref(item.href)}
-                className={`${styles.navItem} ${isLinkActive(item.href) ? styles.activeLink : ""}`}
-                onClick={onClose}
-              >
-                <svg width={24} height={24} aria-hidden="true">
-                  <use href={`/icons.svg#${item.icon}`} />
-                </svg>
-                <span>{item.label}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <aside
+        className={`${styles.sidebar} ${isMobileOrTablet && isMenuOpen ? styles.show : ""}`}
+      >
+        <div className={styles.logoSection}>
+          <Image
+            src="/stork-logo.svg"
+            alt="Лелека"
+            width={48}
+            height={48}
+            priority
+          />
+          <p className={styles.logoText}>Лелека</p>
+        </div>
 
-      <div className={styles.bottomSection}>
-        {isAuthenticated ? (
-          <div className={styles.userProfile}>
-            {user.avatar ? (
-              <Image
-                src={user.avatar}
-                alt={user.name}
-                width={40}
-                height={40}
-                className={styles.avatar}
-              />
-            ) : (
-              <div className={styles.initialsAvatar}>
-                <span>{getInitials(user.name)}</span>
+        <nav className={styles.navMenu}>
+          <ul>
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={isAuthenticated ? item.href : "/auth/register"}
+                  className={`${styles.navItem} ${pathname === item.href ? styles.activeLink : ""}`}
+                  onClick={handleLinkClick}
+                >
+                  <svg width={24} height={24} aria-hidden="true">
+                    <use href={`/icons.svg#${item.icon}`} />
+                  </svg>
+                  <span>{item.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className={styles.bottomSection}>
+          {isAuthenticated ? (
+            <div className={styles.userProfile}>
+              {user.avatar && (
+                <Image
+                  src={user.avatar}
+                  alt={user.name}
+                  width={40}
+                  height={40}
+                  className={styles.avatar}
+                />
+              )}
+              <div className={styles.userInfo}>
+                <span className={styles.userName}>{user.name}</span>
+                <span className={styles.userEmail}>{user.email}</span>
               </div>
-            )}
-            <div className={styles.userInfo}>
-              <span className={styles.userName}>{user.name}</span>
-              <span className={styles.userEmail}>{user.email}</span>
+              <button onClick={handleLogout} className={styles.logoutButton}>
+                <svg width={24} height={24} aria-hidden="true">
+                  <use href="/icons.svg#logout" />
+                </svg>
+              </button>
             </div>
-            <button onClick={handleLogout} className={styles.logoutButton}>
-              <svg width={24} height={24} aria-hidden="true">
-                <use href="/icons.svg#logout" />
-              </svg>
-            </button>
-          </div>
-        ) : (
-          <div className={styles.authLinks}>
-            <Link
-              href="/auth/login"
-              className={`${styles.authLinkItem} ${isLinkActive("/auth/login") ? styles.activeLink : ""}`}
-              onClick={onClose}
-            >
-              Увійти
-            </Link>
-            <Link
-              href="/auth/register"
-              className={`${styles.authLinkItem} ${isLinkActive("/auth/register") ? styles.activeLink : ""}`}
-              onClick={onClose}
-            >
-              Зареєструватися
-            </Link>
-          </div>
-        )}
-      </div>
-    </aside>
+          ) : (
+            <div className={styles.authLinks}>
+              <Link
+                href="/auth/login"
+                className={styles.authLinkItem}
+                onClick={handleLinkClick}
+              >
+                Увійти
+              </Link>
+              <Link
+                href="/auth/register"
+                className={styles.authLinkItem}
+                onClick={handleLinkClick}
+              >
+                Зареєструватися
+              </Link>
+            </div>
+          )}
+        </div>
+      </aside>
+    </>
   );
 };
 

@@ -1,8 +1,5 @@
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  width: 312px;
   height: 100vh;
   background-color: #fff;
   padding: 30px 24px;
@@ -10,32 +7,11 @@
   flex-direction: column;
   justify-content: space-between;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
-  transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
-  z-index: 100;
-}
-
-
-.sidebar.open {
-  transform: translateX(0);
-}
-
-/* tablet */
-@media screen and (min-width: 768px) {
-  .sidebar {
-    width: 312px;
-  }
-}
-
-/* Desktop */
-@media screen and (min-width: 1440px) {
-  .sidebar {
-    position: static;
-    transform: none;
-    box-shadow: none;
-    border-right: 1px solid #e0e0e0;
-    display: flex; 
-  }
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
 }
 
 .logoSection {
@@ -93,27 +69,12 @@
   font-weight: 700;
 }
 
-.bottomSection {
-  padding-top: 24px;
-  border-top: 1px solid #e0e0e0;
-}
-
 .userProfile {
   display: flex;
   align-items: center;
   gap: 12px;
-}
-
-.initialsAvatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: var(--color-pastel-pink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: #fff;
+  padding-top: 24px;
+  border-top: 1px solid #e0e0e0;
 }
 
 .avatar {
@@ -159,4 +120,77 @@
 
 .authLinkItem:hover {
   background-color: #f0f0f0;
+}
+
+/* ---------------------------------------------------- */
+/* Адаптивні стилі */
+/* ---------------------------------------------------- */
+
+/* Стилі для кнопки "Бургер" */
+.burgerButton {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  background-color: red;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 8px;
+  border-radius: 4px; /* Додаємо заокруглення для кращого вигляду */
+}
+
+.burgerIcon {
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Приховуємо кнопку на десктопі */
+@media (min-width: 1440px) {
+  .burgerButton {
+    display: none;
+  }
+}
+
+/* Стилі для планшетів (768px до 1439px) */
+@media (min-width: 768px) and (max-width: 1439px) {
+  .sidebar {
+    width: 300px;
+    transform: translateX(-100%);
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+}
+
+/* Стилі для мобільних пристроїв (до 767px) */
+@media (max-width: 767px) {
+  .sidebar {
+    width: 100%;
+    padding: 20px;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+}
+
+/* Стилі для десктопу (від 1440px і вище) */
+@media (min-width: 1440px) {
+  .sidebar {
+    width: 312px;
+    transform: translateX(0);
+    position: static;
+  }
 }
