@@ -1,0 +1,187 @@
+.wrapper {
+    min-height: 100vh;
+    background: #f6f7f9;
+    color: #111827;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.card {
+    width: min(680px, 92vw);
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .04), 0 10px 24px rgba(0, 0, 0, .06);
+    text-align: center;
+}
+
+.illu {
+    display: grid;
+    place-items: center;
+    margin-bottom: 12px;
+}
+
+.logo {
+    width: 120px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 12px 14px rgba(17, 24, 39, 0.08));
+}
+
+.code {
+    font-size: clamp(22px, 3.2vw, 28px);
+    line-height: 1.2;
+    font-weight: 650;
+    margin: 6px 0 8px;
+}
+
+.message {
+    color: #6b7280;
+    font-size: clamp(14px, 2.3vw, 16px);
+    line-height: 1.55;
+    margin: 0 0 18px;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.button {
+    appearance: none;
+    border: 1px solid #e5e7eb;
+    background: transparent;
+    color: #111827;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: transform .06s ease, background .15s ease, border-color .15s ease, opacity .15s ease;
+}
+
+.button:active {
+    transform: translateY(1px);
+}
+
+.button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 218, 237, 0.7);
+}
+
+.primary {
+    background: #FFCBD3;
+    border-color: #FFCBD3;
+    color: #111827;
+}
+
+.primary:hover {
+    background: #FFDAED;
+}
+
+.ghost {
+    background: #FFCBD3;
+    border-color: #FFCBD3;
+    color: #111827;
+}
+
+.ghost:hover {
+    background: #FFDAED;
+}
+
+@media (min-width: 1440px) {
+    .card {
+        width: 920px;
+        padding: 36px;
+        border-radius: 18px;
+    }
+
+    .logo {
+        width: 140px;
+    }
+
+    .code {
+        font-size: 32px;
+    }
+
+    .message {
+        font-size: 18px;
+    }
+
+    .button {
+        padding: 12px 16px;
+        font-size: 16px;
+        border-radius: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 20px;
+    }
+
+    .card {
+        width: min(620px, 96vw);
+        padding: 24px;
+    }
+
+    .logo {
+        width: 100px;
+    }
+
+    .code {
+        font-size: 22px;
+    }
+
+    .message {
+        font-size: 15px;
+    }
+
+    .actions {
+        gap: 10px;
+    }
+
+    .button {
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 375px) {
+    .wrapper {
+        padding: 16px;
+    }
+
+    .card {
+        width: 100%;
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .logo {
+        width: 84px;
+    }
+
+    .code {
+        font-size: 20px;
+    }
+
+    .message {
+        font-size: 14px;
+    }
+
+    .actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .button {
+        width: 100%;
+        justify-content: center;
+    }
+}
