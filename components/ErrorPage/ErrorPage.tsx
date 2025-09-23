@@ -4,26 +4,27 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { MdHome, MdRefresh } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import css from "./ErrorPage.module.css";
+import css from "./ErrorPage.module.css"; // можеш перейменувати у Error.module.css
 
-type ErrorPageProps = {
+type ErrorViewProps = {
   code?: number | string;
   title?: string;
   message?: string;
   homeHref?: string;
-  onRetry?: () => void;
+  /** Якщо переданий, показуємо кнопку Retry і викликаємо reset() */
+  reset?: () => void;
 };
 
-export default function ErrorPage({
+export default function ErrorView({
   code = 404,
   title = "Сторінку не знайдено",
   message = "Вибачте, сторінка недоступна чи переміщена.",
   homeHref = "/",
-  onRetry,
-}: ErrorPageProps) {
+  reset,
+}: ErrorViewProps) {
   const router = useRouter();
   const handleBack = () => router.push(homeHref);
-  const handleRetry = () => (onRetry ? onRetry() : router.refresh());
+  const handleRetry = () => { if (reset) reset(); };
 
   return (
     <div className={css.wrapper} role="alert" aria-live="polite">
@@ -33,7 +34,7 @@ export default function ErrorPage({
         transition={{ type: "spring", stiffness: 110, damping: 16 }}
         className={css.card}
       >
-        {/* Лелека-лого */}
+        {/* Лого лелеки (PNG) */}
         <motion.div
           className={css.illu}
           initial={{ scale: 0.95, rotate: -2, opacity: 0 }}
@@ -80,10 +81,13 @@ export default function ErrorPage({
             <MdHome size={20} />
             На головну
           </button>
-          <button className={`${css.button} ${css.ghost}`} onClick={handleRetry}>
-            <MdRefresh size={20} />
-            Спробувати ще раз
-          </button>
+
+          {reset && (
+            <button className={`${css.button} ${css.ghost}`} onClick={handleRetry}>
+              <MdRefresh size={20} />
+              Спробувати ще раз
+            </button>
+          )}
         </motion.div>
       </motion.div>
     </div>
