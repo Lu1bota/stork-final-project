@@ -35,10 +35,6 @@ const Sidebar = ({ initialAuthStatus }: SidebarProps) => {
     setIsAuthenticated(false);
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   const handleLinkClick = () => {
     if (isMobileOrTablet) {
       setIsMenuOpen(false);
