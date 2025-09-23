@@ -1,34 +1,33 @@
 /* ========== MOBILE ========== */
 .avatarContainer {
-  display: flex;
+     display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 12px;
-  padding: 16px;
   max-width: 100%;
   color:  #000;
-
+  margin:  24px 20px 0px 20px;
 }
+
+
 .profileWrapper {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  
   width: 100%;
-  max-width: 644px;
-  padding: 16px 24px 16px;
-  margin: 0 auto;
+  width: 375px;
+    gap: 16px;
+    padding-top: 68px; /* для сайдбара */
 }
 
 
 /* Breadcrumbs */
 .breadcrumbs {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 16.5px;
   font-size: 14px;
-  padding-left: 8px;
+  margin: 20px ;
+
 }
 
 .breadcrumbActive {
@@ -47,8 +46,8 @@
 } */
 
 .avatarWrapper {
-  width: 96px;
-  height: 96px;
+  width: 132px;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.05);
@@ -56,17 +55,17 @@
   justify-content: center;
   align-items: center;
 }
-
+ 
 .avatarImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  
 }
 
 .userInfo {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  width: 100%;
 }
 
 .userName {
@@ -78,6 +77,7 @@
 .userEmail {
   font-size: 14px;
   margin: 0;
+  margin-bottom: 16px;
 }
 
 .uploadButton {
@@ -88,6 +88,8 @@
   border-radius: 100px;
   font-size: 14px;
   transition: background-color 0.3s;
+  width: 100%;
+  margin-bottom: 32px;
 }
 
 .uploadButton:hover {
@@ -100,18 +102,22 @@
     flex-direction: row;
     align-items: center;
     text-align: left;
-    padding: 20px;
     gap: 24px;
+    margin: 0px 32px;
+
   }
+ 
+  .profileWrapper {
+
+  width: 100%;
+  width: 768px;
+  gap: 16px;
+}
 
   .userInfo {
     align-items: flex-start;
   }
 
-  .avatarWrapper {
-    width: 112px;
-    height: 112px;
-  }
 
   .userName {
     font-size: 20px;
@@ -124,6 +130,7 @@
   .uploadButton {
     font-size: 15px;
     padding: 10px 20px;
+    width: 218px;
   }
 }
 

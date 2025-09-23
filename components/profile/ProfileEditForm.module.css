@@ -2,20 +2,19 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  max-width: 100%;
-  
-}
+  width: 375px;
+   }
 
 .formGroup {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin:  0px 20px 0px 20px;
 }
 
 .label {
-  font-size: 14px;
-  margin-bottom: 6px;
-  font-weight: 500;
+  font-size: 10px;
+  font-weight: 400;
 }
 
 .input, .select, .date {
@@ -26,6 +25,7 @@
   font-size: 14px;
   background-color: #f2f2f2;
   color: rgba(0, 0, 0, 0.6);
+  margin-top: 8px;
 }
 
 .input:focus,
@@ -40,20 +40,26 @@
 }
 .buttonContainer {
     display: flex;
-    justify-content: flex-end;
-    gap: 16px;
+    justify-content: space-between;
+    gap: 18px;
     flex-wrap: wrap; 
+    width: 100%;
+    margin-top: 24px;
 }
 
 .submitButtonGray,
 .submitButtonPink {
-    padding: 12px 16px;
+    flex: 1;         
+    width: 100%;
+    padding-top: 8px ;
+    padding-bottom: 8px ;
     border: 4px;
     border-radius: 16px;
     font-size: 15px;
     cursor: pointer;
     transition: background 0.2s ease;
 }
+
 .submitButtonGray {
   background-color: #f2f2f2;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
@@ -71,22 +77,33 @@
 /* планшет */
 @media (min-width: 768px) {
   .form {
-    max-width: 400px;
+    max-width: 768px;
+    width: 100%;
   }
 
   .input {
     font-size: 15px;
   }
+  .buttonContainer {
+  justify-content:flex-end;
+  }
 
   .submitButton {
     font-size: 16px;
   }
+  .submitButtonGray {
+ width: 150px;
+}
+
+.submitButtonPink {
+  width: 135px;
+}
 }
 
 /* десктоп */
 @media (min-width: 1024px) {
   .form {
-    max-width: 644px;
+    max-width: 1440px;
     padding: 24px;
   }
 }

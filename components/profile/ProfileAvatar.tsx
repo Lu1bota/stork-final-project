@@ -18,8 +18,8 @@ export default function ProfileAvatar({ user }: { user: any }) {
 
   return (
     <div className={styles.profileWrapper}>
-      {/* Breadcrumbs */}
-      <nav className={styles.breadcrumbs}>
+
+         <nav className={styles.breadcrumbs}>
         {/* <Link to="/" className={styles.breadcrumbLink}>Лелека</Link> */}
         <span>Лелека</span>
         <span className={styles.breadcrumbSeparator}>{'>'}</span>
@@ -28,6 +28,7 @@ export default function ProfileAvatar({ user }: { user: any }) {
 
       {/* Profile content */}
       <div className={styles.avatarContainer}>
+
         <div className={styles.avatarWrapper}>
           <img
             src={user.avatar}
@@ -38,13 +39,14 @@ export default function ProfileAvatar({ user }: { user: any }) {
         <div className={styles.userInfo}>
           <h2 className={styles.userName}>{user.name}</h2>
           <p className={styles.userEmail}>{user.email}</p>
-          <button
+                  <button
             onClick={handleUploadClick}
             className={styles.uploadButton}
           >
             Завантажити нове фото
           </button>
         </div>
+
         <input
           type="file"
           ref={fileInputRef}

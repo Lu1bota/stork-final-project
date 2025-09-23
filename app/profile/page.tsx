@@ -62,10 +62,12 @@ export default function ProfilePage() {
   if (!user) return <p>Завантаження...</p>;
 
   return (
-    <div style={{ maxWidth: "644px", marginLeft: "312px" }}>
+    <div >
       
       <ProfileAvatar user={user} />
       <ProfileEditForm user={user} />
     </div>
   );
 }
+
+//  style={{ maxWidth: "644px", marginLeft: "312px" }}
