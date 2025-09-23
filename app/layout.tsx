@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Lato, Comfortaa } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
-import Sidebar from "@/components/Sidebar/Sidebar";
 
 const fontsLato = Lato({
   variable: "--font-lato",
@@ -32,7 +31,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${fontsLato.variable} ${fontsComfortaa.variable}`}>
         <TanStackProvider>
-          <Sidebar initialAuthStatus={false} />
           <main>{children}</main>
         </TanStackProvider>
       </body>
