@@ -1,7 +1,4 @@
-import Container from "@/components/Container/Container";
-import { DiaryEntryDetails } from "@/components/DiaryEntryDetails/DiaryEntryDetails";
-import { getDiaryEntries } from "@/lib/api/diary";
-
+import DiaryEntryPageClient from "./DiaryEntryPage.client";
 
 type DiaryEntryPageProps = {
     params: {
@@ -10,17 +7,8 @@ type DiaryEntryPageProps = {
 } 
 
 export default async function DiaryEntryPage({ params }: DiaryEntryPageProps) {
-  const { entryId } = params;
 
-  const entries = await getDiaryEntries();
-  const selectedCardDetails = entries.find((entry) => entry._id === entryId);
+  const { entryId } = await params;
 
-  return (
-    <Container>
-      <p>Header</p>
-      <p>Diary Header</p>
-      <p>GreetingBlock</p>
-      <DiaryEntryDetails selectedCardDetails={selectedCardDetails} />
-    </Container>
-  );
+  return <DiaryEntryPageClient entryId={entryId} />
 }

@@ -1,42 +1,32 @@
 "use client"
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";;
+import { useEffect, useState } from "react";
+import { getDiaryEntries } from "@/lib/api/clientApi";
 import { DiaryEntryCard } from "../DiaryEntryCard/DiaryEntryCard"
-import { useState } from "react";
 import { DiaryEntryDetails } from "../DiaryEntryDetails/DiaryEntryDetails";
-import css from "./DiaryList.module.css"
-import { DiaryEntry } from "@/types/diary";
 import { AddDiaryEntryModal } from "../AddDiaryEntryModal/AddDiaryEntryModal";
-
-// export interface Emotion {
-//     _id: string;
-//     title: string;
-// }
-
-// export interface DiaryEntry {
-//     _id: string;
-//     title: string;
-//     description: string;
-//     date: string;
-//     userId: string;
-//     emotions: Emotion[];
-//     createdAt: string;
-//     updatedAt: string;
-// }
+import css from "./DiaryList.module.css"
 
 type DiaryListProps = {
     isMobile: boolean,
-    entries: DiaryEntry[]
 };
 
-export const DiaryList = ({ isMobile, entries }: DiaryListProps) => {
-    // наявність записів
-    const hasEntries = entries && entries.length > 0;
-    // id першого запису (дефолтне значення)
-    const initEntryId = hasEntries ? entries[0]._id : null;
-    // id обраної картки
-    const [selectedEntryId, setSelectedEntryId] = useState<string | null>(initEntryId);
-
+export const DiaryList = ({ isMobile }: DiaryListProps) => {
+    
+    const [selectedEntryId, setSelectedEntryId] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const { data: entries } = useQuery({
+        queryKey: ['diaryEntries'], 
+        queryFn: getDiaryEntries,
+    });
+
+    useEffect(() => {
+        if (entries && entries.length > 0 && selectedEntryId === null) {
+            setSelectedEntryId(entries[0]._id);
+        }
+    }, [entries, selectedEntryId]);
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -51,8 +41,9 @@ export const DiaryList = ({ isMobile, entries }: DiaryListProps) => {
             setSelectedEntryId(entryId);
         }
     };
-
-    const selectedCardDetails = entries.find((entry) => entry._id === selectedEntryId);
+    
+    const hasEntries = entries && entries.length > 0;
+    const selectedCardDetails = hasEntries ? entries.find((entry) => entry._id === selectedEntryId) : null;
 
     return (
         <>  
@@ -70,6 +61,7 @@ export const DiaryList = ({ isMobile, entries }: DiaryListProps) => {
                     {entries.map((entry) => (
                         <li key={entry._id} className={css.card}>
                             {isMobile ? (
+                                
                                 <Link href={`/diary/${entry._id}`} className={css.linkWrapper}>
                                     <DiaryEntryCard entryCard={entry} />
                                 </Link>
@@ -99,22 +91,4 @@ export const DiaryList = ({ isMobile, entries }: DiaryListProps) => {
             )}
         </>
     );
-
 }
-
-
-
-
-  	
-// Компонент відображає список записів щоденника.
-// Дані зі списку приходять з бекенду.
-// Компонент містить в собі:
-// Заголовок сторінки ("Щоденник").
-// Текст "Новий запис" з кнопкою, яка відкриває модальне вікно AddDiaryEntryModal.
-// Список карток записів DiaryEntryCard.
-
-// /api/diaries
-// створити приватний ендпоінт для СТВОРЕННЯ запису в щоденник
-// створити приватний ендпоінт для ОТРИМАННЯ записів щоденника
-// створити приватний ендпоінт для РЕДАГУВАННЯ запису щоденника
-// створити приватний ендпоінт для ВИДАЛЕННЯ запису зі щоденника
