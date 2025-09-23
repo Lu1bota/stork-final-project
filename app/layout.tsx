@@ -3,7 +3,6 @@ import { Toaster } from "react-hot-toast";
 import { Lato, Comfortaa } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
-import { Toaster } from "react-hot-toast";
 
 const fontsLato = Lato({
   variable: "--font-lato",

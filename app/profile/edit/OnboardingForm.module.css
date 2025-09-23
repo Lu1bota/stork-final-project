@@ -139,7 +139,7 @@
   width: 335px;
   height: 40px;
   background: var(--color-neutral-lightest);
-
+display: inline-block;
 }
 
 .input,
@@ -272,7 +272,11 @@
     font-size: 14px;
   }
   
- 
+  .inputFile {
+    margin-top: 8px;
+    font-size: 14px;
+    display: block;
+  }
   
 
  
