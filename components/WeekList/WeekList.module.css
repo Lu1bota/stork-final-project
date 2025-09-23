@@ -1,6 +1,0 @@
-.weeks_list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 16px;
-}
