@@ -1,6 +1,5 @@
 import { cookies } from "next/headers";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
-import Header from "@/components/Header/Header";
 import "./globals.css";
 import { Lato, Comfortaa } from "next/font/google";
 import Container from "@/components/Container/Container";
@@ -29,6 +28,7 @@ interface RootLayoutProps {
 }
 
 export default async function RootLayout({ children }: RootLayoutProps) {
+  // Використовуємо 'await', щоб дочекатися, поки cookies() поверне результат
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token");
   const isAuthenticated = !!token;
@@ -37,7 +37,6 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html lang="uk">
       <body className={`${fontsLato.variable} ${fontsComfortaa.variable}`}>
         <TanStackProvider>
-          <Header initialAuthStatus={isAuthenticated} />
           <main style={{ flex: 1, padding: "20px 0" }}>
             <Container>{children}</Container>
           </main>

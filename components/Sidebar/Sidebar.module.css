@@ -1,4 +1,3 @@
-/* mobile (up to 768px): dropping sidebar */
 .sidebar {
   position: fixed;
   top: 0;
@@ -16,24 +15,26 @@
   z-index: 100;
 }
 
+
 .sidebar.open {
   transform: translateX(0);
 }
 
-/* tablet (from 768px) */
+/* tablet */
 @media screen and (min-width: 768px) {
   .sidebar {
-    width: 300px;
+    width: 312px;
   }
 }
 
-/* Desktop (from 1440px): permanent sidebar */
+/* Desktop */
 @media screen and (min-width: 1440px) {
   .sidebar {
     position: static;
     transform: none;
     box-shadow: none;
     border-right: 1px solid #e0e0e0;
+    display: flex; 
   }
 }
 
