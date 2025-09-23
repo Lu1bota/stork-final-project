@@ -2,7 +2,7 @@
 
 import Select from 'react-select';
 import { Field } from 'formik';
-import styles from '../components/CustomSelect.module.css'
+import styles from '../CustomSelect/CustomSelect.module.css'
 
 const genderOptions = [
   { value: 'boy', label: 'Хлопчик' },

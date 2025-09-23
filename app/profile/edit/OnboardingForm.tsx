@@ -36,7 +36,7 @@ const validationSchema = Yup.object({
     unknown: 'null',
   };
 
-  const GenderSelect = dynamic(() => import('../../components/OnboardingGenderSelect'), {
+  const GenderSelect = dynamic(() => import('../../../components/CustomSelect/OnboardingGenderSelect'), {
     ssr: false,
   });
 
