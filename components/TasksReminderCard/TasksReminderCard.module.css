@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 335px;
+  max-width: 311px;
   margin: 0 auto;
 }
 
@@ -204,7 +204,7 @@
 /* breakpoints */
 @media screen and (min-width: 768px) {
   .card {
-    width: 704px;
+    max-width: 704px;
   }
 
   .listWrapper {
