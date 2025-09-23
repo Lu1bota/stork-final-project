@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
@@ -45,7 +45,26 @@ const GenderSelect = dynamic(
 
 export default function OnboardingForm() {
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [avatarFromServer, setAvatarFromServer] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await nextServer.get("/users/me");
+        const photoUrl = res.data?.data?.photoURL;
+        if (photoUrl) {
+          setAvatarFromServer(photoUrl);
+        }
+      } catch (err) {
+        console.error("Не вдалося отримати користувача!", err);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   const mutation = useMutation<unknown, Error, FormData>({
     mutationFn: (formData) => nextServer.patch("/users/me", formData),
     onSuccess: () => {
@@ -66,6 +85,7 @@ export default function OnboardingForm() {
         if (values.dueDate) {
           formData.append("dueDate", values.dueDate.toISOString());
         }
+
         formData.append("gender", genderMap[values.gender] || "null");
 
         if (avatarFile) {
@@ -79,37 +99,45 @@ export default function OnboardingForm() {
         <Form className={styles.form}>
           <div className={styles.upload}>
             <div className={styles.avatarPreview}>
-              {avatarFile ? (
+            {avatarFile ? (
                 <img
                   src={URL.createObjectURL(avatarFile)}
-                  alt="avatar"
+                  alt="avatar preview"
+                  className={styles.avatarImage}
+                />
+              ) : avatarFromServer ? (
+                <img
+                  src={avatarFromServer}
+                  alt="user avatar"
                   className={styles.avatarImage}
                 />
               ) : (
                 <img
                   src="/avatar-upload.svg"
-                  alt="avatar upload"
+                  alt="default avatar"
                   className={styles.avatarIcon}
                 />
               )}
             </div>
-            <Field name="avatar">
-              {({ field }: { field: FieldInputProps<any> }) => (
-                <label htmlFor="avatar" className={styles.uploadButton}>
-                  Завантажити фото
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className={styles.hiddenInput}
-                    onChange={(e) => {
-                      const file = e.currentTarget.files?.[0] || null;
-                      setAvatarFile(file);
-                      setFieldValue("avatar", file);
-                    }}
-                  />
-                </label>
-              )}
-            </Field>
+            <button
+              type="button"
+              className={styles.uploadButton}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              Завантажити фото
+            </button>
+            <input
+              ref={fileInputRef}
+              id="avatar"
+              type="file"
+              accept="image/*"
+              className={styles.hiddenInput}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                setAvatarFile(file || null);
+                setFieldValue("avatar", file);
+              }}
+            />
           </div>
           <GenderSelect />
           <div className={styles.field}>

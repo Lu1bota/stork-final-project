@@ -31,7 +31,6 @@
 
 @media (min-width: 1024px) {
   .right {
-   
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +45,7 @@
   .image {
     display: block;
     max-width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: contain;
   }
 }
@@ -139,7 +138,6 @@
   width: 335px;
   height: 40px;
   background: var(--color-neutral-lightest);
-display: inline-block;
 }
 
 .input,
@@ -261,25 +259,6 @@ display: inline-block;
   }
 
 
-  .react-select__control {
-    font-size: 14px;
-    min-height: 42px;
-    border-radius: 70px;
-    background-color: rgb(255, 149, 0);
-  }
-  
-  .react-select__menu {
-    font-size: 14px;
-  }
-  
-  .inputFile {
-    margin-top: 8px;
-    font-size: 14px;
-    display: block;
-  }
   
 
  
-  
-
-  
