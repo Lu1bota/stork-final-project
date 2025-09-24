@@ -34,7 +34,6 @@ export default function RootLayout({
         <TanStackProvider>
         <Toaster position="top-right" toastOptions={{ duration: 2000 }} />
           <main>{children}</main>
-                <Toaster position="top-right" />
         </TanStackProvider>
       </body>
     </html>

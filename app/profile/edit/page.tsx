@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import styles from "./OnboardingForm.module.css";
 import OnboardingForm from "./OnboardingForm";
