@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className={`${fontsLato.variable} ${fontsComfortaa.variable}`}>
         <TanStackProvider>
           <main>{children}</main>
-                <Toaster position="top-right" />
+          <Toaster position="top-right" />
         </TanStackProvider>
       </body>
     </html>
