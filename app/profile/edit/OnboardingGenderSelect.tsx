@@ -1,8 +1,13 @@
 'use client';
 
-import Select from 'react-select';
-import { Field } from 'formik';
+import Select, {SingleValue} from 'react-select';
+import { Field, FieldProps } from 'formik';
 import styles from '../../../components/CustomSelect/CustomSelect.module.css'
+
+interface OptionType {
+  value: string;
+  label: string;
+}
 
 const genderOptions = [
   { value: 'boy', label: 'Хлопчик' },
@@ -15,7 +20,7 @@ export default function OnboardingGenderSelect() {
     <div className={styles.field}>
       <label htmlFor="gender" className={styles.label}>Стать дитини</label>
       <Field name="gender">
-        {({ field, form, meta }: any) => {
+        {({ field, form, meta }: FieldProps<string>) => {
           const hasError = meta.touched && meta.error;
 
           return (
@@ -25,7 +30,7 @@ export default function OnboardingGenderSelect() {
                 options={genderOptions}
                 name={field.name}
                 value={genderOptions.find(option => option.value === field.value)}
-                onChange={(option: any) => {
+                onChange={(option: SingleValue<OptionType>) => {
                   form.setFieldValue(field.name, option?.value || '');
                 }}
                 onBlur={() => form.setFieldTouched(field.name, true)}
