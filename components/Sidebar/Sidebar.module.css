@@ -8,11 +8,11 @@
 
 .top { padding: 16px; }
 
-.logoRow { display: flex; align-items: center; gap: 8px; height: 29.4px; padding-left: 8px; }
+.logoRow { display: flex; align-items: center; gap: 8px; width: 95px; height: 29.4px; padding-left: 8px; }
 .logo { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; background: #eaeaea; display: inline-block; }
 .logoBox { position: relative; width: 32px; height: 32px; border-radius: 50%; overflow: hidden; background: #fff; }
 .logoImg { object-fit: contain; }
-.brand { font-family: var(--font-lato), system-ui, sans-serif; font-weight: 400; font-size: 12.892px; line-height: 12.892px; color: #000; }
+.brand { display: none; }
 
 .nav {
   padding: 8px 16px 0 16px;
@@ -47,8 +47,9 @@
 .open .overlay { display: block; }
 .open .panel { transform: translateX(0); }
 
-.close { position: absolute; right: 8px; top: 8px; width: 32px; height: 32px; background: transparent; border: none; border-radius: 8px; padding: 4px; display: inline-flex; align-items: center; justify-content: center; }
-.closeIcon { width: 17.53px; height: 17.53px; color: #000; margin: 7.23px; }
+.close { position: absolute; right: 8px; top: 8px; width: 32px; height: 32px; background: transparent; border: none; border-radius: 8px; padding: 4px; display: inline-flex; align-items: center; justify-content: center; color: #000; }
+.closeIcon { width: 32px; height: 32px; margin: 0; }
+.closeIcon path { stroke: currentColor; stroke-width: 2px; fill: none; }
 .close:active { transform: translateY(1px); }
 
 @media (min-width: 1440px) {

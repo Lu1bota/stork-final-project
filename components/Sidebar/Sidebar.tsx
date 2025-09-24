@@ -7,16 +7,11 @@ import { useState } from "react";
 import css from "./Sidebar.module.css";
 import { useAuthStore } from "@/lib/store/authStore";
 
-type SidebarProps = {
-  isAuthenticated?: boolean;
-};
-
-export default function Sidebar({ isAuthenticated = false }: SidebarProps) {
+export default function Sidebar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   // confirm handled by separate route
-  const { isAuthenticated: storeAuth, user } = useAuthStore();
-  const isAuth = isAuthenticated || storeAuth;
+  const { isAuthenticated: isAuth, user } = useAuthStore();
 
   const nav = [
     { label: "Мій день", href: "/", icon: "today" },
@@ -32,9 +27,8 @@ export default function Sidebar({ isAuthenticated = false }: SidebarProps) {
       <div className={css.top}>
         <div className={css.logoRow}>
           <Link href="/" aria-label="На головну">
-            <Image className={css.logoImg} src="/logo.svg" alt="Лелека" width={29.6213} height={29.6213} priority />
+            <Image className={css.logoImg} src="/logo/Frame_269.png" alt="Лелека" width={95} height={29.6213} priority />
           </Link>
-          <span className={css.brand}>Лелека</span>
         </div>
       </div>
       <nav className={css.nav} aria-label="Sidebar">
@@ -101,7 +95,9 @@ export default function Sidebar({ isAuthenticated = false }: SidebarProps) {
             onClick={() => setMobileOpen(false)}
             aria-label="Закрити меню"
           >
-            <Image className={css.closeIcon} src="/icons-close.svg" alt="Закрити" width={17.53} height={17.53} />
+            <svg className={css.closeIcon} aria-hidden>
+              <use href="/sprite.svg#close" />
+            </svg>
           </button>
           {menu}
         </div>
