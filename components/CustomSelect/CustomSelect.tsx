@@ -2,7 +2,7 @@
 
 import React, { JSX, useState } from 'react';
 import Select from 'react-select';
-import { genderOptions } from '../../app/data';
+import { genderOptions } from '../../const/index';
 
 
 const Checkbox = ({ children, ...props }: JSX.IntrinsicElements['input']) => (

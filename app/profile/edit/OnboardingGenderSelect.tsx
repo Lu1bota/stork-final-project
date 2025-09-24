@@ -3,17 +3,14 @@
 import Select, {SingleValue} from 'react-select';
 import { Field, FieldProps } from 'formik';
 import styles from '../../../components/CustomSelect/CustomSelect.module.css'
+import { genderOptions } from '@/const';
 
 interface OptionType {
   value: string;
   label: string;
 }
 
-const genderOptions = [
-  { value: 'boy', label: 'Хлопчик' },
-  { value: 'girl', label: 'Дівчинка' },
-  { value: 'null', label: 'Ще не знаю' },
-];
+
 
 export default function OnboardingGenderSelect() {
   return (
