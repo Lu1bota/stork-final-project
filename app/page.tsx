@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-import TasksReminderCard from "../components/TasksReminderCard/TasksReminderCard";
-import FeelingCheckCard from "../components/FeelingCheckCard/FeelingCheckCard";
+import TasksReminderCard from "../components/dashboard/TasksReminderCard/TasksReminderCard";
+import FeelingCheckCard from "../components/dashboard/FeelingCheckCard/FeelingCheckCard";
 import styles from "./page.module.css";
+import MomTipCard from "@/components/dashboard/MomTipCard/MomTipCard";
 
 export default function DashboardPage() {
   // Заглушки для открытия модального окна
@@ -25,6 +26,7 @@ export default function DashboardPage() {
           <FeelingCheckCard onOpenAddDiaryEntryModal={openAddDiaryModal} />
         </div>
       </div>
+      <MomTipCard tip="hello" />
     </main>
   );
 }
