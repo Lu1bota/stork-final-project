@@ -12,7 +12,7 @@ type SidebarProps = {
 };
 
 const navItems = [
-  { href: "/today", label: "Мій день", icon: "today" },
+  { href: "/", label: "Мій день", icon: "today" },
   { href: "/journey", label: "Подорож", icon: "conversion_path" },
   { href: "/diary", label: "Щоденник", icon: "book" },
   { href: "/profile", label: "Профіль", icon: "account_circle" },
@@ -48,10 +48,10 @@ const Sidebar = ({ initialAuthStatus }: SidebarProps) => {
       >
         <div className={styles.logoSection}>
           <Image
-            src="/stork-logo.svg"
+            src="/logo/Frame_269.png"
             alt="Лелека"
-            width={48}
-            height={48}
+            width={95}
+            height={30}
             priority
           />
           <p className={styles.logoText}>Лелека</p>
@@ -67,7 +67,7 @@ const Sidebar = ({ initialAuthStatus }: SidebarProps) => {
                   onClick={handleLinkClick}
                 >
                   <svg width={24} height={24} aria-hidden="true">
-                    <use href={`/icons.svg#${item.icon}`} />
+                    <use href={`/sprite.svg#${item.icon}`} />
                   </svg>
                   <span>{item.label}</span>
                 </Link>
@@ -94,7 +94,7 @@ const Sidebar = ({ initialAuthStatus }: SidebarProps) => {
               </div>
               <button onClick={handleLogout} className={styles.logoutButton}>
                 <svg width={24} height={24} aria-hidden="true">
-                  <use href="/icons.svg#logout" />
+                  <use href="/sprite.svg#logout" />
                 </svg>
               </button>
             </div>
