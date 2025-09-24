@@ -1,11 +1,13 @@
 import Tab from "../../components/Tab/Tab";
-import InfoBlock from "../../components/InfoBlock/InfoBlock";
+import BabyBlock from "../BabyBlock/BabyBlock";
+// import MomBlock from "../MomBlock/MomBlock"
 
 export default function JourneyDetails() {
   return (
     <>
       <Tab />
-      <InfoBlock />
+      <BabyBlock />
+      {/* <MomBlock/> */}
     </>
   );
 }
