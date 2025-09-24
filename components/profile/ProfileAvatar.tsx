@@ -50,7 +50,7 @@ export default function ProfileAvatar({ user }: { user: any }) {
         <input
           type="file"
           ref={fileInputRef}
-          style={{ display: "none" }}
+          className={styles.hiddenInput}
           accept="image/*"
           onChange={handleFileChange}
         />

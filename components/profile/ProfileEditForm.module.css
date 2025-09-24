@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin:  0px 20px 0px 20px;
+  margin:  0px 20px 0 20px;
 }
 
 .label {
@@ -45,11 +45,23 @@
     flex-wrap: wrap; 
     width: 100%;
     margin-top: 24px;
+    padding-bottom: 55px;
 }
 
 .submitButtonGray,
 .submitButtonPink {
-    flex: 1;         
+  padding: 8px 8px;
+  border: 4px;
+  border-radius: 16px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  gap: 16px;
+  flex: 1;
+  
+}
+
+      /* flex: 1;         
     width: 100%;
     padding-top: 8px ;
     padding-bottom: 8px ;
@@ -57,15 +69,16 @@
     border-radius: 16px;
     font-size: 15px;
     cursor: pointer;
-    transition: background 0.2s ease;
-}
+    transition: background 0.2s ease; */
 
 .submitButtonGray {
+  margin-left: 20px;  
   background-color: #f2f2f2;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
 }
 
 .submitButtonPink {
+  margin-right: 20px;
   background-color: var(--color-pastel-pink);
   box-shadow: 0 2px 2px #cca2a8;;
 }
@@ -84,7 +97,14 @@
   .input {
     font-size: 15px;
   }
+
+  .submitButtonGray,
+  .submitButtonPink {
+    width: 100%;
+    
+  }
   .buttonContainer {
+  display: flex;
   justify-content:flex-end;
   }
 
@@ -92,11 +112,11 @@
     font-size: 16px;
   }
   .submitButtonGray {
- width: 150px;
+ 
 }
 
 .submitButtonPink {
-  width: 135px;
+  
 }
 }
 
