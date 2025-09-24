@@ -28,7 +28,7 @@
 //   if (selectedWeek === null) {
 //     return <Loader />;
 //   }
-  
+
 //   const limitWeek = maxAvailableWeek !== undefined && selectedWeek !== null
 //   ? Math.max(maxAvailableWeek, selectedWeek)
 //   : maxAvailableWeek ?? totalWeeks;;
@@ -64,8 +64,7 @@
 //   );
 // }
 
-
-'use client'
+"use client";
 import { useEffect, useState } from "react";
 import css from "./WeekSelector.module.css";
 import Loader from "../Loader/Loader";
@@ -83,7 +82,9 @@ export default function WeekSelector({
   initialSelectedWeek,
   maxAvailableWeek,
 }: WeekSelectorProps) {
-  const [selectedWeek, setSelectedWeek] = useState<number | null>(initialSelectedWeek ?? null);
+  const [selectedWeek, setSelectedWeek] = useState<number | null>(
+    initialSelectedWeek ?? null
+  );
 
   useEffect(() => {
     if (initialSelectedWeek !== undefined) {
@@ -91,21 +92,18 @@ export default function WeekSelector({
     }
   }, [initialSelectedWeek]);
 
-  
   const handleClick = (week: number, isBlocked: boolean) => {
     if (isBlocked) return;
     setSelectedWeek(week);
     onSelect(week);
   };
-  
+
   if (selectedWeek === null) {
     return <Loader />;
   }
-  
+
   const limitWeek = maxAvailableWeek ?? totalWeeks;
-  
-  console.log("maxAvailableWeek:", maxAvailableWeek, "selectedWeek:", selectedWeek, "limitWeek:", limitWeek);
-  
+
   return (
     <div className={css.weeks_wrapper}>
       <ul className={css.weeks_list}>
