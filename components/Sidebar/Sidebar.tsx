@@ -61,7 +61,7 @@ export default function Sidebar() {
             </button>
           </div>
         ) : (
-          <div style={{ display: "flex", gap: 12 }}>
+          <div className={css.authLinks}>
             <Link className={css.link} href="/auth/login">Увійти</Link>
             <Link className={css.link} href="/auth/register">Зареєструватися</Link>
           </div>
@@ -87,7 +87,7 @@ export default function Sidebar() {
       </button>
 
       {/* Mobile simple overlay */}
-      <div className={`${css.open} ${css.mobile}`} style={{ display: mobileOpen ? "block" : "none" }}>
+      <div className={`${mobileOpen ? css.open : ""} ${css.mobile}`}>
         <div className={css.overlay} onClick={() => setMobileOpen(false)} />
         <div className={css.panel}>
           <button

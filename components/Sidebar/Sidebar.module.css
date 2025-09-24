@@ -30,6 +30,8 @@
   padding: 0 16px 24px 16px;
 }
 
+.authLinks { display: flex; gap: 12px; }
+
 .burger { display: none; position: fixed; right: 12px; top: 12px; width: 32px; height: 32px; background: transparent; border: none; padding: 4px; border-radius: 8px; align-items: center; justify-content: center; }
 .burger:active { transform: translateY(1px); }
 .burgerIcon { width: 24px; height: 24px; }

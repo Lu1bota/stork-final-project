@@ -4,7 +4,6 @@ import React from "react";
 import TasksReminderCard from "../components/TasksReminderCard/TasksReminderCard";
 import FeelingCheckCard from "../components/FeelingCheckCard/FeelingCheckCard";
 import styles from "./page.module.css";
-import Sidebar from "@/components/Sidebar/Sidebar";
 
 export default function DashboardPage() {
   // Заглушки для открытия модального окна
@@ -17,18 +16,15 @@ export default function DashboardPage() {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100dvh" }}>
-      <Sidebar isAuthenticated={true} onLogout={() => console.log("logout")} />
-      <main className={styles.container} style={{ flex: 1 }}>
-        <div className={styles.grid}>
-          <div className={styles.leftColumn}>
-            <TasksReminderCard onOpenAddTaskModal={openAddTaskModal} />
-          </div>
-          <div className={styles.rightColumn}>
-            <FeelingCheckCard onOpenAddDiaryEntryModal={openAddDiaryModal} />
-          </div>
+    <main className={styles.container}>
+      <div className={styles.grid}>
+        <div className={styles.leftColumn}>
+          <TasksReminderCard onOpenAddTaskModal={openAddTaskModal} />
         </div>
-      </main>
-    </div>
+        <div className={styles.rightColumn}>
+          <FeelingCheckCard onOpenAddDiaryEntryModal={openAddDiaryModal} />
+        </div>
+      </div>
+    </main>
   );
 }
