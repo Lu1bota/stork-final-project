@@ -1,7 +1,8 @@
+"use client";
+
 import { useRef } from "react";
 import styles from "./ProfileAvatar.module.css";
 import Breadcrumbs  from "@/components/Breadcrumbs/Breadcrumbs";
-
 
 
 export default function ProfileAvatar({ user }: { user: any }) {
@@ -29,12 +30,6 @@ export default function ProfileAvatar({ user }: { user: any }) {
         customLabels={{ profile: "Профіль" }}
 />
         </nav>
-         {/* <nav className={styles.breadcrumbs}>
-        {/* <Link to="/" className={styles.breadcrumbLink}>Лелека</Link> */}
-        {/* <span>Лелека</span>
-        <span className={styles.breadcrumbSeparator}>{'>'}</span>
-        <span className={styles.breadcrumbActive}>Профіль</span>
-      </nav> */} 
 
       {/* Profile content */}
       <div className={styles.avatarContainer}>
