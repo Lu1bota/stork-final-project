@@ -22,7 +22,7 @@
     height: 42px;
     background: var(--opacity-transparent);
     cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease-in-out;
 
     font-family: var(--font-lato);
     font-weight: 500;
@@ -32,7 +32,6 @@
     text-align: center;
 }
 
-
 .active {
     border-radius: 100px;
     padding: 10px 12px;
@@ -41,4 +40,34 @@
 
     text-align: center;
     background: var(--color-scheme-foreground-alt);
+}
+
+
+/* TABLET */
+
+@media only screen and (min-width: 768px) {
+    .tab_wrapper {
+        max-width: 704px;
+    }
+
+    .tab_button {
+        width: 348px;
+    }
+}
+
+
+/* DESKTOP */
+
+@media only screen and (min-width: 1440px) {
+    .tab_wrapper {
+        margin-top: 0;
+        margin-right: auto;
+        margin-left: auto;
+        width: 572px;
+    }
+
+    .tab_button {
+        width: 285px;
+        font-size: 16px;
+    }
 }
