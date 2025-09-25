@@ -59,33 +59,37 @@ export default function LoginForm() {
             <Form className={css.form}>
               <h1 className={css.title}>Вхід</h1>
 
-              <Field
-                type="email"
-                name="email"
-                placeholder="Пошта"
-                className={`${css.input} ${
-                  errors.email && touched.email ? css.inputError : ""
-                }`}
-              />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className={css.error}
-              />
+              <div className={css.fieldGroup}>
+                <Field
+                  type="email"
+                  name="email"
+                  placeholder="Пошта"
+                  className={`${css.input} ${
+                    errors.email && touched.email ? css.inputError : ""
+                  }`}
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className={css.error}
+                />
+              </div>
 
-              <Field
-                type="password"
-                name="password"
-                placeholder="Пароль"
-                className={`${css.input} ${
-                  errors.password && touched.password ? css.inputError : ""
-                }`}
-              />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className={css.error}
-              />
+              <div className={css.fieldGroup}>
+                <Field
+                  type="password"
+                  name="password"
+                  placeholder="Пароль"
+                  className={`${css.input} ${
+                    errors.password && touched.password ? css.inputError : ""
+                  }`}
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className={css.error}
+                />
+              </div>
 
               <button
                 className={css.submitBtn}

@@ -1,12 +1,5 @@
-.logoIcon {
-  margin-left: 4.4px;
-  margin-right: 5.6px;
-  margin-bottom: 7.8px;
-  margin-top: 7.8px;
-}
-
 .logo {
-  width: 100vh;
+  width: 105px;
   height: 72px;
   display: flex;
   align-items: center;
@@ -165,11 +158,8 @@
   .container {
     display: flex;
     flex-direction: row;
+    position: relative;
   }
-
-.content {
-  margin-left: -730px;
-}
 
   .title {
     font-size: 48px;

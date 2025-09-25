@@ -49,7 +49,7 @@ export default function RegistrationForm() {
           />
         </Link>
 
-      <div className={css.content}>
+      <div>
         <Formik
           initialValues={{
             name: "",
