@@ -49,6 +49,7 @@ const validationSchema = Yup.object({
               <option value="Чоловіча">Чоловіча</option>
               <option value="Жіноча">Жіноча</option>
             </Field>
+          
             <ErrorMessage
               name="gender"
               component="div"

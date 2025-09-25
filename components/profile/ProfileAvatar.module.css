@@ -8,30 +8,28 @@
   max-width: 100%;
   color:  #000;
   margin: 0 20px 0px 20px;
-}
-
+  }
 
 .profileWrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
-  width: 375px;
+  max-width: 644px;
+  font-family: 'Lato';
   gap: 16px;
   padding-top: 68px; /* для сайдбара */
 }
 
-
-/* Breadcrumbs */
 .breadcrumbs {
   display: flex;
   gap: 16.5px;
-  font-size: 14px;
+  line-height: 160%;
+  font-size: 12px;
   margin: 24px 20px 0 20px;
-
+  font-weight: 400;
 }
 
 .breadcrumbActive {
-  font-weight: 400;
   color: #7f7f7f;;
 }
 
@@ -74,13 +72,17 @@
 }
 
 .userName {
-  font-size: 18px;
-  font-weight: bold;
+  font-family: 'Comfortaa';
+  font-weight: 700;
+  font-style: bold;
+  line-height: 140%;
+  font-size: 20px;
   margin: 0;
 }
 
 .userEmail {
   font-size: 14px;
+  line-height: 150%;
   margin: 0;
   margin-bottom: 16px;
 }
@@ -88,13 +90,17 @@
 .uploadButton {
   background-color: rgba(0, 0, 0, 0.05);
   border: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
   padding: 10px 16px;
   cursor: pointer;
   border-radius: 100px;
+  font-family: 'Lato';
+  font-weight: 500;
   font-size: 14px;
+  line-height: 160%;
   transition: background-color 0.3s;
-  width: 100%;
-  margin-bottom: 32px;
+  margin: 0 20px 32px 20px;
+  
 }
 
 .uploadButton:hover {
@@ -113,8 +119,6 @@
   }
  
   .profileWrapper {
-
-  width: 100%;
   width: 768px;
   gap: 16px;
 }
@@ -128,7 +132,6 @@
   .userInfo {
     align-items: flex-start;
   }
-
 
   .userName {
     font-size: 20px;
@@ -146,29 +149,38 @@
 }
 
 /* ========== DESKTOP  ========== */
-@media (min-width: 1440px) {
+@media (min-width: 1024px) {
   .avatarContainer {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 24px 32px;
-    gap: 32px;
+    gap: 16px;
+    margin: 24px 32px 32px 32px ;
+  }
+  .profileWrapper{
+   padding-top: 0 ;
+   margin-left: 312px; /*место для сайдбара */
+   max-width: 644px;
+   margin-right: auto;
   }
 
   .avatarWrapper {
-    width: 128px;
-    height: 128px;
-  }
-
+  flex-shrink: 0;    
+  min-width: 132px;  
+  min-height: 132px;
+  overflow: hidden;   
+}
+  
   .userName {
-    font-size: 22px;
+    font-size: 24px;
+    line-height: 140%;
   }
 
   .userEmail {
-    font-size: 17px;
+     line-height: 150%;
   }
 
   .uploadButton {
     font-size: 16px;
-    padding: 12px 24px;
+    padding: 8px 20px;
+    line-height: 160%;
+    margin: 0 0 8px;
   }
 }
