@@ -1,21 +1,23 @@
-import Container from "../../components/Container/Container";
-import WeekSelector from "../../components/journey/WeekSelector/WeekSelector";
-import JourneyDetails from "../../components/journey/JourneyDetails/JourneyDetails";
-import { getPublicWeekInfo } from "@/lib/api/clientApi";
-import GreetingBlock from "../../components/GreetingBlock/GreetingBlock";
+'use client';
 
-export default async function JourneyPage() {
-  const weeks = await getPublicWeekInfo();
-  console.log("weeks:", weeks);
-  return (
-    <>
-      <Container>
-        <GreetingBlock />
-      </Container>
-      <WeekSelector />
-      <Container>
-        <JourneyDetails />
-      </Container>
-    </>
-  );
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { getPrivateWeekInfo } from "@/lib/api/clientApi";
+import Loader from "@/components/Loader/Loader";
+
+export default function JourneyPage() {
+  const router = useRouter();
+  useEffect(() => {
+    const loadWeekInfo = async () => {
+      try {
+        const weekInfo = await getPrivateWeekInfo();
+        router.replace(`/journey/${weekInfo.week}`);
+      } catch (error) {
+        router.replace('/auth/login');
+      }
+    };
+    loadWeekInfo();
+  }, [router]);
+
+  return <Loader />;
 }
