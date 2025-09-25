@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import styles from "./Breadcrumbs.module.css";
 
+
 export type BreadcrumbsProps = {
   className?: string;
   capitalize?: boolean;

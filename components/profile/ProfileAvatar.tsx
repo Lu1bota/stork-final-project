@@ -1,5 +1,8 @@
 import { useRef } from "react";
 import styles from "./ProfileAvatar.module.css";
+import Breadcrumbs  from "@/components/Breadcrumbs/Breadcrumbs";
+
+
 
 export default function ProfileAvatar({ user }: { user: any }) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -19,12 +22,19 @@ export default function ProfileAvatar({ user }: { user: any }) {
   return (
     <div className={styles.profileWrapper}>
 
-         <nav className={styles.breadcrumbs}>
+       <nav className={styles.breadcrumbs}>
+        <Breadcrumbs
+        homeLabel="Лелека"
+        homeHref="/"
+        customLabels={{ profile: "Профіль" }}
+/>
+        </nav>
+         {/* <nav className={styles.breadcrumbs}>
         {/* <Link to="/" className={styles.breadcrumbLink}>Лелека</Link> */}
-        <span>Лелека</span>
+        {/* <span>Лелека</span>
         <span className={styles.breadcrumbSeparator}>{'>'}</span>
         <span className={styles.breadcrumbActive}>Профіль</span>
-      </nav>
+      </nav> */} 
 
       {/* Profile content */}
       <div className={styles.avatarContainer}>
