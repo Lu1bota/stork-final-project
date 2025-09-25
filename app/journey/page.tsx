@@ -1,7 +1,7 @@
 import Container from "../../components/Container/Container";
 import Greating from "../../components/GreatingBlock/GreetingBlock";
-import WeekSelector from "../../components/WeekSelector/WeekSelector";
-import JourneyDetails from "../../components/JourneyDetails/JourneyDetails";
+import WeekSelector from "../../components/journey/WeekSelector/WeekSelector";
+import JourneyDetails from "../../components/journey/JourneyDetails/JourneyDetails";
 import { getPublicWeekInfo } from "@/lib/api/clientApi";
 
 export default async function JourneyPage() {
