@@ -8,6 +8,7 @@ import Image from "next/image";
 import { login } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import GoogleAuthBtn from "@/components/auth/GoogleAuthBtn";
 
 
 const validationSchema = Yup.object().shape({
@@ -94,6 +95,9 @@ export default function LoginForm() {
               >
                 {isSubmitting ? "Зачекайте..." : "Увійти"}
               </button>
+
+              <GoogleAuthBtn label="Увійти через Google" />
+
               <p className={css.ensureText}>
                 Немає аккаунту?{" "}
                 <Link href="/auth/register" className={css.ensureTextPart}>

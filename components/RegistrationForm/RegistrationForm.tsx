@@ -8,6 +8,7 @@ import Image from "next/image";
 import { register } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import GoogleAuthBtn from "@/components/auth/GoogleAuthBtn";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().max(32).required("Імʼя є обовʼязковим"),
@@ -129,6 +130,7 @@ export default function RegistrationForm() {
               >
                 {isSubmitting ? "Зачекайте..." : "Зареєструватись"}
               </button>
+              <GoogleAuthBtn label="Зареєструватись через Google" />
               <p className={css.ensureText}>
                 Вже маєте аккаунт?{" "}
                 <Link href="/auth/login" className={css.ensureTextPart}>

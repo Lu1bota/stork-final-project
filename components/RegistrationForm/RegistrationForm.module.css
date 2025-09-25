@@ -148,6 +148,7 @@
   font-family: var(--font-family);
 }
 
+
 .img {
   display: none;
 }
@@ -206,6 +207,7 @@
     font-size: 16px;
     line-height: 1.6;
   }
+
 
   .img {
     display: block;

@@ -4,11 +4,12 @@ import styles from "./GoogleAuthBtn.module.css";
 
 type Props = {
   className?: string;
+  label?: string;
 };
 
 // Фронтенд: редірект на бекенд-ендпоїнт Google OAuth
 // Очікуваний ендпоїнт: `${process.env.NEXT_PUBLIC_API_URL}/api/auth/google`
-export default function GoogleAuthBtn({ className }: Props) {
+export default function GoogleAuthBtn({ className, label = "Зареєструватись через Google" }: Props) {
   const handleClick = () => {
     const base = process.env.NEXT_PUBLIC_API_URL;
     if (!base) {
@@ -29,7 +30,7 @@ export default function GoogleAuthBtn({ className }: Props) {
           <use href="/sprite.svg#google" />
         </svg>
       </span>
-      Зареєструватись через Google
+      {label}
     </button>
   );
 }
