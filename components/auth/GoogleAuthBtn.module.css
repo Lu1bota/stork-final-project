@@ -13,8 +13,7 @@
   color: var(--color-scheme-text);
   font-family: var(--font-family);
   font-size: 14px;
-  font-weight: 500; /* Lato Medium */
-  line-height: 1.6; /* 160% */
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -30,7 +29,7 @@
 .icon {
   width: 18px;
   height: 18px;
-  color: var(--color-scheme-text); /* var(--Color-Scheme-Text) */
+  color: var(--color-scheme-text);
 }
 
 .iconBox {
@@ -50,7 +49,7 @@
   .btn {
     width: 100%;
     max-width: 480px;
-    font-size: 16px; /* Text Regular */
+    font-size: 16px;
   }
 }
 
@@ -58,7 +57,7 @@
 @media screen and (min-width: 1440px) {
   .btn {
     width: 100%;
-    max-width: 480px; /* соответствует ширине инпутов/кнопок на десктопе */
+    max-width: 480px;
     height: 46px;
   }
 
