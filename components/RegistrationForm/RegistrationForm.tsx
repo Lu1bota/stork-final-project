@@ -31,25 +31,25 @@ export default function RegistrationForm() {
     try {
       await register(values);
       router.push("/onboarding");
-    } catch  {
+    } catch {
       toast.error("Ця пошта вже використовується");
     }
   };
 
   return (
     <Container className={css.container}>
-      <Link href="/" className={css.logo}>
-        <Image
-          src="/logo/Frame_269.png"
-          alt="Лелека"
-          width={95}
-          height={30}
-          priority
-          className={css.logoIcon}
-        />
-      </Link>
+        <Link href="/" className={css.logo}>
+          <Image
+            src="/logo/Frame_269.png"
+            alt="Лелека"
+            width={112}
+            height={48}
+            priority
+            className={css.logoIcon}
+          />
+        </Link>
 
-      <div>
+      <div className={css.content}>
         <Formik
           initialValues={{
             name: "",
@@ -144,7 +144,7 @@ export default function RegistrationForm() {
         src="/auth/storks_picture.jpg"
         alt="Stork illustration"
         width={720}
-        height={948}
+        height={900}
       />
     </Container>
   );

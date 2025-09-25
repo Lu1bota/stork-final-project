@@ -39,8 +39,8 @@ export default function LoginForm() {
         <Image
           src="/logo/Frame_269.png"
           alt="Лелека"
-          width={95}
-          height={30}
+          width={112}
+          height={48}
           priority
           className={css.logoIcon}
         />
@@ -109,7 +109,7 @@ export default function LoginForm() {
         src="/auth/stork's_eggs.jpg"
         alt="Stork's eggs illustration"
         width={720}
-        height={948}
+        height={900}
       />
     </Container>
   );
