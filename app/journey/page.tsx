@@ -1,8 +1,8 @@
 import Container from "../../components/Container/Container";
-import Greating from "../../components/GreatingBlock/GreetingBlock";
 import WeekSelector from "../../components/journey/WeekSelector/WeekSelector";
 import JourneyDetails from "../../components/journey/JourneyDetails/JourneyDetails";
 import { getPublicWeekInfo } from "@/lib/api/clientApi";
+import GreetingBlock from "../../components/GreetingBlock/GreetingBlock";
 
 export default async function JourneyPage() {
   const weeks = await getPublicWeekInfo();
@@ -10,7 +10,7 @@ export default async function JourneyPage() {
   return (
     <>
       <Container>
-        <Greating />
+        <GreetingBlock />
       </Container>
       <WeekSelector />
       <Container>

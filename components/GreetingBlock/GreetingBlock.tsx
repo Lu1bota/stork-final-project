@@ -1,6 +1,10 @@
+"use client";
 import css from "./GreetingBlock.module.css";
+import { useAuthStore } from "@/lib/store/authStore";
 
-export default function Greating() {
+export default function GreetingBlock() {
+  const user = useAuthStore((state) => state.user);
+
   return (
     <div className={css.greating_block}>
       <div className={css.app_nav_wrapper}>
@@ -21,7 +25,7 @@ export default function Greating() {
         </div>
       </div>
       <div className={css.greating_wrapper}>
-        <h2 className={css.greating}>Доброго ранку, Ганна!</h2>
+        <h2 className={css.greating}>Вітаю, {user?.name}!</h2>
       </div>
     </div>
   );
