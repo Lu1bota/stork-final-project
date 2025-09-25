@@ -1,4 +1,4 @@
-import Tab from "../../components/Tab/Tab";
+import Tab from "../../journey/Tab/Tab";
 import BabyBlock from "../BabyBlock/BabyBlock";
 // import MomBlock from "../MomBlock/MomBlock"
 
