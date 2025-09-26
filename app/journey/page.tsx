@@ -1,68 +1,24 @@
 "use client";
-import Container from "../../components/Container/Container";
-import WeekSelector from "../../components/journey/WeekSelector/WeekSelector";
-import JourneyDetails from "../../components/journey/JourneyDetails/JourneyDetails";
-import { useEffect, useState } from "react";
-import { getBabyDetails, getPrivateWeekInfo } from "@/lib/api/clientApi";
-import ErrorPage from "@/components/ErrorPage/ErrorPage";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { getPrivateWeekInfo } from "@/lib/api/clientApi";
 import Loader from "@/components/Loader/Loader";
-import GreetingBlock from "@/components/dashboard/GreetingBlock/GreetingBlock";
 
 export default function JourneyPage() {
-  const [currentWeek, setCurrentWeek] = useState<number | null>(null);
-  const [selectedWeek, setSelectedWeek] = useState<number | null>(null);
-  const [error, setError] = useState<null | string>(null);
+  const router = useRouter();
 
-  // Функція для завантаження тижня користувача (поточний тиждень)
   useEffect(() => {
-    async function fetchCurrentWeek() {
+    const redirectToCurrentWeek = async () => {
       try {
         const weekInfo = await getPrivateWeekInfo();
-        setCurrentWeek(weekInfo.week);
-        setSelectedWeek(weekInfo.week);
+        router.replace(`/journey/${weekInfo.week}`);
       } catch {
-        setError("Помилка завантаження поточного тижня");
+        router.replace("/auth/login");
       }
-    }
-    fetchCurrentWeek();
-  }, []);
+    };
+    redirectToCurrentWeek();
+  }, [router]);
 
-  if (error) {
-    return (
-      <ErrorPage
-        code={404}
-        title="Помилка завантаження поточного тижня."
-        message="Спробуйте ще раз."
-        homeHref="/"
-      />
-    );
-  }
-
-  const fetchWeekInfo = async (week: number) => {
-    const babyDetails = await getBabyDetails(week);
-    return babyDetails;
-  };
-
-  if (currentWeek === null || selectedWeek === null) {
-    return <Loader />;
-  }
-
-  return (
-    <>
-      <Container>
-        <GreetingBlock />
-      </Container>
-      <WeekSelector
-        currentWeek={currentWeek}
-        totalWeeks={42}
-        onWeekChange={setSelectedWeek}
-      />
-      <Container>
-        <JourneyDetails
-          weekNumber={selectedWeek}
-          fetchWeekInfo={fetchWeekInfo}
-        />
-      </Container>
-    </>
-  );
+  return <Loader />;
 }

@@ -1,35 +1,40 @@
 "use client";
 import { useState, useEffect } from "react";
-
 import Tab from "../../journey/Tab/Tab";
 import BabyBlock from "../BabyBlock/BabyBlock";
-import { BabyDetails } from "@/types/weeks";
+import { BabyDetails, MomDetails } from "@/types/weeks";
 import Loader from "@/components/Loader/Loader";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
-// import MomBlock from "../MomBlock/MomBlock"
+import MomBlock from "../MomBlock/MomBlock"
+import { getBabyDetails, getMomDetails } from "@/lib/api/clientApi";
+
 
 interface JourneyDetailsProps {
-  weekNumber: number; // Вибраний тиждень вагітності
-  fetchWeekInfo: (week: number) => Promise<BabyDetails>; // Функція завантаження даних
+  weekNumber: number;
+  activeTab: "baby" | "mom";
+  setActiveTab: (tab: "baby" | "mom") => void;
 }
 
 export default function JourneyDetails({
   weekNumber,
-  fetchWeekInfo,
+  activeTab,
+  setActiveTab,
 }: JourneyDetailsProps) {
-  const [activeTab, setActiveTab] = useState<"Малюк" | "Мама">("Малюк");
+
   const [babyInfo, setBabyInfo] = useState<BabyDetails | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [momInfo, setMomInfo] = useState<MomDetails | null>(null);
 
-  useEffect(() => {
+    useEffect(() => {
     async function fetchData() {
+      try {
       setLoading(true);
       setError(null);
-      setBabyInfo(null);
-      try {
-        const data = await fetchWeekInfo(weekNumber);
-        setBabyInfo(data);
+        const babyData = await getBabyDetails(weekNumber);
+        setBabyInfo(babyData);
+        const momData = await getMomDetails(weekNumber);
+        setMomInfo(momData);
       } catch {
         setError("Дані на цей тиждень не завантажено.");
       } finally {
@@ -37,7 +42,7 @@ export default function JourneyDetails({
       }
     }
     fetchData();
-  }, [fetchWeekInfo, weekNumber]);
+  }, [weekNumber]);
 
   if (loading) return <Loader />;
   if (error)
@@ -49,13 +54,12 @@ export default function JourneyDetails({
         homeHref="/"
       />
     );
-  if (!babyInfo) return null;
 
   return (
     <>
       <Tab activeTab={activeTab} onTabChange={setActiveTab} />
-      {activeTab === "Малюк" && <BabyBlock baby={babyInfo} />}
-      {/* {activeTab === "Мама" && <MomBlock momTip={weekInfo.momTip} />} */}
+      {activeTab === "baby" && babyInfo && <BabyBlock baby={babyInfo} />}
+      {activeTab === "mom" && momInfo && <MomBlock data={momInfo} />}
     </>
   );
 }

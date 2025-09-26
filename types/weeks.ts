@@ -31,8 +31,8 @@ export interface MomDetails{
     week: number;
     feelings: {
         states: string[];
+        sensationDescr: string;
     };
-    sensationDescr: string;
     comfortTips: {
         category: string;
         tip: string;
