@@ -3,46 +3,22 @@
 import React from "react";
 import Image from "next/image";
 import { useBabyDetails } from "@/hooks/useBabyDetails";
-// import { useAuthStore } from "@/lib/store/authStore";
 import type { BabyDetails } from "@/types/weeks";
 import css from "./BabyTodayCard.module.css";
+import Loader from "@/components/Loader/Loader";
+import ErrorView from "@/components/ErrorPage/ErrorPage";
 
 export default function BabyTodayCard() {
-  const { data, isLoading, error, refetch } = useBabyDetails();
-  // const { isAuthenticated } = useAuthStore();
+  const { data, isLoading, isError, refetch } = useBabyDetails();
 
   const babyData = data as BabyDetails | undefined;
 
   if (isLoading) {
-    return (
-      <section className={css.card} aria-label="Baby development today">
-        <div className={css.loadingContainer}>
-          <div className={css.spinner}></div>
-          <p>Завантаження даних про малюка...</p>
-        </div>
-      </section>
-    );
+    return <Loader />;
   }
 
-  if (error) {
-    return (
-      <section className={css.card} aria-label="Baby development today">
-        <div className={css.errorContainer}>
-          <h2 className={css.header}>Малюк сьогодні</h2>
-          <div className={css.errorMessage}>
-            <p>Помилка завантаження даних</p>
-            <p className={css.errorDetails}>{error.message}</p>
-            <button
-              onClick={() => refetch()}
-              className={css.retryButton}
-              type="button"
-            >
-              Спробувати знову
-            </button>
-          </div>
-        </div>
-      </section>
-    );
+  if (isError) {
+    return <ErrorView />;
   }
 
   if (!babyData) {

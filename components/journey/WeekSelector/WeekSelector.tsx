@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import css from "./WeekSelector.module.css";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface WeekSelectorProps {
   currentWeek: number; // поточний тиждень вагітності
@@ -49,90 +49,6 @@ export default function WeekSelector({
             </li>
           );
         })}
-        {/* <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>2</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>3</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>4</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>5</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>1</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>2</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>3</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>4</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>5</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>1</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>2</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>3</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>4</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li>
-        <li className={css.weeks_list_item}>
-          <button className={css.item_button}>
-            <span className={css.item_title_number}>5</span>
-            <p className={css.item_title}>Тиждень</p>
-          </button>
-        </li> */}
       </ul>
     </div>
   );
