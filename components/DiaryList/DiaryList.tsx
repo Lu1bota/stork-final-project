@@ -23,8 +23,14 @@ export const DiaryList = ({ isMobile }: DiaryListProps) => {
     });
 
     useEffect(() => {
-        if (entries && entries.length > 0 && selectedEntryId === null) {
-            setSelectedEntryId(entries[0]._id);
+        if (entries && entries.length > 0) {
+            const isSelectedEntryStillExists = entries.some(entry => entry._id === selectedEntryId);
+
+            if (!isSelectedEntryStillExists) {
+                setSelectedEntryId(entries[0]._id);
+            }
+        } else {
+            setSelectedEntryId(null);
         }
     }, [entries, selectedEntryId]);
 
@@ -57,9 +63,9 @@ export const DiaryList = ({ isMobile }: DiaryListProps) => {
                         </svg>
                     </button>
                 </div>
-                {hasEntries && <ul>
+                {hasEntries && <ul className={css.entriesList}>
                     {entries.map((entry) => (
-                        <li key={entry._id} className={css.card}>
+                        <li key={entry._id} className={`${css.card} ${selectedEntryId === entry._id ? css.activeCard : ''}`}>
                             {isMobile ? (
                                 
                                 <Link href={`/diary/${entry._id}`} className={css.linkWrapper}>

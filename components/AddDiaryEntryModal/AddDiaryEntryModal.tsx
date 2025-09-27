@@ -1,13 +1,15 @@
+import { DiaryEntry } from "@/types/diary";
 import { AddDiaryEntryForm } from "../AddDiaryEntryForm/AddDiaryEntryForm"
 import Modal from "../Modal/Modal"
 
 type AddDiaryEntryModalProps = {
     onClose: () => void,
-    title: string
+    title: string,
+    entryToEdit?: DiaryEntry | null;
 };
 
-export const AddDiaryEntryModal = ({onClose, title}: AddDiaryEntryModalProps) => {
+export const AddDiaryEntryModal = ({onClose, title, entryToEdit}: AddDiaryEntryModalProps) => {
     return <Modal title={title} onClose={onClose}>
-        <AddDiaryEntryForm />
+        <AddDiaryEntryForm onSuccess={onClose} entryToEdit={entryToEdit}/>
     </Modal>
 }

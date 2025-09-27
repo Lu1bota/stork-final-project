@@ -7,6 +7,13 @@
     line-height: 1.5;
     box-sizing: border-box;
     height: auto;
+    gap: 24;
+}
+
+.fieldWrap {
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .title {
@@ -19,6 +26,12 @@
     padding: 8px 12px;
     background: var(--opacity-neutral-darkest-5);
     outline: none;
+
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
 }
 .input:focus, .textarea:focus {
     border: 2px solid var(--color-pastel-pink);
@@ -28,29 +41,118 @@
     color: var(--opacity-neutral-darkest-60);
 }
 
-.margin-bottom {
-    margin-bottom: 24px;
+.inputOpen {
+    min-height: 50px;
+    border-radius: 12px 12px 0 0;
+    border: 1px solid var(--opacity-neutral-darkest-15);
 }
 
-.select {
-    border: 1px solid rgba(var(--opacity-transparent));
-    border-radius: 12px;
-    padding: 8px 12px;
-    background: var(--color-neutral-lightest);
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 1.6;
+.selectedTagsContainer {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-right: 40px;
 }
 
-.option {
-    border: 1px solid rgba(var(--opacity-transparent));
+.placeholder {
+    color: var(--color-neutral-darkest);
+}
+
+.dropdownArrow {
+    position: absolute;
+    right: 15px;
+    transition: transform 0.3s;
+    transform: rotate(90deg);
+}
+
+.dropdownArrowOpen {
+    transform: rotate(-90deg);
+}
+
+.selectedEmotionTag {
+    border: 1px solid var(--opacity-transparent);
     border-radius: 100px;
     padding: 4px 10px;
+    background-color: var(--opacity-neutral-darkest-5);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-neutral-darkest);
+}
+
+.emotionsDropdownList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    max-height: 220px;
+    overflow-y: auto;
+    background: var(--color-neutral-lightest);
+    border: 1px solid var(--opacity-neutral-darkest-15);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    padding: 8px 0px;
+}
+
+.emotionsDropdownList::-webkit-scrollbar {
+    width: 12px;
+}
+
+.emotionsDropdownList::-webkit-scrollbar-thumb {
+    background-color: var(--color-pastel-pink);
+    border-radius: 4px;
+}
+
+.emotionsDropdownList::-webkit-scrollbar-track {
+    background: var(--opacity-neutral-darkest-20);
+    border-radius: 12px;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    background-clip: content-box;
+}
+
+.emotionItem {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.emotionItem:hover {
     background: var(--opacity-neutral-darkest-5);
 }
 
-.optionItem {
+.checkbox {
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--opacity-transparent);
+    border-radius: 4px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+    background: var(--opacity-neutral-darkest-5);
+}
 
+.checkbox svg {
+    width: 14px;
+    height: 14px;
+    fill: var(--color-white);
+}
+
+.checked {
+    background-color: var(--color-neutral-darkest);
+}
+
+.emotionItem:has(.checked) {
+    background: var(--opacity-neutral-darkest-5);
 }
 
 .textarea {
@@ -72,6 +174,26 @@
     font-size: 14px;
     line-height: 1.6;
     background: var(--color-pastel-pink-light);
+    cursor: pointer;
+}
+
+.error {
+    position: absolute;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--color-red);
+    bottom: 0;
+    margin-bottom: -20px;
+}
+
+.inputError {
+    border: 2px solid var(--color-red);
+    color: var(--color-red);
+}
+
+.inputError::placeholder, .placeholderError {
+    color: var(--color-red);
 }
 
 @media screen and (min-width: 1440px) {
@@ -87,5 +209,4 @@
         margin: 0 auto;
         width: 268px;
     }
-
 }

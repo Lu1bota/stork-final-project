@@ -4,6 +4,9 @@ import css from "./DiaryEntryDetails.module.css";
 import { formattingDate } from "@/utils/dateUtils";
 import { useState } from "react";
 import { AddDiaryEntryModal } from "../AddDiaryEntryModal/AddDiaryEntryModal";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteDiaryEntry } from "@/lib/api/clientApi";
+import toast from "react-hot-toast";
 
 
 interface DiaryEntryDetailsProps {
@@ -12,25 +15,33 @@ interface DiaryEntryDetailsProps {
 }
 
 export const DiaryEntryDetails = ({ selectedCardDetails, noEntryMessage }: DiaryEntryDetailsProps) => {
-
+    const queryClient = useQueryClient();
     const [isModalEditOpen, setIsModalEditOpen] = useState(false);
-    const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
     const handleOpenModalEdit = () => {
         setIsModalEditOpen(true);
     };
-
     const handleCloseModalEdit = () => {
         setIsModalEditOpen(false);
     };
-    const handleOpenConfirmationModal = () => {
-        setIsConfirmationModalOpen(true);
-    };
-
-    const handleCloseConfirmationModal = () => {
-        setIsConfirmationModalOpen(false);
-    };
-
+      
+        const deleteMutation = useMutation({
+            mutationFn: (entryId: string) => deleteDiaryEntry(entryId),
+            onSuccess: () => {
+                queryClient.invalidateQueries({ queryKey: ['diaryEntries'] }); 
+                toast.success("Запис успішно видалено.");
+            },
+            onError: () => {
+                toast.error("Не вдалося видалити запис.");
+            },
+        });
+        
+        const handleDelete = () => {
+            if (selectedCardDetails) {
+                deleteMutation.mutate(selectedCardDetails._id);
+            }
+        };
+        
     if (noEntryMessage || !selectedCardDetails) {
         return (
             <div className={css.diaryDetails}>
@@ -51,14 +62,14 @@ export const DiaryEntryDetails = ({ selectedCardDetails, noEntryMessage }: Diary
                 </div>
                 <div className={css.diaryDetailsSvgContainer}>
                     <p className={css.diaryDetailsDate}>{formattingDate(selectedCardDetails.date)}</p>
-                    <button className={css.button} onClick={handleOpenConfirmationModal}>
+                    <button className={css.button} onClick={handleDelete} disabled={deleteMutation.isPending}>
                         <svg width={24} height={24}>
                             <use href="/sprite.svg#delete_forever"></use>
                         </svg>
                     </button>
                 </div>
             </div>
-            
+                       
             <p className={css.diaryDetailsMainText}>{selectedCardDetails.description}</p>
             
             <div className={css.emotionsContainer}>
@@ -70,27 +81,9 @@ export const DiaryEntryDetails = ({ selectedCardDetails, noEntryMessage }: Diary
             {isModalEditOpen && (
                 <AddDiaryEntryModal
                     onClose={handleCloseModalEdit}
-                    title="Новий запис"
+                    title="Редагувати запис"
+                    entryToEdit={selectedCardDetails}
                 />
             )}
-            
-            {/* ----- ДОРОБИТИ ConfirmationModal ----- */}
-            {isConfirmationModalOpen && (
-                <AddDiaryEntryModal onClose={handleCloseConfirmationModal} title="DELETE"/>
-            )}
-        </div>
+    </div>
 }
-
-
-
-// Відображає повну інформацію обраного запису. На мобілці/планшеті є окремою сторінкою.
-// Компонент містить в собі:
-// Заголовок запису.
-// Дату створення.
-// Повний текст запису.
-// Список іконок-емоцій.
-// Кнопки "Редагувати" та "Видалити".
-
-// Взаємодія:
-// Клік по кнопці "Редагувати" відкриває модальне вікно AddDiaryEntryModal з даними поточного запису для редагування.
-// Клік по кнопці "Видалити" відкриває модальне вікно ConfirmationModal.

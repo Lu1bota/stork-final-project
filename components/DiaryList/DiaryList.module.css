@@ -8,6 +8,23 @@
     width: 335px;
 }
 
+.list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background-color: var(--color-pastel-pink);
+    border-radius: 10px;
+}
+
+.list::-webkit-scrollbar-track {
+    background: var(--opacity-neutral-darkest-20);
+    border-radius: 12px;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+    background-clip: content-box;
+}
+
 .list > ul {
     display: flex;
     flex-direction: column;
@@ -28,9 +45,15 @@
     position: relative;
 }
 
+.activeCard {
+    background: var(--color-pastel-pink);
+    border: 1px solid var(--color-pastel-pink);
+}
+
 .button {
     padding: 16px;
     cursor: pointer;
+    background: inherit;
 }
 
 .linkWrapper {
@@ -38,6 +61,8 @@
     width: 100%;
     height: 100%;
     padding: 16px;
+    background: inherit;
+    border-radius: 16px;
 }
 
 .listHeaderContainer{
