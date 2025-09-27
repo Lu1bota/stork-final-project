@@ -1,3 +1,4 @@
+import AppLayout from "@/components/AppLayout/AppLayout";
 import DiaryEntryPageClient from "./DiaryEntryPage.client";
 
 type DiaryEntryPageProps = {
@@ -10,5 +11,9 @@ export default async function DiaryEntryPage({ params }: DiaryEntryPageProps) {
 
   const { entryId } = await params;
 
-  return <DiaryEntryPageClient entryId={entryId} />
+  return (
+    <AppLayout>
+        <DiaryEntryPageClient entryId={entryId} />
+    </AppLayout>
+  );
 }

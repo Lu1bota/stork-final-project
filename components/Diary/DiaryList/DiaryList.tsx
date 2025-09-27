@@ -8,7 +8,6 @@ import { DiaryEntryDetails } from "../DiaryEntryDetails/DiaryEntryDetails";
 import { AddDiaryEntryModal } from "../AddDiaryEntryModal/AddDiaryEntryModal";
 import css from "./DiaryList.module.css"
 
-
 type DiaryListProps = {
     isMobile: boolean,
 };
