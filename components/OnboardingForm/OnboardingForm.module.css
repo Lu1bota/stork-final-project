@@ -1,0 +1,320 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.left {
+  flex: 1;
+  padding: 0 16px;
+}
+
+.navbar {
+  padding: 12px 0;
+  display: block;
+}
+
+.title {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 120%;
+  letter-spacing: .01em;
+  text-align: center;
+  color: var(--color-scheme-text);
+  margin: 24px 0 24px;
+}
+
+.right,
+.image {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .left {
+    padding: 0 64px;
+  }
+
+  .title {
+    font-size: 48px;
+    margin: 56px 0 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .page {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+/* ====== ФОРМА ====== */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* група з двох полів (стать + дата) */
+.fieldsRow {
+  width: 100%;
+    max-width: 480px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.fieldCol {
+  width: 100%;
+  
+}
+
+
+.field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+
+.label {
+  margin-bottom: 8px;
+  
+}
+
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* ====== react-select (вбудовано тут) ====== */
+.mySelect {
+  width: 100%;
+  max-width: 480px;
+}
+
+.mySelect :global(.react-select__control) {
+  border: 1px solid var(--opacity-transparent);
+  border-radius: 12px;
+  min-height: 40px;
+  background: var(--color-neutral-lightest);
+  box-shadow: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.mySelect :global(.react-select__control:hover) {
+  border-color: var(--color-scheme-text);
+}
+
+.mySelect :global(.react-select__control--is-focused) {
+  border-color: var(--color-scheme-accent);
+  box-shadow: 0 0 0 2px var(--color-scheme-accent);
+}
+
+/* value / placeholder */
+.mySelect :global(.react-select__value-container) {
+  padding: 2px 12px;
+}
+
+.mySelect :global(.react-select__single-value) {
+  color: var(--color-scheme-text);
+}
+
+.mySelect :global(.react-select__placeholder) {
+  opacity: .6;
+}
+
+/* indicators */
+.mySelect :global(.react-select__indicator-separator) {
+  display: none;
+}
+
+.mySelect :global(.react-select__dropdown-indicator) {
+  padding-right: 12px;
+}
+
+/* menu */
+.mySelect :global(.react-select__menu) {
+  margin-top: 6px;
+  background: var(--color-neutral-lightest);
+  border: 1px solid var(--opacity-transparent);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+  z-index: 30;
+}
+
+.mySelect :global(.react-select__option) {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.mySelect :global(.react-select__option--is-focused) {
+  background: var(--color-scheme-foreground);
+}
+
+.mySelect :global(.react-select__option--is-selected) {
+  background: var(--color-scheme-accent);
+  color: var(--color-neutral-darkest);
+}
+
+/* disabled */
+.mySelect :global(.react-select__control--is-disabled) {
+  background: var(--opacity-neutral-darkest-5);
+  cursor: not-allowed;
+}
+
+/* error для select */
+.selectError :global(.react-select__control) {
+  border-color: red !important;
+  box-shadow: 0 0 0 1px red !important;
+}
+
+/* ====== Інпут (дата) — як select__control ====== */
+.input {
+  width: 100%;
+  max-width: 480px;
+  /* ⬅ та ж ширина */
+  min-height: 40px;
+  border: 1px solid var(--opacity-transparent);
+  border-radius: 12px;
+  background: var(--color-neutral-lightest);
+  padding: 8px 12px;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.input:hover {
+  border-color: var(--color-scheme-text);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-scheme-accent);
+  box-shadow: 0 0 0 2px var(--color-scheme-accent);
+}
+
+/* обгортка datepicker, щоб тягнувся на ширину колонки */
+.controlWrapper {
+  width: 100%;
+  max-width: 480px;
+  /* ⬅ однаково з селектом */
+}
+
+/* календар */
+.calendar {
+  background-color: #fff;
+  border: 4px solid var(--color-scheme-foreground-alt);
+  border-radius: 14px;
+}
+
+/* error для input */
+.inputError {
+  border-color: red !important;
+  box-shadow: 0 0 0 1px red !important;
+  background: var(--opacity-neutral-darkest-5);
+}
+
+/* ====== КНОПКА ====== */
+.button {
+  width: 100%;
+  max-width: 480px;
+  /* ⬅ однакова ширина */
+  height: 42px;
+  border: none;
+  border-radius: 100px;
+  border-bottom: 4px solid var(--color-scheme-accent);
+  color: var(--color-neutral-darkest);
+  background: var(--color-scheme-foreground-alt);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 24px;
+}
+
+.button:hover {
+  background: var(--color-scheme-foreground);
+}
+
+.button:active {
+  background: var(--color-scheme-accent);
+}
+
+@media (min-width: 1440px) {
+  .button {
+    height: 46px;
+  }
+}
+
+/* ====== АВАТАР ====== */
+.upload {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.avatarPreview {
+  width: 164px;
+  height: 164px;
+  border-radius: 100%;
+  display: flex;
+  margin: 0 auto 24px;
+  overflow: hidden;
+  transition: border-color .3s ease;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatarIcon {
+  font-size: 50px;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.uploadButton {
+  border: none;
+  border-radius: 100px;
+  width: 179px;
+  height: 42px;
+  background: var(--opacity-neutral-darkest-5);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 160%;
+  color: var(--color-scheme-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+  margin: 0 auto;
+}
+
+.uploadButton:hover {
+  background: var(--color-scheme-foreground);
+}
+
+.uploadButton:active {
+  background: var(--color-scheme-accent);
+}
