@@ -163,7 +163,7 @@ export const AddDiaryEntryForm = ({ onSuccess, entryToEdit }: AddDiaryEntryFormP
                         {/* Поле вибору (немає тегів/список відкритий) */}
                         {(isDropdownOpen || values.emotions.length === 0) && (
                             <div 
-                                className={`${css.input} ${css.inputOpen} ${errors.emotions && touched.emotions ? css.inputError : ""}`}
+                                className={`${css.input} ${isDropdownOpen ? css.inputOpen : ""} ${errors.emotions && touched.emotions ? css.inputError : ""}`}
                                 onClick={handleDropdownClick} 
                                 ref={dropdownInputRef}
                             >

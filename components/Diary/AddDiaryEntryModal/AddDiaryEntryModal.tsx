@@ -1,6 +1,7 @@
 import { DiaryEntry } from "@/types/diary";
 import { AddDiaryEntryForm } from "../AddDiaryEntryForm/AddDiaryEntryForm"
-import Modal from "../Modal/Modal"
+import Modal from "@/components/Modal/Modal";
+
 
 type AddDiaryEntryModalProps = {
     onClose: () => void,

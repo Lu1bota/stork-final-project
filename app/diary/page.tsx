@@ -1,5 +1,5 @@
 import Container from "@/components/Container/Container"
-import { DiaryList } from "@/components/DiaryList/DiaryList";
+import { DiaryList } from "@/components/Diary/DiaryList/DiaryList";
 import { headers } from "next/headers";
 import { getDevice } from "@/utils/getDevice";
 import css from "./DiaryPage.module.css";

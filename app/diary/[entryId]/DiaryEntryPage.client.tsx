@@ -1,7 +1,7 @@
 "use client"
 
 import Container from "@/components/Container/Container";
-import { DiaryEntryDetails } from "@/components/DiaryEntryDetails/DiaryEntryDetails";
+import { DiaryEntryDetails } from "@/components/Diary/DiaryEntryDetails/DiaryEntryDetails";
 import { DiaryEntry } from "@/types/diary";
 import { useQueryClient } from "@tanstack/react-query";
 
