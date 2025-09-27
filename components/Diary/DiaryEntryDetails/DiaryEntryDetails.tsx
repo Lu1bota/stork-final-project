@@ -1,13 +1,13 @@
 "use client"
-import { DiaryEntry } from "@/types/diary";
-import css from "./DiaryEntryDetails.module.css";
-import { formattingDate } from "@/utils/dateUtils";
-import { useState } from "react";
-import { AddDiaryEntryModal } from "../AddDiaryEntryModal/AddDiaryEntryModal";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { DiaryEntry } from "@/types/diary";
+import { AddDiaryEntryModal } from "../AddDiaryEntryModal/AddDiaryEntryModal";
+import { formattingDate } from "@/utils/dateUtils";
 import { deleteDiaryEntry } from "@/lib/api/clientApi";
 import toast from "react-hot-toast";
-
+import css from "./DiaryEntryDetails.module.css";
 
 interface DiaryEntryDetailsProps {
     selectedCardDetails?: DiaryEntry | null,
@@ -15,6 +15,8 @@ interface DiaryEntryDetailsProps {
 }
 
 export const DiaryEntryDetails = ({ selectedCardDetails, noEntryMessage }: DiaryEntryDetailsProps) => {
+    const router = useRouter();
+
     const queryClient = useQueryClient();
     const [isModalEditOpen, setIsModalEditOpen] = useState(false);
 
@@ -25,22 +27,23 @@ export const DiaryEntryDetails = ({ selectedCardDetails, noEntryMessage }: Diary
         setIsModalEditOpen(false);
     };
       
-        const deleteMutation = useMutation({
-            mutationFn: (entryId: string) => deleteDiaryEntry(entryId),
-            onSuccess: () => {
-                queryClient.invalidateQueries({ queryKey: ['diaryEntries'] }); 
-                toast.success("Запис успішно видалено.");
-            },
-            onError: () => {
-                toast.error("Не вдалося видалити запис.");
-            },
-        });
-        
-        const handleDelete = () => {
-            if (selectedCardDetails) {
-                deleteMutation.mutate(selectedCardDetails._id);
-            }
-        };
+    const deleteMutation = useMutation({
+        mutationFn: (entryId: string) => deleteDiaryEntry(entryId),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['diaryEntries'] }); 
+            toast.success("Запис успішно видалено.");
+        },
+        onError: () => {
+            toast.error("Не вдалося видалити запис.");
+        },
+    });
+    
+    const handleDelete = () => {
+        if (selectedCardDetails) {
+            deleteMutation.mutate(selectedCardDetails._id);
+            router.push("/diary");
+        }
+    };
         
     if (noEntryMessage || !selectedCardDetails) {
         return (
