@@ -45,8 +45,6 @@ export default function ProfileAvatar() {
   
   return (
     <div className={styles.profileWrapper}>
-      <div className={styles.avatarContainer}>
-        <div className={styles.avatarWrapper}>
             <Image
               src={getPhotoUrl(user) || "/avatar-upload.svg"}
               alt={user.name || 'User avatar'}
@@ -54,27 +52,27 @@ export default function ProfileAvatar() {
               height={132}
               className={styles.avatarImage}
             />
-        </div>
-        <div className={styles.userInfo}>
-          <h2 className={styles.userName}>{user.name}</h2>
-          <p className={styles.userEmail}>{user.email}</p>
+        <div className={styles.infoPhotoUpload}>
+          <div className={styles.userInfo}>
+            <h2 className={styles.userName}>{user.name}</h2>
+            <p className={styles.userEmail}>{user.email}</p>
+          </div>
+          
           <label
             htmlFor="avatar-upload"
             className={styles.uploadButton}
           >
             Завантажити нове фото
           </label>
+          <input
+            id="avatar-upload"
+            type="file"
+            ref={fileInputRef}
+            className={styles.hiddenInput}
+            accept="image/*"
+            onChange={handleFileChange}
+          />
         </div>
-
-        <input
-          id="avatar-upload"
-          type="file"
-          ref={fileInputRef}
-          className={styles.hiddenInput}
-          accept="image/*"
-          onChange={handleFileChange}
-        />
-      </div>
     </div>
   );
 }

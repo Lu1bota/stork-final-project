@@ -85,7 +85,7 @@ export default function ProfileEditForm({ user }: { user: User }) {
       {({ isSubmitting, resetForm }) => (
         <Form className={styles.form}>
           <div className={styles.formGroup}>
-            <label htmlFor="name">Ім&#39;я</label>
+            <label htmlFor="name" className={styles.label}>Ім&#39;я</label>
             <Field id="name" name="name" className={styles.input} />
             <ErrorMessage
               name="name"
@@ -95,7 +95,7 @@ export default function ProfileEditForm({ user }: { user: User }) {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="email">Пошта</label>
+            <label htmlFor="email" className={styles.label}>Пошта</label>
             <Field id="email" name="email" className={styles.input} />
             <ErrorMessage
               name="email"
@@ -105,7 +105,7 @@ export default function ProfileEditForm({ user }: { user: User }) {
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="gender">Стать дитини:</label>             
+            <label htmlFor="gender" className={styles.label}>Стать дитини</label>             
             <Field as="select" id="gender" name="gender" className={styles.select}>
               <option value="">-- оберіть стать --</option>
               <option value="boy">Хлопчик</option>
@@ -117,10 +117,10 @@ export default function ProfileEditForm({ user }: { user: User }) {
               component="div"
               className={styles.error}
             />
-            </div>
+          </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="dueDate">Планова дата пологів:</label>        
+            <label htmlFor="dueDate" className={styles.label}>Планова дата пологів</label>        
             <Field type="date" id="dueDate" name="dueDate" className={styles.date} />
             <ErrorMessage
               name="dueDate"
@@ -134,7 +134,7 @@ export default function ProfileEditForm({ user }: { user: User }) {
               type="button"
               onClick={() => resetForm()}
               disabled={isSubmitting || isPending}
-              className={styles.submitButtonGray}
+              className={`${styles.button} ${styles.reset}`}
             >
               Відмінити зміни
             </button>
@@ -142,7 +142,7 @@ export default function ProfileEditForm({ user }: { user: User }) {
             <button
               type="submit"
               disabled={isSubmitting || isPending}
-              className={styles.submitButtonPink}
+              className={`${styles.button} ${styles.submit}`}
             >
               {isSubmitting || isPending ? 'Збереження...' : 'Зберегти зміни'}
             </button>

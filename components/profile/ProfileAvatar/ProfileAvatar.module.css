@@ -1,186 +1,107 @@
-/* ========== MOBILE ========== */
-.avatarContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 12px;
-  max-width: 100%;
-  color:  #000;
-  margin: 0 20px 0px 20px;
-  }
-
 .profileWrapper {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 644px;
-  font-family: 'Lato';
+  margin-bottom: 32px;
+}
+
+.avatarImage {
+  display: flex;
+  margin: 0 auto;
+  border-radius: 100%;
+  margin-bottom: 12px;
+}
+
+.infoPhotoUpload {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  padding-top: 68px; /* для сайдбара */
 }
 
-.breadcrumbs {
-  display: flex;
-  gap: 16.5px;
-  line-height: 160%;
-  font-size: 12px;
-  margin: 24px 20px 0 20px;
+.userInfo {
+  text-align: center;
+  color: var(--color-scheme-text);
+}
+
+.userName{
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.userEmail{
+  font-family: var(--font-family);
   font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
-.breadcrumbActive {
-  color: #7f7f7f;;
+.uploadButton{
+  text-align: center;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-scheme-text);
+
+  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+  border-radius: 100px;
+  padding: 8px 20px;
+  max-width: 335px;
+  height: 38px;
+  background-color: var(--opacity-neutral-darkest-5);
+  cursor: pointer;
+
+  transition: all 0.2s ease;
 }
 
-/* .breadcrumbLink {
-  text-decoration: none;
-  color: #0077cc;
-  transition: color 0.2s ease;
-} */
-
-/* .breadcrumbLink:hover {
-  color: #005fa3;
-} */
-
-.avatarWrapper {
-  width: 132px;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.05);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.uploadButton:hover,
+.uploadButton:focus {
+  border-bottom: 4px solid var(--color-scheme-border);
+  background-color: var(--color-scheme-background);
 }
 
 .hiddenInput {
   display: none;
 }
 
-.avatarImage {
-  width: 100%;
-  height: 100%;
-  
-}
-
-.userInfo {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-top:12px;
-}
-
-.userName {
-  font-family: 'Comfortaa';
-  font-weight: 700;
-  font-style: bold;
-  line-height: 140%;
-  font-size: 20px;
-  margin: 0;
-}
-
-.userEmail {
-  font-size: 14px;
-  line-height: 150%;
-  margin: 0;
-  margin-bottom: 16px;
-}
-
-.uploadButton {
-  background-color: rgba(0, 0, 0, 0.05);
-  border: rgba(0, 0, 0, 0.15);
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
-  padding: 10px 16px;
-  cursor: pointer;
-  border-radius: 100px;
-  font-family: 'Lato';
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 160%;
-  transition: background-color 0.3s;
-  margin: 0 20px 32px 20px;
-  
-}
-
-.uploadButton:hover {
-  transform: scale(1.10);;
-}
-
-/* ========== TABLET  ========== */
-@media (min-width: 768px) {
-  .avatarContainer {
+@media screen and (min-width: 768px) {
+  .profileWrapper {
     flex-direction: row;
     align-items: center;
+    gap: 12px;
+  }
+
+  .avatarImage {
+    margin: 0;
+    border-radius: 100%;
+    margin-bottom: 12px;
+  }
+
+  .userInfo{
     text-align: left;
-    gap: 24px;
-    margin: 0px 32px;
-
-  }
- 
-  .profileWrapper {
-  width: 768px;
-  gap: 16px;
-}
-
-.breadcrumbs {
-  gap: 16.5px;
-  font-size: 14px;
-  margin: 24px 32px 0 32px;
-
-}
-  .userInfo {
-    align-items: flex-start;
   }
 
-  .userName {
-    font-size: 20px;
-  }
-
-  .userEmail {
-    font-size: 16px;
-  }
-
-  .uploadButton {
-    font-size: 15px;
-    padding: 10px 20px;
+  .uploadButton{
     width: 218px;
   }
 }
 
-/* ========== DESKTOP  ========== */
-@media (min-width: 1024px) {
-  .avatarContainer {
-    gap: 16px;
-    margin: 24px 32px 32px 32px ;
-  }
-  .profileWrapper{
-   padding-top: 0 ;
-   margin-left: 312px; /*место для сайдбара */
-   max-width: 644px;
-   margin-right: auto;
+@media screen and (min-width: 1440px) {
+  .profileWrapper {
+    padding: 0 32px;
   }
 
-  .avatarWrapper {
-  flex-shrink: 0;    
-  min-width: 132px;  
-  min-height: 132px;
-  overflow: hidden;   
-}
-  
-  .userName {
+  .userName{
     font-size: 24px;
-    line-height: 140%;
   }
 
-  .userEmail {
-     line-height: 150%;
-  }
-
-  .uploadButton {
+  .userEmail{
     font-size: 16px;
-    padding: 8px 20px;
-    line-height: 160%;
-    margin: 0 0 8px;
+  }
+
+  .uploadButton{
+    font-size: 16px;
+    height: 42px;
   }
 }

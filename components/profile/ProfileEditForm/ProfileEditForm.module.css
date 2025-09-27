@@ -1,153 +1,160 @@
-/* ========== MOBILE ========== */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 100%;
-  max-width: 644px;
-   }
+  gap: 24px;
+}
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin:  0 20px 0 20px;
-  font-family: 'Lato';
+  gap: 8px
+}
+
+.label {
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 14px;
-  line-height: 150%;
+  line-height: 1.5;
+  color: var(--color-scheme-text);
 }
 
-.input, .date {
-  width: 100%;
+.input,
+.select,
+.date {
+  max-width: 335px;
   padding: 8px 12px;
-  border: transparent;
+
+  border: 2px solid var(--opacity-transparent);
   border-radius: 12px;
-  background-color: #f2f2f2;
-  color: rgba(0, 0, 0, 0.6);
-  margin-top: 8px;
+  background-color: var(--opacity-neutral-darkest-5);
+
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-neutral);
+  outline: none;
+
+  transition: all 0.2s ease;
 }
 
-.select  {
-  width: 100%;
-  padding: 8px 36px 8px 12px; 
-  border: transparent;
-  border-radius: 12px;
-  background-color: #f2f2f2;
-  color: rgba(0, 0, 0, 0.6);
-  margin-top: 8px;
+.input {
+  height: 37px;
+}
+
+.select {
+  height: 40px;
+  padding-right: 12px;
 
   /* убираем системную стрелку */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  
+    /* добавляем свою */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23999999' d='M5 7l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+    transition: all 0.2s ease;
+}
 
-  /* добавляем свою */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23999999' d='M5 7l5 5 5-5z'/%3E%3C/svg%3E");
+.select:focus{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23999999' transform='rotate(180 10 10)' d='M5 7l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-repeat: no-repeat;
-  background-position: right 12px center; 
-  background-size: 18px; 
+  background-position: right 12px center;
+  background-size: 18px;
+}
+
+.select option {
+  font-size: 16px;
+  color: var(--color-neutral-darkest);
+}
+
+.date {
+  height: 48px;
 }
 
 .input:focus,
-.input:hover {
-    border-color: red;
-  }
+.input:hover,
+.select:focus,
+.select:hover,
+.date:focus,
+.date:hover {
+  border: 2px solid var(--color-scheme-accent);
+}
 
 .error {
   font-size: 12px;
-  color: red;
+  color: var(--color-red);
   margin-top: 4px;
 }
-.buttonContainer {
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
-    flex-wrap: wrap; 
-    width: 100%;
-    margin-top: 24px;
-    padding-top: 24px;
-    padding-bottom: 55px;
-}
 
-.submitButtonGray,
-.submitButtonPink {
-  font-family: 'Lato';
-  font-weight: 500;
-  line-height: 160%;
-  padding: 8px 12px;
-  border: 4px;
-  border-radius: 16px;
-  font-size: 15px;
-  cursor: pointer;
-  transition: background 0.2s ease;
+.buttonContainer{
+  padding-top: 24px;
+  display: flex;
   gap: 16px;
-  flex: 1;
-  
 }
 
-.submitButtonGray {
-  margin-left: 20px;  
-  background-color: #f2f2f2;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15);
+.button {
+  border: none;
+  border-radius: 100px;
+  padding: 8px 20px;
+  width: 159px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-scheme-text);
 }
 
-.submitButtonPink {
-  margin-right: 20px;
-  background-color: var(--color-pastel-pink);
-  box-shadow: 0 2px 2px #cca2a8;
-}
-.submitButtonGray:hover,
-.submitButtonPink:hover {
-  transform: scale(1.10);
+.reset{  
+  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+  background-color: var(--opacity-neutral-darkest-5);
+  transition: all 0.2s ease;
 }
 
-/* ========== TABLET  ========== */
-@media (min-width: 768px) {
+.submit{
+  border-bottom: 4px solid var(--color-scheme-accent);
+  background-color: var(--color-scheme-foreground-alt);
+  transition: all 0.2s ease;
+}
+
+.button:hover,
+.button:focus {
+  border-bottom: 4px solid var(--color-scheme-border);
+  background-color: var(--color-scheme-background);
+}
+
+@media screen and (min-width: 768px) {
+  .input,
+  .select,
+  .date {
+    max-width: 704px;
+  }
+
+  .buttonContainer{
+    justify-content: flex-end;
+  }
+}
+
+@media screen and (min-width: 1440px) {
   .form {
-    
-    width: 100%;
+    width: 644px;
+    padding: 0 32px;
   }
 
-  .input {
-    font-size: 15px;
-  }
-  
-   .buttonContainer {
-    justify-content: flex-end; 
-    white-space: nowrap; 
-  }
-  
-  .submitButtonGray,
-  .submitButtonPink {
-    width: auto; 
-    flex: 0;  
+  .input{
+    height: 40px;
   }
 
-
-  .submitButton {
+  .label {
     font-size: 16px;
   }
 
-.submitButtonGray {
-  margin-left: 0;  
-
-}
-
-}
-
-/* ========== DESKTOP  ========== */
-@media (min-width: 1024px) {
-  .form {
-   padding-top: 0 ;
-   margin-left: 312px; /*место для сайдбара */
-   max-width: 644px;
-   margin-right: auto;
+  .input,
+  .select,
+  .date {
+    font-size: 16px;
   }
 }
-  .formGroup {
-  
-  }
-   
-   
