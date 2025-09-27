@@ -49,7 +49,7 @@ export default function AddTaskForm({
       {({ isSubmitting, values, setFieldValue }) => (
         <Form className={css.form}>
           <div className={css.label}>
-            Завдання
+            Назва завдання
             <Field
               name="title"
               placeholder="Прийняти вітаміни"

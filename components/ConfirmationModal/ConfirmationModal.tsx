@@ -31,3 +31,24 @@ export default function ConfirmationModal({
     </Modal>
   );
 }
+
+// для компоненту, який буде викоритсовувати цю модалку:
+
+// return (
+// <ваш компонент>
+//   {/* ... інший вміст вашого компонента */}
+//   <button onClick={() => setShowConfirm(true)}>
+//     <svg>{/* Іконка логауту */}</svg>
+//   </button>
+
+//    {showConfirm && (
+//      <ConfirmationModal
+//        title="Ви точно хочете вийти?"
+//        confirmButtonText="Так"
+//        cancelButtonText="Ні"
+//        onConfirm={handleLogout}
+//        onCancel={handleCancelLogout}
+//      />
+//    )}
+//  </ваш компонент>
+// );

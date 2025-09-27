@@ -1,23 +1,34 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 .label {
   display: flex;
   flex-direction: column;
-  font-weight: 500;
-  color: #333;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-scheme-text);
 }
 
 .inputField {
   padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
+  border: 2px solid var(--opacity-transparent);
+  background-color: var(--opacity-neutral-darkest-5);
+  border-radius: 12px;
+  font-size: 16px;
   margin-top: 4px;
-  width: 100%;
+  padding: 8px 12px;
+  width: 295px;
+  height: 37px;
+}
+
+.inputField:focus {
+  outline: none; /* Забирає стандартну рамку браузера */
+  border-color: var(--color-scheme-accent);
 }
 
 .errorMessage {
@@ -65,8 +76,8 @@
 }
 
 .submitButton {
-  width: 268px;
-  height: 46px;
+  width: 295px;
+  height: 42px;
 
   border: none;
   background-color: var(--color-scheme-foreground-alt);
@@ -95,4 +106,26 @@
 
 .submitButton:active:not(:disabled) {
   background-color: var(--color-scheme-accent);
+}
+
+@media screen and (min-width: 768px) {
+  .inputField {
+    width: 640px;
+    height: 37px;
+  }
+  .submitButton {
+    width: 268px;
+    height: 42px;
+  }
+}
+
+/* --- */
+
+@media screen and (min-width: 1440px) {
+  .inputField {
+    width: 640px;
+  }
+  .submitButton {
+    width: 268px;
+  }
 }

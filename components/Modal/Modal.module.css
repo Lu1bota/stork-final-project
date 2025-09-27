@@ -22,8 +22,12 @@
   position: relative;
 }
 
-.open { animation: scale-in-center 0.3s forwards; }
-.close { animation: scale-out-center 0.3s forwards; }
+.open {
+  animation: scale-in-center 0.3s forwards;
+}
+.close {
+  animation: scale-out-center 0.3s forwards;
+}
 
 .title {
   font-family: var(--second-family);
@@ -45,24 +49,49 @@
   background-color: transparent;
 }
 
-.closeIcon { stroke: black; }
+.closeIcon {
+  stroke: black;
+}
 
 @media screen and (min-width: 768px) {
-  .modal { padding: 64px 32px; max-width: 704px; }
-  .closeBtn { top: 32px; right: 32px; }
+  .modal {
+    padding: 64px 32px;
+    max-width: 706px;
+  }
+  .closeBtn {
+    top: 32px;
+    right: 32px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
-  .modal { padding: 64px; max-width: 768px; }
-  .title { font-size: 48px; }
+  .modal {
+    padding: 64px;
+    max-width: 768px;
+  }
+  .title {
+    font-size: 48px;
+  }
 }
 
 @keyframes scale-in-center {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes scale-out-center {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(0.8); opacity: 0; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
 }
