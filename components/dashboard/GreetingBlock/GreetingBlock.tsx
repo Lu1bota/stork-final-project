@@ -1,11 +1,18 @@
+"use client";
+
 import css from "./GreetingBlock.module.css";
+import { useEffect, useState } from "react";
+import { useAuthStore } from "@/lib/store/authStore";
 
-interface GreetingBlockProps {
-  userName: string;
-}
+export default function GreetingBlock() {
+  const [userName, setUserName] = useState<string | undefined>("мама");
+  const { isAuthenticated, user } = useAuthStore();
 
-export default function GreetingBlock({
-  userName = "майбутня мама",
-}: GreetingBlockProps) {
+  useEffect(() => {
+    if (isAuthenticated && user?.name) {
+      setUserName(user?.name);
+    }
+  }, [isAuthenticated, user?.name]);
+
   return <h1 className={css.title}>Доброго ранку, {userName}!</h1>;
 }

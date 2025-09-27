@@ -1,0 +1,31 @@
+.content {
+  padding-top: 24px;
+}
+
+.crumb {
+  max-width: 311px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .crumb {
+    margin: 0;
+    max-width: none;
+    margin-bottom: 16px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .support {
+    display: flex;
+    gap: 32px;
+  }
+
+  .children {
+    display: flex;
+  }
+}

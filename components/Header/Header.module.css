@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: space-between;
   background: var(--color-scheme-background);
-  padding: 16px 20px;
   height: 68px;
 }
 
@@ -25,13 +24,6 @@
   align-items: center;
   justify-content: center;
 }
-
-/* @media (min-width: 768px) {
-  .header {
-    width: 768px;
-    margin: 0 auto;
-  }
-} */
 
 @media (min-width: 1440px) {
   .header {
