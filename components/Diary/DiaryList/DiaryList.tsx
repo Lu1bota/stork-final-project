@@ -7,12 +7,24 @@ import { DiaryEntryCard } from "../DiaryEntryCard/DiaryEntryCard"
 import { DiaryEntryDetails } from "../DiaryEntryDetails/DiaryEntryDetails";
 import { AddDiaryEntryModal } from "../AddDiaryEntryModal/AddDiaryEntryModal";
 import css from "./DiaryList.module.css"
+import { useAuthStore } from "@/lib/store/authStore";
+import { useRouter } from "next/navigation";
 
 type DiaryListProps = {
     isMobile: boolean,
 };
 
 export const DiaryList = ({ isMobile }: DiaryListProps) => {
+  
+    const router = useRouter();
+
+    useEffect(() => {
+        const isAuthenticated = useAuthStore.getState().isAuthenticated;
+
+        if (!isAuthenticated) {
+            router.push('/auth/login');
+        }
+    }, [router]);
     
     const [selectedEntryId, setSelectedEntryId] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
