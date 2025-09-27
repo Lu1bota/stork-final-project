@@ -35,7 +35,8 @@
   }
 
   .title {
-    margin: 109px 0px 32px;
+    margin: 109px auto 32px;
+   max-width: 480px;
   }
 }
 
@@ -62,6 +63,7 @@
   .title {
     font-size: 48px;
     margin: 57px 56px 32px;
+    max-width:max-content;
   }
 }
 
@@ -114,6 +116,8 @@ color: var(--color-scheme-text);
   .label {
     font-size: 16px;
   }
+
+ 
 }
 
 /* ====== react-select (вбудовано тут) ====== */
