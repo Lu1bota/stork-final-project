@@ -1,44 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import ProfileAvatar from "@/components/profile/ProfileAvatar";
-import ProfileEditForm from "@/components/profile/ProfileEditForm";
-import { getMe } from "@/lib/api/clientApi";
-import type { User } from "@/types/user";
+import ProfileAvatar from "@/components/profile/ProfileAvatar/ProfileAvatar";
+import ProfileEditForm from "@/components/profile/ProfileEditForm/ProfileEditForm";
+import Loader from "@/components/Loader/Loader";
+import { useAuthStore } from "@/lib/store/authStore";
 
 export default function ProfilePage() {
-  const [user, setUser] = useState<User | null>(null);
+  const user = useAuthStore(state => state.user);
 
-  useEffect(() => {
-    getMe()
-      .then((data) => setUser(data)) 
-      .catch((error) => {
-        if (error instanceof Error) {
-          console.warn("Бэкенд недоступен:", error.message);
-        } else {
-          console.warn("Бэкенд недоступен, показана заглушка");
-        }
-
-        // Заглушка
-        setUser({
-          _id: "111",
-          name: "Test User",
-          email: "test@example.com",
-          photoUrl: "https://via.placeholder.com/150",
-          gender: "girl",
-          dueDate: "2025-12-31",
-        });
-      });
-  }, []);
-
-  if (!user) return <p>Завантаження...</p>;
-
+  if (!user) return <Loader />;
+  
   return (
     <div>
-      <ProfileAvatar user={user} />
+      <ProfileAvatar />
       <ProfileEditForm user={user} />
     </div>
   );
 }
-  
-
