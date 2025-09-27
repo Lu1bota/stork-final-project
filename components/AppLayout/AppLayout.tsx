@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Container from "../Container/Container";
-import Sidebar from "../Sidebar/Sidebar";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import css from "./AppLayout.module.css";
 import GreetingBlock from "../dashboard/GreetingBlock/GreetingBlock";
+import Sidebar from "../Sidebar/Sidebar";
+import Header from "../Header/Header";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -28,9 +29,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <Container className={css.support}>
-      {/* {isMobile && <Header />} */}
+      {isMobile && <Header />}
 
-      {!isMobile && <Sidebar />}
+      {!isMobile && (
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+        />
+      )}
 
       <div className={css.content}>
         <Breadcrumbs />
@@ -39,7 +45,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
         <div className={css.children}>{children}</div>
       </div>
 
-      {isMobile && isSidebarOpen && <Sidebar />}
+      {isMobile && isSidebarOpen && (
+        <Sidebar
+          isOpen={isSidebarOpen}
+          onClose={() => setIsSidebarOpen(false)}
+        />
+      )}
     </Container>
   );
 }
