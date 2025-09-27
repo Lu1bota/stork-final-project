@@ -5,16 +5,9 @@ import { CreateTaskRequest, Task } from "@/types/task.js";
 import { DiaryEntry, Emotion } from "@/types/diary.js";
 import { BabyDetails, MomDetails, WeekInfo } from "@/types/weeks.js";
 
-export type RegisterRequest = {
-  name: string;
-  email: string;
-  password: string;
-};
+export type RegisterRequest = { name: string; email: string; password: string };
+export type LoginRequest = { email: string; password: string };
 
-export type LoginRequest = {
-  email: string;
-  password: string;
-};
 
 function getAuthHeaders() {
   const token = useAuthStore.getState().token;
@@ -22,44 +15,34 @@ function getAuthHeaders() {
 }
 
 // AUTH
-
 export const register = async (data: RegisterRequest): Promise<User> => {
-  try {
-    await nextServer.post("/auth/register", data);
-    return await login({ email: data.email, password: data.password });
-  } catch (error) {
-    throw error;
-  }
+  await nextServer.post("/auth/register", data);
+  return await login({ email: data.email, password: data.password });
 };
 
 export const login = async (data: LoginRequest): Promise<User> => {
-  try {
-    const loginRes = await nextServer.post("/auth/login", data);
-    const accessToken = loginRes.data.data.accessToken;
-    const { data: user } = await nextServer.get<User>("/users/me", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+  const loginRes = await nextServer.post("/auth/login", data);
+  const accessToken = loginRes.data?.data?.accessToken;
 
-    useAuthStore.getState().setAuth(user, accessToken);
-    return user;
-  } catch (error) {
-    throw error;
+  // Зберігаємо токен і в стор, і в localStorage (для інтерсептора)
+  if (accessToken) {
+    localStorage.setItem("accessToken", accessToken);
+    nextServer.defaults.headers.Authorization = `Bearer ${accessToken}`;
   }
+
+  const { data: user } = await nextServer.get<User>("/users/me");
+  useAuthStore.getState().setAuth(user, accessToken);
+  return user;
 };
 
 export const logout = async (): Promise<void> => {
-  try {
-    await nextServer.post("/auth/logout", {}, { headers: getAuthHeaders() });
-    useAuthStore.getState().clearAuth();
-  } catch (error) {
-    throw error;
-  }
+  await nextServer.post("/auth/logout", {});
+  useAuthStore.getState().clearAuth();
+  localStorage.removeItem("accessToken");
+  delete nextServer.defaults.headers.Authorization;
 };
 
 // USERS
-
 export type UpdateUserRequest = {
   name?: string;
   email?: string;
@@ -68,31 +51,17 @@ export type UpdateUserRequest = {
   photoURL?: string;
 };
 
-export const getMe = async (): Promise<User> => {
-  try {
-    const { data } = await nextServer.get<User>("/users/me", {
-      headers: getAuthHeaders(),
-    });
-    return data;
-  } catch (error) {
-    throw error;
-  }
+export const updateMe = async (payload: FormData): Promise<User> => {
+  const { data } = await nextServer.patch<User>("/users/me", payload);
+  const token = useAuthStore.getState().token;
+  useAuthStore.getState().setAuth(data, token!);
+  return data;
 };
 
-export const updateMe = async (payload: UpdateUserRequest): Promise<User> => {
-  try {
-    const { data } = await nextServer.patch<User>("/users/me", payload, {
-      headers: {
-        ...getAuthHeaders(),
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    const token = useAuthStore.getState().token;
-    useAuthStore.getState().setAuth(data, token!);
-    return data;
-  } catch (error) {
-    throw error;
-  }
+
+export const getMe = async (): Promise<User> => {
+  const { data } = await nextServer.get<User>("/users/me");
+  return data;
 };
 
 // TASKS

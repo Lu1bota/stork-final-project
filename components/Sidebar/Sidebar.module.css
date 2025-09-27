@@ -1,0 +1,273 @@
+/* app/Sidebar.module.css */
+.sidebar {
+  width: 312px;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--opacity-neutral-darkest-10);
+  background: var(--color-scheme-background);
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  box-shadow: 0 8px 24px var(--opacity-neutral-darkest-20);
+  transform: translateX(-100%);
+  transition: transform 300ms ease-in-out;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--opacity-neutral-darkest-50);
+  z-index: 999;
+  display: block;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  padding: 16px 24px;
+  height: 77px;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoImg {
+  object-fit: contain;
+}
+
+.nav {
+  padding: 0px 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  padding: 8px 8px;
+  border-radius: 8px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link span {
+  color: var(--color-scheme-text);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+.link:hover,
+.link:focus {
+  background: var(--color-scheme-foreground);
+}
+
+.link:active {
+  background: var(--opacity-neutral-darkest-10);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160%;
+}
+
+.bottom {
+  padding: 24px 16px;
+  width: 312px;
+  height: 92px;
+}
+
+.bottom::after {
+  content: "";
+  position: absolute;
+  width: 280px;
+  bottom: 92px;
+  height: 1px;
+  background-color: var(--color-scheme-border);
+}
+
+.authLinks {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 160%;
+  height: 40px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+}
+
+.authLinks .authLink {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: var(--color-scheme-text);
+  transition: color 0.3s ease;
+}
+
+.authLinks .authLink:hover,
+.authLinks .authLink:focus {
+  color: var(--color-scheme-accent);
+}
+
+.authLinks .authLink::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--color-scheme-text);
+  transition:
+    width 0.3s ease,
+    left 0.3s ease,
+    background-color 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.authLinks .authLink:hover::after,
+.authLinks .authLink:focus::after {
+  width: 100%;
+  background-color: var(--color-scheme-accent);
+}
+
+.authLinks .authLink.active {
+  color: var(--color-scheme-accent) !important;
+}
+
+.authLinks .authLink.active::after {
+  width: 100%;
+  background-color: var(--color-scheme-accent) !important;
+}
+
+.userCard {
+  display: flex;
+  justify-content: space-between;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatarImg {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-neutral-light);
+}
+
+.userText {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 160%;
+  color: var(--color-scheme-text);
+}
+
+.userEmail {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160%;
+  color: var(--color-scheme-text);
+}
+
+.exitButton {
+  fill: var(--color-scheme-text);
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.exitButton svg {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.exitButton:hover,
+.exitButton:focus {
+  background: var(--color-scheme-foreground);
+  outline: none;
+}
+
+.exitButton.active {
+  background: var(--opacity-neutral-darkest-10);
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+}
+
+.closeButton:active {
+  transform: translateY(1px);
+}
+
+.closeIcon {
+  width: 45px;
+  height: 45px;
+  fill: var(--color-scheme-text);
+  stroke-width: 1px;
+  stroke: var(--color-scheme-text);
+}
+
+@media (min-width: 1440px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .overlay {
+    display: none !important;
+  }
+
+  .closeButton {
+    display: none;
+  }
+}
