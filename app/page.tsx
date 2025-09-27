@@ -1,3 +1,43 @@
-export default function DashboardPage() {
-  return null;
+import AppLayout from "@/components/AppLayout/AppLayout";
+import FeelingCheckCard from "@/components/dashboard/FeelingCheckCard/FeelingCheckCard";
+import MomTipCard from "@/components/dashboard/MomTipCard/MomTipCard";
+import StatusBlock from "@/components/dashboard/StatusBlock/StatusBlock";
+import TasksReminderCard from "@/components/dashboard/TasksReminderCard/TasksReminderCard";
+import { getPrivateWeekInfo, getPublicWeekInfo } from "@/lib/api/clientApi";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import css from "./page.module.css";
+
+export default async function DashboardPage() {
+  const queryClient = new QueryClient();
+
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ["privateWeek"],
+      queryFn: getPrivateWeekInfo,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ["publicWeek"],
+      queryFn: getPublicWeekInfo,
+    }),
+  ]);
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <AppLayout>
+        <div className={css.stats}>
+          <StatusBlock />
+          <div className={css.test}>Заглушка BabyTodayCard</div>
+          <MomTipCard />
+        </div>
+        <div className={css.tasks}>
+          <TasksReminderCard />
+          <FeelingCheckCard />
+        </div>
+      </AppLayout>
+    </HydrationBoundary>
+  );
 }

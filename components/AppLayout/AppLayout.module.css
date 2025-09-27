@@ -1,0 +1,16 @@
+/* @media screen and (min-width: 768px) {} */
+
+@media screen and (min-width: 1440px) {
+  .support {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .content {
+    padding-top: 24px;
+  }
+
+  .children {
+    display: flex;
+  }
+}
