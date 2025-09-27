@@ -1,0 +1,98 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #333;
+}
+
+.inputField {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.errorMessage {
+  color: #e63946;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Кастомні стилі для календаря */
+.react-datepicker {
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.react-datepicker__header {
+  background-color: #0070f3;
+  color: #fff;
+  border-bottom: none;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day {
+  color: #333;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #0070f3;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.react-datepicker__day:hover {
+  background-color: #90caf9;
+  color: #000;
+  border-radius: 8px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center; /* Центруємо кнопку */
+  margin-top: 16px;
+}
+
+.submitButton {
+  width: 268px;
+  height: 46px;
+
+  border: none;
+  background-color: var(--color-scheme-foreground-alt);
+  border-bottom: 4px solid var(--color-scheme-accent);
+  border-radius: 100px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+.submitButton:disabled {
+  background-color: var(--color-pastel-pink-light);
+  opacity: 0.3;
+
+  cursor: not-allowed;
+}
+
+.submitButton:hover:not(:disabled),
+.submitButton:focus:not(:disabled) {
+  background-color: var(--color-scheme-foreground);
+  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+  transform: translateY(-1px); /* Легка анімація при наведенні */
+}
+
+.submitButton:active:not(:disabled) {
+  background-color: var(--color-scheme-accent);
+}

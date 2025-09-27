@@ -1,0 +1,59 @@
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.confirm {
+  width: 268px;
+  height: 46px;
+
+  border: none;
+  background-color: var(--color-scheme-foreground-alt);
+  border-bottom: 4px solid var(--color-scheme-accent);
+  border-radius: 100px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+.confirm:disabled {
+  background-color: var(--color-pastel-pink-light);
+  opacity: 0.3;
+
+  cursor: not-allowed;
+}
+
+.confirm:hover:not(:disabled),
+.submitButton:focus:not(:disabled) {
+  background-color: var(--color-scheme-foreground);
+  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+  transform: translateY(-1px);
+}
+
+.confirm:active:not(:disabled) {
+  background-color: var(--color-scheme-accent);
+}
+
+/* Кнопка скасування */
+.cancel {
+  width: 268px;
+  height: 46px;
+  border: none;
+  background-color: var(--opacity-neutral-darkest-5);
+  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+  border-radius: 100px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+.cancel:hover {
+  background-color: var(--color-scheme-background);
+  border-bottom: 4px solid var(--color-scheme-border);
+}
