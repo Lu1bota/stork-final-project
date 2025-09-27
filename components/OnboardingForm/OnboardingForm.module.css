@@ -9,19 +9,19 @@
 }
 
 .navbar {
-  padding: 12px 0;
+  padding: 13.5px 0px 13.5px;
   display: block;
 }
 
 .title {
   font-family: var(--second-family);
   font-weight: 700;
-  font-size: 32px;
+  font-size: 36px;
   line-height: 120%;
   letter-spacing: .01em;
   text-align: center;
   color: var(--color-scheme-text);
-  margin: 24px 0 24px;
+  margin: 29px 0px 32px;
 }
 
 .right,
@@ -35,8 +35,7 @@
   }
 
   .title {
-    font-size: 48px;
-    margin: 56px 0 32px;
+    margin: 109px 0px 32px;
   }
 }
 
@@ -59,6 +58,11 @@
     height: auto;
     object-fit: contain;
   }
+
+  .title {
+    font-size: 48px;
+    margin: 57px 56px 32px;
+  }
 }
 
 /* ====== ФОРМА ====== */
@@ -66,7 +70,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
 }
 
 /* група з двох полів (стать + дата) */
@@ -76,12 +80,11 @@
     margin-inline: auto;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
 }
 
 .fieldCol {
   width: 100%;
-  
 }
 
 
@@ -89,18 +92,28 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
 }
 
 .label {
   margin-bottom: 8px;
-  
+  font-family: var(--font-family);
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+color: var(--color-scheme-text);
 }
+
 
 .error {
   color: red;
   font-size: 13px;
   margin-top: 4px;
+}
+
+@media (min-width: 1440px) {
+  .label {
+    font-size: 16px;
+  }
 }
 
 /* ====== react-select (вбудовано тут) ====== */
@@ -138,6 +151,13 @@
 
 .mySelect :global(.react-select__placeholder) {
   opacity: .6;
+  font-size: 14px;
+}
+
+@media (min-width: 1440px) {
+  .mySelect :global(.react-select__placeholder) {
+    font-size: 16px;
+  }
 }
 
 /* indicators */
@@ -163,15 +183,26 @@
 .mySelect :global(.react-select__option) {
   padding: 8px 12px;
   cursor: pointer;
+  font-family: var(--font-family);
+font-weight: 400;
+font-size: 14px;
+line-height: 150%;
+
 }
 
 .mySelect :global(.react-select__option--is-focused) {
-  background: var(--color-scheme-foreground);
+  background: var(--opacity-neutral-darkest-5);
 }
 
 .mySelect :global(.react-select__option--is-selected) {
   background: var(--color-scheme-accent);
   color: var(--color-neutral-darkest);
+}
+
+@media (min-width: 1440px) {
+  .mySelect :global(.react-select__option) {
+    font-size: 16px; 
+  }
 }
 
 /* disabled */
@@ -197,6 +228,7 @@
   background: var(--color-neutral-lightest);
   padding: 8px 12px;
   transition: border-color .15s ease, box-shadow .15s ease;
+  font-size: 14px;
 }
 
 .input:hover {
@@ -207,6 +239,12 @@
   outline: none;
   border-color: var(--color-scheme-accent);
   box-shadow: 0 0 0 2px var(--color-scheme-accent);
+}
+
+@media (min-width: 1440px) {
+  .input {
+    font-size: 16px;
+  }
 }
 
 /* обгортка datepicker, щоб тягнувся на ширину колонки */
@@ -241,7 +279,7 @@
   border-bottom: 4px solid var(--color-scheme-accent);
   color: var(--color-neutral-darkest);
   background: var(--color-scheme-foreground-alt);
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   padding: 10px 24px;
 }
@@ -257,6 +295,7 @@
 @media (min-width: 1440px) {
   .button {
     height: 46px;
+    font-size: 16px;
   }
 }
 
@@ -294,8 +333,8 @@
 .uploadButton {
   border: none;
   border-radius: 100px;
-  width: 179px;
-  height: 42px;
+  width: 162px;
+  height: 38px;
   background: var(--opacity-neutral-darkest-5);
   font-family: var(--font-family);
   font-weight: 500;
@@ -317,4 +356,12 @@
 
 .uploadButton:active {
   background: var(--color-scheme-accent);
+}
+
+@media (min-width: 1440px) {
+  .uploadButton {
+    font-size: 16px; 
+    width: 179px;
+    height: 42px;
+  }
 }
