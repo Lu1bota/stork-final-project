@@ -1,0 +1,49 @@
+.cardHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.cardTitle {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.cardDate {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.emotionsContainer {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.emotionsItem {
+    font-family: var(--font-lato);
+    background: var(--color-pastel-pink-lighter);
+    border: 1px solid var(--opacity-transparent);
+    border-radius: 100px;
+    padding: 2px 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+@media screen and (min-width: 1440px) {
+    .cardTitle {
+        font-size: 18px;
+    }
+
+    .cardDate {
+        font-weight: 400;
+        font-size: 14px;
+    }
+
+    .emotionsItem {
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,4 @@
+.diaryContainer {
+    display: flex;
+    gap: 32;
+}
