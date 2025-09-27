@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import css from "./WeekSelector.module.css";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface WeekSelectorProps {
   currentWeek: number; // поточний тиждень вагітності
