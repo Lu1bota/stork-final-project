@@ -1,12 +1,12 @@
 "use client";
 import Container from "../../components/Container/Container";
-import Greating from "../../components/GreatingBlock/GreetingBlock";
 import WeekSelector from "../../components/journey/WeekSelector/WeekSelector";
 import JourneyDetails from "../../components/journey/JourneyDetails/JourneyDetails";
 import { useEffect, useState } from "react";
 import { getBabyDetails, getPrivateWeekInfo } from "@/lib/api/clientApi";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
 import Loader from "@/components/Loader/Loader";
+import GreetingBlock from "@/components/dashboard/GreetingBlock/GreetingBlock";
 
 export default function JourneyPage() {
   const [currentWeek, setCurrentWeek] = useState<number | null>(null);
@@ -50,7 +50,7 @@ export default function JourneyPage() {
   return (
     <>
       <Container>
-        <Greating />
+        <GreetingBlock />
       </Container>
       <WeekSelector
         currentWeek={currentWeek}

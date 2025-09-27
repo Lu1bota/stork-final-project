@@ -19,11 +19,23 @@
   flex-direction: column;
   gap: 32px;
   justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.baby {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 16px;
 }
 
 @media screen and (min-width: 768px) {
   .stats {
     margin-right: 0;
+  }
+
+  .baby {
+    margin-bottom: 48px;
   }
 }
 
@@ -35,5 +47,9 @@
   .test {
     width: 642px;
     height: 422px;
+  }
+
+  .baby {
+    margin-bottom: 0;
   }
 }

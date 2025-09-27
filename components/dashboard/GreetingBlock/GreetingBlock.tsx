@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useAuthStore } from "@/lib/store/authStore";
 
 export default function GreetingBlock() {
-  const [userName, setUserName] = useState<string | undefined>("майбутня мама");
+  const [userName, setUserName] = useState<string | undefined>("мама");
   const { isAuthenticated, user } = useAuthStore();
 
   useEffect(() => {

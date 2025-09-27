@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Container from "../Container/Container";
 import Breadcrumbs from "../Breadcrumbs/Breadcrumbs";
 import css from "./AppLayout.module.css";
-import GreetingBlock from "../dashboard/GreetingBlock/GreetingBlock";
 import Sidebar from "../Sidebar/Sidebar";
 import Header from "../Header/Header";
+import GreetingBlock from "../dashboard/GreetingBlock/GreetingBlock";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -39,8 +39,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
       )}
 
       <div className={css.content}>
-        <Breadcrumbs />
-        <GreetingBlock />
+        <div className={css.crumb}>
+          <Breadcrumbs />
+          <GreetingBlock />
+        </div>
 
         <div className={css.children}>{children}</div>
       </div>

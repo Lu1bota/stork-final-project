@@ -10,6 +10,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import css from "./page.module.css";
+import BabyTodayCard from "@/components/dashboard/BabyTodayCard/BabyTodayCard";
 
 export default async function DashboardPage() {
   const queryClient = new QueryClient();
@@ -30,8 +31,10 @@ export default async function DashboardPage() {
       <AppLayout>
         <div className={css.stats}>
           <StatusBlock />
-          <div className={css.test}>Заглушка BabyTodayCard</div>
-          <MomTipCard />
+          <div className={css.baby}>
+            <BabyTodayCard />
+            <MomTipCard />
+          </div>
         </div>
         <div className={css.tasks}>
           <TasksReminderCard />
