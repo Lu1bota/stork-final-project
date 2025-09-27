@@ -7,6 +7,7 @@ import Loader from "@/components/Loader/Loader";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
 import MomBlock from "../MomBlock/MomBlock"
 import { getBabyDetails, getMomDetails } from "@/lib/api/clientApi";
+import css from "./JourneyDetails.module.css"
 
 
 interface JourneyDetailsProps {
@@ -57,9 +58,11 @@ export default function JourneyDetails({
 
   return (
     <>
+      <div className={css.tab_container}>
       <Tab activeTab={activeTab} onTabChange={setActiveTab} />
       {activeTab === "baby" && babyInfo && <BabyBlock baby={babyInfo} />}
-      {activeTab === "mom" && momInfo && <MomBlock data={momInfo} />}
+        {activeTab === "mom" && momInfo && <MomBlock data={momInfo} />}
+      </div>
     </>
   );
 }

@@ -18,11 +18,12 @@ export default function WeekSelector({
 }: WeekSelectorProps) {
   const router = useRouter();
  const [selectedWeek, setSelectedWeek] = useState(activeWeek);
+  
+  
   const activeRef = useRef<HTMLLIElement | null>(null);
   const itemsRef = useRef<HTMLUListElement | null>(null);
-    
-
   const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
 const [startX, setStartX] = useState<number>(0);
 const [scrollLeft, setScrollLeft] = useState<number>(0);
 
@@ -59,7 +60,10 @@ const [scrollLeft, setScrollLeft] = useState<number>(0);
 
   const handleMouseLeave = () => setIsMouseDown(false);
 
-  const handleMouseUp = () => setIsMouseDown(false);
+  const handleMouseUp = () => {
+    setIsMouseDown(false)
+    setTimeout(() => setIsDragging(false), 50);
+  };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLUListElement>) => {
     if (!isMouseDown || !itemsRef.current) return;
@@ -67,6 +71,10 @@ const [scrollLeft, setScrollLeft] = useState<number>(0);
     const x = e.pageX - itemsRef.current.offsetLeft;
     const walk = (x - startX) * 1; 
     itemsRef.current.scrollLeft = scrollLeft - walk;
+
+    if (Math.abs(x - startX) > 5) {
+    setIsDragging(true);
+  }
   };
 
 
@@ -88,7 +96,10 @@ const [scrollLeft, setScrollLeft] = useState<number>(0);
               <button
                 disabled={isDisabled}
                 className={`${css.item_button} ${isActive ? css.active_butt : ""}  ${isDisabled ? css.disabled_butt : ""}`}
-                onClick={() => handleWeekClick(week)}
+                onClick={() => {
+                  if (isDragging) return;
+                  handleWeekClick(week)
+                }}
               >
                 <span className={css.item_title_number}>{week}</span>
                 <p className={css.item_title}>Тиждень</p>

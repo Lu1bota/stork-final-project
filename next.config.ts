@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
- domains: ["ftp.goit.study"],
+  domains: ["ftp.goit.study"],
+  images: {
+  domains: ["ftp.goit.study"],
+}
 };
 
 export default nextConfig;

@@ -10,7 +10,7 @@ export default function MomBBlock({ data }: MomBlockProps) {
   return (
     <div className={css.mom_container}>
       <div className={css.mom_tag_tip_container}>
-        <div className={css.mom_card}>
+        <div className={css.mom_card_feelings}>
           <h2 className={css.mom_cardTitle}>Як ви можете почуватись</h2>
           <div className={css.mom_tags_container}>
             {data.feelings.states.map((state, idx) => (

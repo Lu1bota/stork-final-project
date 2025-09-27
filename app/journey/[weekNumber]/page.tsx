@@ -1,7 +1,5 @@
 "use client";
 
-import Container from "../../../components/Container/Container";
-import GreetingBlock from "@/components/dashboard/GreetingBlock/GreetingBlock";
 import WeekSelector from "../../../components/journey/WeekSelector/WeekSelector";
 import JourneyDetails from "../../../components/journey/JourneyDetails/JourneyDetails";
 import { useEffect, useState } from "react";
@@ -9,6 +7,8 @@ import { getPrivateWeekInfo } from "@/lib/api/clientApi";
 import ErrorPage from "@/components/ErrorPage/ErrorPage";
 import Loader from "@/components/Loader/Loader";
 import { useParams, useRouter } from "next/navigation";
+import AppLayout from "@/components/AppLayout/AppLayout";
+import css from "./page.module.css"
 
 export default function JourneyPage() {
   const router = useRouter();
@@ -67,21 +67,20 @@ export default function JourneyPage() {
 
   return (
     <>
-      <Container>
-        <GreetingBlock />
-    
+      <AppLayout>
+        <div className={css.journeyContainer}>
       <WeekSelector
         onWeekChange={handleWeekSelect}
         activeWeek={selectedWeek}
         maxAvailableWeek={maxAvailableWeek}
       />
-    
         <JourneyDetails
           weekNumber={selectedWeek}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
-        />
-      </Container>
+          />
+          </div>
+      </AppLayout>
     </>
   );
 }
