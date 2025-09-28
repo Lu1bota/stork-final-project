@@ -1,54 +1,70 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useMutation } from '@tanstack/react-query';
 import styles from './GoogleAuthBtn.module.css';
 
 type Props = {
   className?: string;
   label?: string;
   onError?: (err: unknown) => void;
+  state?: string;                    
+  callbackPathOverride?: string;     
 };
 
-export default function GoogleAuthBtn({
-  className,
-  label = 'Зареєструватись через Google',
-  onError,
-}: Props) {
-  const [pending, setPending] = useState(false);
+function siteOrigin(): string {
+  return typeof window !== 'undefined' ? window.location.origin : (process.env.NEXT_PUBLIC_SITE_URL ?? '');
+}
 
-  const handleClick = async () => {
-    const base = process.env.NEXT_PUBLIC_API_URL;
-    if (!base) {
-      const err = new Error('NEXT_PUBLIC_API_URL не задано у .env.local');
-      onError?.(err);
-      console.warn(err.message);
-      return;
-    }
+function callbackPath(): string {
+  return process.env.NEXT_PUBLIC_OAUTH_CALLBACK_PATH || '/auth/confirm-google-auth';
+}
 
-    try {
-      setPending(true);
-      const res = await fetch(`${base}/api/get-oauth-url`, {
-        method: 'GET',
-        credentials: 'include',
-      });
-      if (!res.ok) throw new Error(`OAuth URL HTTP ${res.status}`);
-      const body = await res.json();
-      const url: string | undefined = body?.data?.url ?? body?.url;
-      if (!url) throw new Error('Не отримав URL авторизації');
-      window.location.assign(url); 
-    } catch (e) {
-      onError?.(e);
-      console.error('OAuth URL error:', e);
-      setPending(false);
-    }
+export default function GoogleAuthBtn({ className, label = 'Зареєструватись через Google', onError, state, callbackPathOverride }: Props) {
+  const mutation = useMutation<string, Error, { redirectUri: string; state?: string }>({
+    mutationKey: ['get-oauth-url'],
+    mutationFn: async ({ redirectUri, state }) => {
+      const base = process.env.NEXT_PUBLIC_API_URL;
+      if (!base) throw new Error('NEXT_PUBLIC_API_URL не задано');
+
+      const u = new URL(`${base}/api/get-oauth-url`);
+      u.searchParams.set('redirect_uri', redirectUri);
+      if (state) u.searchParams.set('state', state);
+
+      const res = await fetch(u.toString(), { method: 'GET', credentials: 'include' });
+      if (!res.ok) {
+        const text = await res.text().catch(() => '');
+        throw new Error(text || `OAuth URL HTTP ${res.status}`);
+      }
+
+      const body: unknown = await res.json().catch(() => ({}));
+      const authUrl =
+        typeof (body as { data?: { url?: unknown } }).data?.url === 'string'
+          ? (body as { data: { url: string } }).data.url
+          : typeof (body as { url?: unknown }).url === 'string'
+          ? (body as { url: string }).url
+          : null;
+
+      if (!authUrl) throw new Error('Не отримав URL авторизації');
+      return authUrl;
+    },
+    onSuccess: (authUrl) => window.location.assign(authUrl),
+    onError,
+  });
+
+  const site = siteOrigin();
+  const cbPath = callbackPathOverride || callbackPath();
+  const redirectUri = `${site}${cbPath}`;
+
+  const handleClick = () => {
+    mutation.mutate({ redirectUri, state });
   };
 
   return (
     <button
       type="button"
       onClick={handleClick}
-      disabled={pending}
-      aria-busy={pending}
+      disabled={mutation.isPending}
+      aria-busy={mutation.isPending}
       className={className ? `${styles.btn} ${className}` : styles.btn}
     >
       <span className={styles.iconBox} aria-hidden>
@@ -56,7 +72,7 @@ export default function GoogleAuthBtn({
           <use href="/sprite.svg#google" />
         </svg>
       </span>
-      {pending ? 'Зачекайте…' : label}
+      {mutation.isPending ? 'Зачекайте…' : label}
     </button>
   );
 }
