@@ -5,11 +5,13 @@ import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import styles from "./Breadcrumbs.module.css";
 
+
 export type BreadcrumbsProps = {
   className?: string;
   capitalize?: boolean;
   homeHref?: string;
   homeLabel?: ReactNode;
+  customLabels?: Record<string, ReactNode>;
 };
 
 export default function Breadcrumbs({
@@ -17,6 +19,7 @@ export default function Breadcrumbs({
   capitalize = true,
   homeHref = "/",
   homeLabel = "Мій день",
+  customLabels = {},
 }: BreadcrumbsProps) {
   const pathname = usePathname();
   const segments = (pathname || "/").split("/").filter(Boolean);
@@ -46,15 +49,18 @@ export default function Breadcrumbs({
         {segments.map((seg, idx) => {
           hrefAccumulator += `/${seg}`;
           const isLast = idx === segments.length - 1;
+          const label = customLabels[seg] ?? makeLabel(seg); // кастомный label
+
           return (
             <li key={hrefAccumulator} className={styles.item}>
               {isLast ? (
-                <span className={`${styles.link} ${styles.active}`}>{makeLabel(seg)}</span>
+                <span className={`${styles.link} ${styles.active}`}>{label}</span>
               ) : (
                 <Link href={hrefAccumulator} className={styles.link}>
-                  {makeLabel(seg)}
+                  {label}
                 </Link>
               )}
+
               {!isLast && (
                 <span className={styles.sepItem}>
                   <span className={styles.sep}>
