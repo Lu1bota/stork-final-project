@@ -107,7 +107,7 @@
 @media (min-width: 1440px) {
   .card {
     width: 642px;
-    height: auto;
+    height: 421px;
     padding: 24px;
     overflow-y: auto;
   }
@@ -115,5 +115,17 @@
   .imageWrapper {
     width: 257px;
     height: 194px;
+  }
+
+  .detailLabel {
+    font-size: 16px;
+  }
+
+  .detailItem span {
+    font-size: 16px;
+  }
+
+  .developmentText {
+    font-size: 16px;
   }
 }

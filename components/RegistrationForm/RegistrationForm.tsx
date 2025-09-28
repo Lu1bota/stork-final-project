@@ -31,7 +31,7 @@ export default function RegistrationForm() {
   }) => {
     try {
       await register(values);
-      router.push("/onboarding");
+      router.push("/profile/edit");
     } catch {
       toast.error("Ця пошта вже використовується");
     }
@@ -39,16 +39,16 @@ export default function RegistrationForm() {
 
   return (
     <Container className={css.container}>
-        <Link href="/" className={css.logo}>
-          <Image
-            src="/logo/Frame_269.png"
-            alt="Лелека"
-            width={112}
-            height={48}
-            priority
-            className={css.logoIcon}
-          />
-        </Link>
+      <Link href="/" className={css.logo}>
+        <Image
+          src="/logo/Frame_269.png"
+          alt="Лелека"
+          width={112}
+          height={48}
+          priority
+          className={css.logoIcon}
+        />
+      </Link>
 
       <div>
         <Formik
