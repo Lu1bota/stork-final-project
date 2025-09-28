@@ -48,7 +48,7 @@ export const DiaryEntryDetails = ({ selectedCardDetails, noEntryMessage }: Diary
     if (noEntryMessage || !selectedCardDetails) {
         return (
             <div className={css.diaryDetails}>
-                <p className={css.diaryDetailsTitle}>Наразі записи у щоденнику відстні</p>
+                <p className={css.diaryDetailsTitle}>Наразі записи у щоденнику відсутні</p>
             </div>
         )    
     }
