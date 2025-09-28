@@ -1,0 +1,48 @@
+.themeRoot {
+	/* базовые переменные темы по умолчанию */
+	--theme-bg: #ffffff;
+	--theme-text: #000000;
+	--theme-accent: #7c4dff; /* нейтральный акцент */
+	--theme-muted: #f3f4f6;
+	background-color: var(--theme-bg);
+	color: var(--theme-text);
+}
+
+.themeRoot[data-theme="neutral"] {
+	--theme-bg: #FFFFFF;
+	--theme-text: #0F172A;
+	--theme-accent: #7C4DFF;
+	--theme-muted: #F1F5F9;
+	--theme-border: #E2E8F0;
+	--theme-btn-bg: #FFFFFF;
+	--theme-btn-text: #0F172A;
+	--theme-btn-border: #CBD5E1;
+	--theme-link: #7C4DFF;
+}
+
+.themeRoot[data-theme="girl"] {
+	--theme-bg: #FFF5F7;
+	--theme-text: #3D0B1A;
+	--theme-accent: #FF4D8D;
+	--theme-muted: #FFE3EC;
+	--theme-border: #FFC2D1;
+	--theme-btn-bg: #FFE3EC;
+	--theme-btn-text: #3D0B1A;
+	--theme-btn-border: #FF8EB2;
+	--theme-link: #FF4D8D;
+}
+
+.themeRoot[data-theme="boy"] {
+	--theme-bg: #F2F8FF;
+	--theme-text: #0A2342;
+	--theme-accent: #3B82F6;
+	--theme-muted: #DBEAFE;
+	--theme-border: #93C5FD;
+	--theme-btn-bg: #DBEAFE;
+	--theme-btn-text: #0A2342;
+	--theme-btn-border: #93C5FD;
+	--theme-link: #3B82F6;
+}
+
+
+

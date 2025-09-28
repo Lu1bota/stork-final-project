@@ -9,6 +9,7 @@ import { register } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import GoogleAuthBtn from "@/components/auth/GoogleAuthBtn";
+import { useTheme } from "@/components/ThemeProvider/ThemeProvider";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().max(32).required("Імʼя є обовʼязковим"),
@@ -24,6 +25,7 @@ const validationSchema = Yup.object().shape({
 
 export default function RegistrationForm() {
   const router = useRouter();
+  const { setThemeByGender } = useTheme();
   const handleSubmit = async (values: {
     name: string;
     email: string;
@@ -63,6 +65,37 @@ export default function RegistrationForm() {
           {({ errors, touched, isSubmitting }) => (
             <Form className={css.form}>
               <h1 className={css.title}>Реєстрація</h1>
+
+              <div className={css.fieldGroup} role="radiogroup" aria-label="Стать дитини">
+                <label className={css.label}>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="girl"
+                    onChange={() => setThemeByGender('girl')}
+                  />
+                  Дівчинка
+                </label>
+                <label className={css.label}>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="boy"
+                    onChange={() => setThemeByGender('boy')}
+                  />
+                  Хлопчик
+                </label>
+                <label className={css.label}>
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="unknown"
+                    defaultChecked
+                    onChange={() => setThemeByGender('unknown')}
+                  />
+                  Не вказано
+                </label>
+              </div>
 
               <div className={css.fieldGroup}>
                 <label htmlFor="name" className={css.label}>
