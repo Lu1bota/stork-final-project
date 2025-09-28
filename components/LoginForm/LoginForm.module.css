@@ -135,10 +135,6 @@
   .submitBtn {
     width: 480px;
   }
-
-  .img {
-    display: none;
-  }
 }
 
 /* 💻 Desktop */
@@ -178,5 +174,7 @@
     right: 0;
     position: absolute;
     height: 100vh;
+    object-fit: contain;
+
   }
 }
