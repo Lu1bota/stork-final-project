@@ -23,7 +23,7 @@ function msgFrom(e: unknown): string {
 
 export default function ConfirmGoogleAuthClient({ code, error, successRedirect = '/profile/edit' }: Props) {
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePathname(); // має бути /confirm-google-auth
   const setUser = useAuthStore(s => s.setUser);
   const [msg, setMsg] = useState('Завершую авторизацію…');
   const base = process.env.NEXT_PUBLIC_API_URL;
@@ -44,8 +44,7 @@ export default function ConfirmGoogleAuthClient({ code, error, successRedirect =
         const text = await res.text().catch(() => '');
         throw new Error(text || `HTTP ${res.status}`);
       }
-      const json = (await res.json().catch(() => ({}))) as ConfirmResponse;
-      return json;
+      return (await res.json().catch(() => ({}))) as ConfirmResponse;
     },
     onSuccess: (data) => {
       const u = data?.data?.user;
