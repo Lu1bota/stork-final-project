@@ -35,7 +35,6 @@
 
 .active { color: #7f7f7f; }
 
-.sepItem { padding: 0; display: inline-flex; }
 .sep { display: inline-flex; align-items: center; justify-content: center; }
 .sepIcon { width: 24px; height: 24px; }
 

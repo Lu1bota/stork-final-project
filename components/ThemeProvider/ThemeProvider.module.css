@@ -1,8 +1,7 @@
 .themeRoot {
-	/* базовые переменные темы по умолчанию */
 	--theme-bg: #ffffff;
 	--theme-text: #000000;
-	--theme-accent: #7c4dff; /* нейтральный акцент */
+	--theme-accent: #7c4dff;
 	--theme-muted: #f3f4f6;
 	background-color: var(--theme-bg);
 	color: var(--theme-text);
