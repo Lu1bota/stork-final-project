@@ -39,6 +39,7 @@ export default function RegistrationForm() {
 
   return (
     <Container className={css.container}>
+      <div className={css.left}>
       <Link href="/" className={css.logo}>
         <Image
           src="/logo/Frame_269.png"
@@ -50,7 +51,6 @@ export default function RegistrationForm() {
         />
       </Link>
 
-      <div>
         <Formik
           initialValues={{
             name: "",
@@ -141,13 +141,15 @@ export default function RegistrationForm() {
           )}
         </Formik>
       </div>
-      <Image
-        className={css.img}
-        src="/auth/storks_picture.jpg"
-        alt="Stork illustration"
-        width={720}
-        height={900}
-      />
+      <div className={css.right}>
+        <Image
+          className={css.img}
+          src="/auth/storks_picture.jpg"
+          alt="Stork illustration"
+          width={720}
+          height={900}
+        />
+      </div>
     </Container>
   );
 }

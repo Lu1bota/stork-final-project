@@ -22,7 +22,8 @@
   gap: 16px;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+    padding-top: 220px;
+
 }
 
 .input {
@@ -121,8 +122,8 @@
   font-family: var(--font-family);
 }
 
-
-.img {
+.img,
+.right {
   display: none;
 }
 
@@ -130,6 +131,10 @@
 @media screen and (min-width: 768px) {
   .input {
     width: 480px;
+  }
+
+  .form {
+    padding-top: 280px;
   }
 
   .submitBtn {
@@ -142,7 +147,6 @@
   .container {
     display: flex;
     flex-direction: row;
-    position: relative;
   }
 
   .title {
@@ -168,13 +172,22 @@
     line-height: 1.6;
   }
 
+  .form {
+    padding: 0 56px;
+    padding-top: 266px;
+  }
+
+  .left {
+    padding: 0 64px;
+  }
+
+  .right {
+    display: block;
+  }
 
   .img {
     display: block;
     right: 0;
-    position: absolute;
-    height: 100vh;
     object-fit: contain;
-
   }
 }
