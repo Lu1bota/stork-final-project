@@ -8,7 +8,7 @@ import Image from "next/image";
 import { register } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import GoogleAuthBtn from "@/components/auth/GoogleAuthBtn";
+import GoogleAuthBtn from "@/components/GoogleAuthBtn/GoogleAuthBtn";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().max(32).required("Імʼя є обовʼязковим"),
