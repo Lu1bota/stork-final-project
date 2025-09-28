@@ -1,0 +1,131 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-scheme-text);
+}
+
+.inputField {
+  padding: 8px 12px;
+  border: 2px solid var(--opacity-transparent);
+  background-color: var(--opacity-neutral-darkest-5);
+  border-radius: 12px;
+  font-size: 16px;
+  margin-top: 4px;
+  padding: 8px 12px;
+  width: 295px;
+  height: 37px;
+}
+
+.inputField:focus {
+  outline: none; /* Забирає стандартну рамку браузера */
+  border-color: var(--color-scheme-accent);
+}
+
+.errorMessage {
+  color: #e63946;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Кастомні стилі для календаря */
+.react-datepicker {
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.react-datepicker__header {
+  background-color: #0070f3;
+  color: #fff;
+  border-bottom: none;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day {
+  color: #333;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #0070f3;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.react-datepicker__day:hover {
+  background-color: #90caf9;
+  color: #000;
+  border-radius: 8px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center; /* Центруємо кнопку */
+  margin-top: 16px;
+}
+
+.submitButton {
+  width: 295px;
+  height: 42px;
+
+  border: none;
+  background-color: var(--color-scheme-foreground-alt);
+  border-bottom: 4px solid var(--color-scheme-accent);
+  border-radius: 100px;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+.submitButton:disabled {
+  background-color: var(--color-pastel-pink-light);
+  opacity: 0.3;
+
+  cursor: not-allowed;
+}
+
+.submitButton:hover:not(:disabled),
+.submitButton:focus:not(:disabled) {
+  background-color: var(--color-scheme-foreground);
+  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+  transform: translateY(-1px); /* Легка анімація при наведенні */
+}
+
+.submitButton:active:not(:disabled) {
+  background-color: var(--color-scheme-accent);
+}
+
+@media screen and (min-width: 768px) {
+  .inputField {
+    width: 640px;
+    height: 37px;
+  }
+  .submitButton {
+    width: 268px;
+    height: 42px;
+  }
+}
+
+/* --- */
+
+@media screen and (min-width: 1440px) {
+  .inputField {
+    width: 640px;
+  }
+  .submitButton {
+    width: 268px;
+  }
+}
