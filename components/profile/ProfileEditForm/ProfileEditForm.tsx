@@ -70,8 +70,9 @@ function formatDueDate(date: string | Date): string {
   return `${dd}-${mm}-${yyyy}`;
 }
 
-export default function ProfileEditForm({ user }: { user: User }) {
+export default function ProfileEditForm() {
   const selectId = useId();
+  const user = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
 
   const { mutate, isPending } = useMutation({
@@ -94,6 +95,8 @@ export default function ProfileEditForm({ user }: { user: User }) {
     if ([dd, mm, yyyy].every(Boolean)) return new Date(+yyyy, +mm - 1, +dd);
     return null;
   };
+
+  if (!user) return null;
 
   return (
     <Formik
