@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/lib/store/authStore";
 import { getTasks, createTask, setTaskCompleted } from "@/lib/api/clientApi";
 import { Task } from "@/types/task";
+import AddTaskModal from "@/components/AddTaskModal/AddTaskModal";
 import styles from "./TasksReminderCard.module.css";
 
 type Props = {
@@ -44,6 +45,7 @@ export default function TasksReminderCard({
 
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [isLoadingList, setIsLoadingList] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     let mounted = true;
@@ -95,13 +97,13 @@ export default function TasksReminderCard({
       return;
     }
 
-    try {
-      const today = new Date().toISOString().slice(0, 10);
-      const newTask = await createTask({ title: "Нове завдання", date: today });
-      setTasks((prev) => [...prev, newTask]);
-    } catch (err) {
-      console.error("Create task error:", err);
-    }
+    setIsModalOpen(true);
+  };
+
+  const handleModalSubmit = async (values: { title: string; date: Date }) => {
+    const dateString = values.date.toISOString().slice(0, 10);
+    const newTask = await createTask({ title: values.title, date: dateString });
+    setTasks((prev) => [...prev, newTask]);
   };
 
   const toggleTask = async (task: Task) => {
@@ -129,131 +131,140 @@ export default function TasksReminderCard({
   };
 
   return (
-    <section className={`${styles.card} ${className}`}>
-      <div className={styles.header}>
-        <h3 className={styles.title}>Важливі завдання</h3>
-        <button
-          className={styles.createBtn}
-          onClick={handleCreateNewTask}
-          aria-label="Create new task"
-        >
-          <svg
-            className={styles.addIcon}
-            aria-hidden="true"
-            width="24"
-            height="24"
+    <>
+      <section className={`${styles.card} ${className}`}>
+        <div className={styles.header}>
+          <h3 className={styles.title}>Важливі завдання</h3>
+          <button
+            className={styles.createBtn}
+            onClick={handleCreateNewTask}
+            aria-label="Create new task"
           >
-            <use href="/sprite.svg#add_circle" />
-          </svg>
-        </button>
-      </div>
+            <svg
+              className={styles.addIcon}
+              aria-hidden="true"
+              width="24"
+              height="24"
+            >
+              <use href="/sprite.svg#add_circle" />
+            </svg>
+          </button>
+        </div>
 
-      <div className={styles.content}>
-        {isLoadingList ? (
-          <div className={styles.loader}>Завантаження завдань...</div>
-        ) : tasks.length === 0 ? (
-          <div className={styles.emptyTask}>
-            <span>Наразі немає жодних завдань</span> <br />
-            Створіть мершій нове завдання!
-          </div>
-        ) : (
-          <div className={styles.listWrapper}>
-            {todayTasks.length > 0 && (
-              <div className={styles.group}>
-                <h4 className={styles.groupTitle}>Сьогодні:</h4>
-                {todayTasks.map((task) => (
-                  <label key={task._id} className={styles.taskRow}>
-                    <div
-                      className={`${styles.checkbox} ${
-                        task.completed ? styles.checked : ""
-                      }`}
-                      onClick={() => toggleTask(task)}
-                      role="checkbox"
-                      aria-checked={task.completed}
-                    >
-                      {task.completed && (
-                        <svg
-                          className={styles.checkIcon}
-                          aria-hidden="true"
-                          width="14"
-                          height="12"
+        <div className={styles.content}>
+          {isLoadingList ? (
+            <div className={styles.loader}>Завантаження завдань...</div>
+          ) : tasks.length === 0 ? (
+            <div className={styles.emptyTask}>
+              <span>Наразі немає жодних завдань</span> <br />
+              Створіть мершій нове завдання!
+            </div>
+          ) : (
+            <div className={styles.listWrapper}>
+              {todayTasks.length > 0 && (
+                <div className={styles.group}>
+                  <h4 className={styles.groupTitle}>Сьогодні:</h4>
+                  {todayTasks.map((task) => (
+                    <label key={task._id} className={styles.taskRow}>
+                      <div
+                        className={`${styles.checkbox} ${
+                          task.completed ? styles.checked : ""
+                        }`}
+                        onClick={() => toggleTask(task)}
+                        role="checkbox"
+                        aria-checked={task.completed}
+                      >
+                        {task.completed && (
+                          <svg
+                            className={styles.checkIcon}
+                            aria-hidden="true"
+                            width="14"
+                            height="12"
+                          >
+                            <use href="/sprite.svg#flag" />
+                          </svg>
+                        )}
+                      </div>
+
+                      <div className={styles.taskContent}>
+                        <span className={styles.date}>
+                          {formatDate(task.date)}
+                        </span>
+                        <span
+                          className={
+                            task.completed
+                              ? styles.completedTitle
+                              : styles.taskTitle
+                          }
                         >
-                          <use href="/sprite.svg#flag" />
-                        </svg>
-                      )}
-                    </div>
+                          {task.title}
+                        </span>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              )}
 
-                    <div className={styles.taskContent}>
-                      <span className={styles.date}>
-                        {formatDate(task.date)}
-                      </span>
-                      <span
-                        className={
-                          task.completed
-                            ? styles.completedTitle
-                            : styles.taskTitle
-                        }
+              {upcomingTasks.length > 0 && (
+                <div className={styles.group}>
+                  <h4 className={styles.groupTitle}>
+                    Завдання на найближчий тиждень:
+                  </h4>
+                  {upcomingTasks.map((task) => (
+                    <label key={task._id} className={styles.taskRow}>
+                      <div
+                        className={`${styles.checkbox} ${
+                          task.completed ? styles.checked : ""
+                        }`}
+                        onClick={() => toggleTask(task)}
+                        role="checkbox"
+                        aria-checked={task.completed}
                       >
-                        {task.title}
-                      </span>
-                    </div>
-                  </label>
-                ))}
-              </div>
-            )}
+                        {task.completed && (
+                          <svg className={styles.checkIcon} aria-hidden="true">
+                            <use href="/sprite.svg#flag" />
+                          </svg>
+                        )}
+                      </div>
 
-            {upcomingTasks.length > 0 && (
-              <div className={styles.group}>
-                <h4 className={styles.groupTitle}>
-                  Завдання на найближчий тиждень:
-                </h4>
-                {upcomingTasks.map((task) => (
-                  <label key={task._id} className={styles.taskRow}>
-                    <div
-                      className={`${styles.checkbox} ${
-                        task.completed ? styles.checked : ""
-                      }`}
-                      onClick={() => toggleTask(task)}
-                      role="checkbox"
-                      aria-checked={task.completed}
-                    >
-                      {task.completed && (
-                        <svg className={styles.checkIcon} aria-hidden="true">
-                          <use href="/sprite.svg#flag" />
-                        </svg>
-                      )}
-                    </div>
+                      <div className={styles.taskContent}>
+                        <span className={styles.date}>
+                          {formatDate(task.date)}
+                        </span>
+                        <span
+                          className={
+                            task.completed
+                              ? styles.completedTitle
+                              : styles.taskTitle
+                          }
+                        >
+                          {task.title}
+                        </span>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
-                    <div className={styles.taskContent}>
-                      <span className={styles.date}>
-                        {formatDate(task.date)}
-                      </span>
-                      <span
-                        className={
-                          task.completed
-                            ? styles.completedTitle
-                            : styles.taskTitle
-                        }
-                      >
-                        {task.title}
-                      </span>
-                    </div>
-                  </label>
-                ))}
-              </div>
-            )}
-          </div>
+        {tasks.length === 0 && !isLoadingList && (
+          <button
+            className={styles.bottomCreateBtn}
+            onClick={handleCreateNewTask}
+          >
+            Створити завдання
+          </button>
         )}
-      </div>
+      </section>
 
-      {tasks.length === 0 && !isLoadingList && (
-        <button
-          className={styles.bottomCreateBtn}
-          onClick={handleCreateNewTask}
-        >
-          Створити завдання
-        </button>
+      {isModalOpen && (
+        <AddTaskModal
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleModalSubmit}
+        />
       )}
-    </section>
+    </>
   );
 }
