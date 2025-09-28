@@ -6,9 +6,9 @@ import styles from "./ProfileAvatar.module.css";
 import { User } from "@/types/user";
 import { updateMe, getMe } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
+import { toast } from 'react-hot-toast';
 
 function getPhotoUrl(user: User): string | undefined {
-  // Якщо бекенд віддає photoUrl або photoURL — обробляємо без any
   if ("photoUrl" in user && user.photoUrl) return user.photoUrl;
   if ("photoURL" in user && user.photoURL) return user.photoURL;
   return undefined;
@@ -36,10 +36,10 @@ export default function ProfileAvatar() {
 
       setUser(updatedUser);
 
-      console.log("✅ Аватар оновлений"); //IZITOAST
+      toast.success("Аватар оновлений");
     }
       catch (error) {
-        console.error("Помилка завантаження фото:", error); //IZITOAST
+        toast.error("Помилка завантаження фото:");
       }
   }
   

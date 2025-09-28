@@ -12,6 +12,7 @@ import Select, { SingleValue } from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useId } from "react";
+import toast from "react-hot-toast";
 
 const genderOptions = [
   { value: "boy", label: "Хлопчик" },
@@ -78,8 +79,11 @@ export default function ProfileEditForm({ user }: { user: User }) {
     onSuccess: async () => {
       const fullUser = await getMe();
       setUser(fullUser);
+      toast.success('Профіль успішно оновлено!')
     },
-    // onError:()=>{}
+    onError: () => {
+      toast.error('Сталася помилка. Будь ласка, спробуйте пізніше.');
+    }
   });
 
   const parseDueDate = (str?: string | null): Date | null => {
@@ -191,6 +195,7 @@ export default function ProfileEditForm({ user }: { user: User }) {
                 {({ field, form, meta }: FieldProps<Date | null>) => (
                   <DatePicker
                     id="dueDate"
+                    calendarClassName='calendar'
                     selected={field.value}
                     onChange={(date: Date | null) =>
                       form.setFieldValue(field.name, date)
