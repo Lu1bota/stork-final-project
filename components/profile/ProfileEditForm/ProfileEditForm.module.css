@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-bottom: 24px;
 }
 
 .formGroup {
@@ -18,9 +19,7 @@
   color: var(--color-scheme-text);
 }
 
-.input,
-.select,
-.date {
+.input {
   max-width: 335px;
   padding: 8px 12px;
 
@@ -42,45 +41,8 @@
   height: 37px;
 }
 
-.select {
-  height: 40px;
-  padding-right: 12px;
-
-  /* убираем системную стрелку */
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-  
-    /* добавляем свою */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23999999' d='M5 7l5 5 5-5z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 18px;
-    transition: all 0.2s ease;
-}
-
-.select:focus{
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23999999' transform='rotate(180 10 10)' d='M5 7l5 5 5-5z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 18px;
-}
-
-.select option {
-  font-size: 16px;
-  color: var(--color-neutral-darkest);
-}
-
-.date {
-  height: 48px;
-}
-
 .input:focus,
-.input:hover,
-.select:focus,
-.select:hover,
-.date:focus,
-.date:hover {
+.input:hover {
   border: 2px solid var(--color-scheme-accent);
 }
 
@@ -126,10 +88,135 @@
   background-color: var(--color-scheme-background);
 }
 
+:global(.select) {
+  max-width: 335px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-neutral);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+:global(.select) :global(.react-select__control) {
+  min-height: 40px;
+  border: 2px solid var(--opacity-transparent);
+  border-radius: 12px;
+  background-color: var(--opacity-neutral-darkest-5);
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+:global(.select) :global(.react-select__control:hover),
+:global(.select) :global(.react-select__control--is-focused) {
+  border-color: var(--color-scheme-accent);
+}
+
+:global(.selectError) :global(.react-select__control) {
+  border-color: var(--color-red) !important;
+  box-shadow: 0 0 0 1px var(--color-red) !important;
+}
+
+:global(.select) :global(.react-select__single-value),
+:global(.select) :global(.react-select__input),
+:global(.select) :global(.react-select__placeholder) {
+  color: var(--color-neutral);
+  opacity: 1;
+  font-size: 14px;
+}
+
+:global(.select) :global(.react-select__control--is-focused) {
+  border-color: var(--color-scheme-accent);
+  box-shadow: none;
+}
+
+:global(.select) :global(.react-select__menu) {
+  margin-top: 6px;
+  background: var(--color-neutral-lightest);
+  border: 1px solid var(--opacity-transparent);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  z-index: 30;
+}
+
+:global(.select) :global(.react-select__option) {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--color-scheme-text);
+  transition: background 0.2s ease;
+}
+
+:global(.select) :global(.react-select__option--is-focused) {
+  background: var(--opacity-neutral-darkest-5);
+}
+
+:global(.select) :global(.react-select__option--is-selected) {
+  background: var(--color-scheme-accent);
+  color: var(--color-neutral-darkest);
+}
+
+/* disabled */
+:global(.select) :global(.react-select__control--is-disabled) {
+  background: var(--opacity-neutral-darkest-5);
+  cursor: not-allowed;
+}
+
+.date {
+  width: 100%;
+  max-width: 335px;
+  height: 48px;
+  padding: 8px 12px;
+
+  border: 2px solid var(--opacity-transparent);
+  border-radius: 12px;
+  background-color: var(--opacity-neutral-darkest-5);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-neutral);
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  display: block;
+}
+
+/* Колір плейсхолдера дати */
+.date::placeholder {
+  color: var(--color-neutral);
+  opacity: 1;
+}
+
+/* Фокус і hover */
+.date:focus,
+.date:hover {
+  border: 2px solid var(--color-scheme-accent);
+  box-shadow: none;
+}
+
+/* Для readonly/disabled інпуту дати (стандарт react-datepicker) */
+.date[readonly] {
+  cursor: pointer;
+  background-color: var(--opacity-neutral-darkest-5);
+  color: var(--color-neutral);
+}
+
+/* Підсилити тінь і border при помилці */
+.inputError {
+  border-color: var(--color-red) !important;
+  box-shadow: 0 0 0 1px var(--color-red) !important;
+  background-color: var(--opacity-neutral-darkest-5);
+}
+
 @media screen and (min-width: 768px) {
   .input,
-  .select,
-  .date {
+  .date,
+  :global(.select){
     max-width: 704px;
   }
 
@@ -153,8 +240,13 @@
   }
 
   .input,
-  .select,
   .date {
     font-size: 16px;
   }
+
+    :global(.select) :global(.react-select__single-value),
+    :global(.select) :global(.react-select__input),
+    :global(.select) :global(.react-select__placeholder) {
+      font-size: 16px;
+    }
 }
