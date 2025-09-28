@@ -7,12 +7,14 @@ import css from "./AppLayout.module.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Header from "../Header/Header";
 import GreetingBlock from "../dashboard/GreetingBlock/GreetingBlock";
+import { usePathname } from "next/navigation.js";
 
 interface AppLayoutProps {
   children: React.ReactNode;
 }
 
 export default function AppLayout({ children }: AppLayoutProps) {
+  const pathname = usePathname();
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
@@ -26,6 +28,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const hideGreeting = pathname === '/profile';
 
   return (
     <Container className={css.support}>
@@ -41,7 +45,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       <div className={css.content}>
         <div className={css.crumb}>
           <Breadcrumbs />
-          <GreetingBlock />
+          {!hideGreeting && <GreetingBlock />}
         </div>
 
         <div className={css.children}>{children}</div>
