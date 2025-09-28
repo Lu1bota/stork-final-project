@@ -1,0 +1,74 @@
+.wrap {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 560px;
+
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.msg {
+    font-size: 16px;
+    line-height: 1.45;
+}
+
+/* Стани картки */
+.pending {
+    border-color: rgba(99, 102, 241, 0.35);
+}
+
+/* індиго */
+.ok {
+    border-color: rgba(16, 185, 129, 0.35);
+}
+
+/* зелений */
+.error {
+    border-color: rgba(244, 63, 94, 0.45);
+}
+
+/* рожево-червоний */
+
+/* Спінер */
+.spinner {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-left-color: currentColor;
+    animation: spin 0.9s linear infinite;
+    opacity: 0.85;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Light/Dark адаптація */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: #111318;
+        border-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    }
+
+    .msg {
+        color: #e7e9ee;
+    }
+}
