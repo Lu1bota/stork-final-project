@@ -7,19 +7,42 @@ type Props = {
   className?: string;
   label?: string;
   onError?: (err: unknown) => void;
-  state?: string;                    
-  callbackPathOverride?: string;     
+  state?: string;
+  callbackPathOverride?: string;
 };
 
 function siteOrigin(): string {
-  return typeof window !== 'undefined' ? window.location.origin : (process.env.NEXT_PUBLIC_SITE_URL ?? '');
+  return typeof window !== 'undefined'
+    ? window.location.origin
+    : (process.env.NEXT_PUBLIC_SITE_URL ?? '');
 }
-
 function callbackPath(): string {
-  return process.env.NEXT_PUBLIC_OAUTH_CALLBACK_PATH || '/auth/confirm-google-auth';
+  return process.env.NEXT_PUBLIC_OAUTH_CALLBACK_PATH || '/confirm-google-auth';
 }
 
-export default function GoogleAuthBtn({ className, label = 'Зареєструватись через Google', onError, state, callbackPathOverride }: Props) {
+/* ---------- type guards ---------- */
+type BodyDataShape = { data?: { url?: unknown } };
+type BodyUrlShape  = { url?: unknown };
+
+function hasDataShape(v: unknown): v is BodyDataShape {
+  return !!v && typeof v === 'object' && 'data' in (v as Record<string, unknown>);
+}
+function hasUrlShape(v: unknown): v is BodyUrlShape {
+  return !!v && typeof v === 'object' && 'url' in (v as Record<string, unknown>);
+}
+function extractAuthUrl(body: unknown): string | undefined {
+  if (hasDataShape(body) && body.data && typeof body.data.url === 'string') return body.data.url;
+  if (hasUrlShape(body) && typeof body.url === 'string') return body.url;
+  return undefined;
+}
+
+export default function GoogleAuthBtn({
+  className,
+  label = 'Зареєструватись через Google',
+  onError,
+  state,
+  callbackPathOverride,
+}: Props) {
   const mutation = useMutation<string, Error, { redirectUri: string; state?: string }>({
     mutationKey: ['get-oauth-url'],
     mutationFn: async ({ redirectUri, state }) => {
@@ -37,14 +60,9 @@ export default function GoogleAuthBtn({ className, label = 'Зареєструв
       }
 
       const body: unknown = await res.json().catch(() => ({}));
-      const authUrl =
-        typeof (body as { data?: { url?: unknown } }).data?.url === 'string'
-          ? (body as { data: { url: string } }).data.url
-          : typeof (body as { url?: unknown }).url === 'string'
-          ? (body as { url: string }).url
-          : null;
-
+      const authUrl = extractAuthUrl(body);
       if (!authUrl) throw new Error('Не отримав URL авторизації');
+
       return authUrl;
     },
     onSuccess: (authUrl) => window.location.assign(authUrl),
@@ -55,14 +73,10 @@ export default function GoogleAuthBtn({ className, label = 'Зареєструв
   const cbPath = callbackPathOverride || callbackPath();
   const redirectUri = `${site}${cbPath}`;
 
-  const handleClick = () => {
-    mutation.mutate({ redirectUri, state });
-  };
-
   return (
     <button
       type="button"
-      onClick={handleClick}
+      onClick={() => mutation.mutate({ redirectUri, state })}
       disabled={mutation.isPending}
       aria-busy={mutation.isPending}
       className={className ? `${styles.btn} ${className}` : styles.btn}
