@@ -34,14 +34,16 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className={css.content}>
           <div className={css.top}>
             <div className={css.headerRow}>
-              <Image
-                className={css.logoImg}
-                src="/logo/Frame_269.png"
-                alt="Лелека"
-                width={105}
-                height={45}
-                priority
-              />
+              <Link href='/' aria-label="Go to Мій день" onClick={onClose}>
+                <Image
+                  className={css.logoImg}
+                  src="/logo/Frame_269.png"
+                  alt="Лелека"
+                  width={105}
+                  height={45}
+                  priority
+                />
+              </Link>
 
               <button
                 className={css.closeButton}
@@ -78,9 +80,9 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             {isAuth ? (
               <div className={css.userCard}>
                 <div className={css.userInfo}>
-                  {user?.photoUrl ? (
+                  {user?.photoURL ? (
                     <Image
-                      src={user.photoUrl}
+                      src={user.photoURL}
                       alt={user.name || "Аватар користувача"}
                       width={40}
                       height={40}
