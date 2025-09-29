@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import { useAuthStore } from '@/lib/store/authStore';
 import { User } from '@/types/user';
@@ -10,35 +10,31 @@ import css from './ConfirmGoogleAuthClient.module.css';
 type Props = { code: string | null; error: string | null; successRedirect?: string };
 type ConfirmResponse = { data?: { user?: User } };
 
-function siteOrigin(): string {
-  return typeof window !== 'undefined'
-    ? window.location.origin
-    : (process.env.NEXT_PUBLIC_SITE_URL ?? '');
-}
 function msgFrom(e: unknown): string {
   if (e instanceof Error) return e.message;
   if (typeof e === 'string') return e;
   try { return JSON.stringify(e); } catch { return String(e); }
 }
 
-export default function ConfirmGoogleAuthClient({ code, error, successRedirect = '/profile/edit' }: Props) {
+export default function ConfirmGoogleAuthClient({
+  code,
+  error,
+  successRedirect = '/profile/edit',
+}: Props) {
   const router = useRouter();
-  const pathname = usePathname(); // має бути /confirm-google-auth
   const setUser = useAuthStore(s => s.setUser);
   const [msg, setMsg] = useState('Завершую авторизацію…');
   const base = process.env.NEXT_PUBLIC_API_URL;
 
-  const redirectUri = useMemo(() => `${siteOrigin()}${pathname}`, [pathname]);
-
-  const confirmMutation = useMutation<ConfirmResponse, Error, { code: string; redirectUri: string }>({
+  const confirmMutation = useMutation<ConfirmResponse, Error, { code: string }>({
     mutationKey: ['confirm-oauth'],
-    mutationFn: async ({ code, redirectUri }) => {
+    mutationFn: async ({ code }) => {
       if (!base) throw new Error('NEXT_PUBLIC_API_URL не задано');
       const res = await fetch(`${base}/api/confirm-oauth`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ code, redirectUri }),
+        credentials: 'include', // обовʼязково, щоб сервер міг поставити HttpOnly refresh cookie
+        body: JSON.stringify({ code }), // <-- ТІЛЬКИ code
       });
       if (!res.ok) {
         const text = await res.text().catch(() => '');
@@ -59,15 +55,13 @@ export default function ConfirmGoogleAuthClient({ code, error, successRedirect =
     if (error) { setMsg(`Google повернув помилку: ${error}`); return; }
     if (!base) { setMsg('NEXT_PUBLIC_API_URL не задано'); return; }
     if (!code) { setMsg('У callback-URL відсутній параметр ?code'); return; }
-    confirmMutation.mutate({ code, redirectUri });
+    confirmMutation.mutate({ code });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [code, error, redirectUri, base]);
+  }, [code, error, base]);
 
-  const stateClass = confirmMutation.isPending
-    ? css.pending
-    : confirmMutation.isError || !!error
-    ? css.error
-    : css.ok;
+  const stateClass =
+    confirmMutation.isPending ? css.pending :
+    confirmMutation.isError || !!error ? css.error : css.ok;
 
   return (
     <section className={css.wrap} aria-live="polite" role="status">
