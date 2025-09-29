@@ -3,10 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import css from "./Sidebar.module.css";
 import { useAuthStore } from "@/lib/store/authStore";
-// import ConfirmationModal from "@/components/Modal/ConfirmationModal";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import { logout } from "@/lib/api/clientApi";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -18,12 +19,18 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { isAuthenticated: isAuth, user } = useAuthStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const router = useRouter();
   const nav = [
     { label: "Мій день", href: "/", icon: "today" },
     { label: "Подорож", href: "/journey", icon: "conversion_path" },
     { label: "Щоденник", href: "/diary", icon: "book" },
     { label: "Профіль", href: "/profile", icon: "account_circle" },
   ];
+
+  const handleLogout = () => {
+    logout();
+    router.push("/auth/login");
+  }
 
   const navHref = (href: string) => (isAuth ? href : "/auth/register");
 
@@ -111,13 +118,15 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   </svg>
                 </button>
 
-                {/* Нужна модалка
                 {isModalOpen && (
                   <ConfirmationModal
-                    title="Вийти з системи?"
+                    title="Ви точно хочете вийти?"
+                    confirmButtonText="Так"
+                    cancelButtonText="Ні"
+                    onConfirm={handleLogout}
                     onCancel={() => setIsModalOpen(false)}
                   />
-                )} */}
+                )}
               </div>
             ) : (
               <div className={css.authLinks}>
