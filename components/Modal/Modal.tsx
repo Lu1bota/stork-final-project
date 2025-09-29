@@ -7,7 +7,7 @@ import clsx from "clsx";
 
 interface ModalProps {
   children: React.ReactNode;
-  title: string;
+  title?: string;
   onClose: () => void;
   className?: string;
 }
@@ -83,5 +83,3 @@ export default function Modal({
     document.body
   );
 }
-
-
