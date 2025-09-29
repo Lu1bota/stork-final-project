@@ -59,22 +59,11 @@ export default function Breadcrumbs({
             </span>
           </span>
         </li>
-        <li className={styles.item}>
-          {segments.length === 0 ? (
+        {segments.length === 0 && (
+          <li className={styles.item}>
             <span className={`${styles.link} ${styles.active}`} aria-current="page">Мій день</span>
-          ) : (
-            <>
-              <Link href="/" className={styles.link}>Мій день</Link>
-              <span className={styles.sep}>
-                <span className={styles.sepBox} aria-hidden>
-                  <svg className={styles.sepGlyph} viewBox="0 0 24 24">
-                    <use className={styles.sepUse} href="/sprite.svg#chevron_right" />
-                  </svg>
-                </span>
-              </span>
-            </>
-          )}
-        </li>
+          </li>
+        )}
         {segments.map((seg, idx) => {
           hrefAccumulator += `/${seg}`;
           const isLast = idx === segments.length - 1;

@@ -169,7 +169,9 @@ export default function ProfileEditForm() {
                         }
                         onChange={(
                           opt: SingleValue<{ value: string; label: string }>
-                        ) => form.setFieldValue(field.name, opt?.value ?? "")}
+                        ) => {
+                          form.setFieldValue(field.name, opt?.value ?? "");
+                        }}
                         onBlur={() => form.setFieldTouched(field.name, true)}
                         placeholder="Оберіть стать"
                         isSearchable={false}
