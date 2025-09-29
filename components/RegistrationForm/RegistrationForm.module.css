@@ -96,12 +96,12 @@
   border-radius: 100px;
   padding: 10px 24px;
   width: 335px;
-  height: 42px;
+  height: 41px;
   background-color: var(--color-scheme-foreground-alt);
 
-  font-weight: 500;
+  font-weight: 400;
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--color-scheme-text);
   font-family: var(--font-family);
 }
