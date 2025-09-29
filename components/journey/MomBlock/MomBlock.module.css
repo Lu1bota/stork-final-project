@@ -1,0 +1,191 @@
+.mom_container {
+  width: 100%;
+  max-width: 311px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 0 auto;
+}
+
+.mom_tag_tip_container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mom_card {
+  background: var(--color-pastel-pink-lighter);
+  border-radius: 32px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 311px;
+  margin: 0 auto;
+}
+
+.mom_card_feelings {
+  background: var(--color-pastel-pink-lighter);
+  border-radius: 32px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 311px;
+  margin: 0 auto;
+}
+
+.mom_cardTitle {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: var(--color-scheme-text);
+}
+
+.mom_tags_container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 8px;
+  width: 100%;
+}
+
+.mom_tag {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0);
+  border-radius: 100px;
+  padding: 4px 10px;
+  background: var(--opacity-neutral-darkest-5);
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-scheme-text);
+}
+
+.mom_cardText {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-scheme-text);
+}
+
+.mom_tip {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.mom_tipTitle {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-scheme-text);
+}
+
+.mom_tipText {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-scheme-text);
+}
+
+.mom_tipIcon {
+  width: 24px;
+  height: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .mom_container {
+    max-width: 704px;
+  }
+
+  .mom_card {
+    width: 100%;
+    max-width: 704px;
+  }
+
+  .mom_card_feelings {
+    width: 100%;
+    max-width: 704px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .mom_container {
+    max-width: 1440px;
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .mom_card_feelings {
+    width: 100%;
+    max-width: 704px;
+  }
+
+  .mom_card {
+    width: 100%;
+    max-width: 704px;
+    max-height: 322px;
+    overflow-y: auto;
+  }
+
+  .mom_card::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .mom_card::-webkit-scrollbar-thumb {
+    background: #ffcbd3;
+    border-radius: 4px;
+    width: 10px;
+    height: 56px;
+  }
+
+  .mom_card::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    width: 6px;
+    margin: 12px 0;
+  }
+
+  .mom_card::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  .mom_cardTitle {
+    font-size: 20px;
+  }
+
+  .mom_tag {
+    font-size: 14px;
+  }
+
+  .mom_cardText {
+    font-size: 16px;
+  }
+
+  .mom_tipTitle {
+    font-size: 16px;
+  }
+
+  .mom_tipText {
+    font-size: 16px;
+  }
+}

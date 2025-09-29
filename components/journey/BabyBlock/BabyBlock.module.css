@@ -1,155 +1,145 @@
 /* MOBILE */
 
 .info_wrapper {
-    border: 0px solid var(--color-scheme-border);
-    border-radius: 32px;
-    width: 90vw;
-    max-width: 335px;
-    padding: 24px;
-    background: var(--color-scheme-foreground);
+  border: 0px solid var(--color-scheme-border);
+  border-radius: 32px;
+  width: 90vw;
+  max-width: 335px;
+  padding: 24px;
+  background: var(--color-scheme-foreground);
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    font-family: var(--font-lato);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 150%;
-    color: var(--color-scheme-text);
+  font-family: var(--font-lato);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--color-scheme-text);
 }
 
 .comparison {
-    height: 416px;
-    min-width: 232px;
-    max-width: 287px;
-    margin-bottom: 32px;
+  height: 416px;
+  width: 100%;
+  margin-bottom: 32px;
 
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 }
 
 .comparison_img {
-    display: block;
-    width: 100%;
-    object-fit: cover;
-
-    border: 1px solid var(--color-scheme-border);
-    border-radius: 24px;
-    overflow: hidden;
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  border: 1px solid var(--color-scheme-border);
+  border-radius: 24px;
+  overflow: hidden;
 }
 
 .comparison_descr {
-    align-self: flex-start;
+  align-self: flex-start;
 }
 
 .detailed_descr_fact_box {
-    min-width: 232px;
-    max-width: 287px;
-    margin-bottom: 24px;
+  width: 100%;
+  max-width: 287px;
+  margin-bottom: 24px;
 }
 
 .detailed_descr_wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-
-    margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-
-
 .fact_box_wrapper {
-    padding: 12px;
-    border-radius: 12px;
-    background: var(--color-scheme-foreground-alt);
-
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--color-scheme-foreground-alt);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .title_wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
 }
 
 .icon_wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 24px;
-    height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
 }
 
 .title {
-    font-weight: 700;
+  font-weight: 700;
 }
-
 
 /* TABLET */
 
 @media only screen and (min-width: 768px) {
-    .info_wrapper {
-        max-width: 704px;
-    }
+  .info_wrapper {
+    max-width: 704px;
+  }
 
-    .comparison {
-        min-width: 656px;
-    }
+  .comparison {
+    min-width: 656px;
+  }
 
-    .detailed_descr_fact_box {
-        min-width: 656px;
-    }
-
+  .detailed_descr_fact_box {
+    min-width: 656px;
+  }
 }
-
 
 /* DESKTOP */
 
 @media only screen and (min-width: 1440px) {
-    .info_wrapper {
-        max-width: 1064px;
-        margin-top: 0;
-        margin-right: auto;
-        margin-bottom: 73px;
-        margin-left: auto;
+  .info_wrapper {
+    max-width: 1064px;
+    margin-top: 0;
+    margin-right: auto;
+    margin-bottom: 73px;
+    margin-left: auto;
 
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 32px;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
 
-        font-size: 16px;
-    }
+    font-size: 16px;
+  }
 
-    .comparison {
-        min-width: 461px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+  .comparison {
+    min-width: 461px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .detailed_descr_fact_box {
-        min-width: 523px;
-    }
+  .detailed_descr_fact_box {
+    min-width: 523px;
+  }
 
-    .detailed_descr_wrapper {
-        margin-bottom: 16px;
-    }
+  .detailed_descr_wrapper {
+    margin-bottom: 16px;
+  }
 
-    .fact_box_wrapper {
-        max-width: 523px;
+  .fact_box_wrapper {
+    max-width: 523px;
 
-        font-size: 16px;
-    }
+    font-size: 16px;
+  }
 
-    .fact_of_the_week_text_wrapper {
-        font-size: 16px;
-    }
+  .fact_of_the_week_text_wrapper {
+    font-size: 16px;
+  }
 }

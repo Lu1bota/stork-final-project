@@ -1,47 +1,124 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useEffect, useRef, useState } from "react";
 import css from "./WeekSelector.module.css";
 import { useRouter } from "next/navigation";
+import { getPrivateWeekInfo, getPublicWeekInfo } from "@/lib/api/clientApi";
 
 interface WeekSelectorProps {
-  currentWeek: number; // поточний тиждень вагітності
-  totalWeeks?: number; // загальна кількість тижнів
-  onWeekChange: (week: number) => void; // колбек для оновлення JourneyDetails
+  activeWeek: number;
+  totalWeeks?: number;
 }
 
 export default function WeekSelector({
-  currentWeek,
+  activeWeek,
   totalWeeks = 42,
-  onWeekChange,
 }: WeekSelectorProps) {
   const router = useRouter();
-  const [selectedWeek, setSelectedWeek] = useState(currentWeek);
+  const [selectedWeek, setSelectedWeek] = useState(activeWeek);
+  const [maxAvailableWeek, setMaxAvailableWeek] = useState<number>(1);
 
+  const activeRef = useRef<HTMLLIElement | null>(null);
+  const itemsRef = useRef<HTMLUListElement | null>(null);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  // завантажуємо максимальний доступний тиждень
   useEffect(() => {
-    setSelectedWeek(currentWeek);
-  }, [currentWeek]);
+    async function fetchWeek() {
+      try {
+        const weekInfo = await getPrivateWeekInfo();
+        setMaxAvailableWeek(weekInfo.week);
+      } catch {
+        const weekInfo = await getPublicWeekInfo();
+        setMaxAvailableWeek(weekInfo.week);
+      }
+    }
+    fetchWeek();
+  }, []);
+
+  // оновлюємо активний тиждень
+  useEffect(() => {
+    if (activeWeek !== undefined) {
+      setSelectedWeek(activeWeek);
+    }
+  }, [activeWeek]);
+
+  // скролимо до активного елементу
+  useEffect(() => {
+    if (activeRef.current) {
+      activeRef.current.scrollIntoView({
+        behavior: "auto",
+        inline: "center",
+        block: "nearest",
+      });
+    }
+  }, [selectedWeek]);
 
   const handleWeekClick = (week: number) => {
-    if (week > currentWeek) return;
-
+    if (week > maxAvailableWeek) return;
     setSelectedWeek(week);
-    onWeekChange(week);
-    router.push(`journey/${week}`);
+    router.push(`/journey/${week}`);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLUListElement>) => {
+    if (!itemsRef.current) return;
+    setIsMouseDown(true);
+    setStartX(e.pageX - itemsRef.current.offsetLeft);
+    setScrollLeft(itemsRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => setIsMouseDown(false);
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+    setTimeout(() => setIsDragging(false), 50);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLUListElement>) => {
+    if (!isMouseDown || !itemsRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - itemsRef.current.offsetLeft;
+    const walk = (x - startX) * 1;
+    itemsRef.current.scrollLeft = scrollLeft - walk;
+
+    if (Math.abs(x - startX) > 5) {
+      setIsDragging(true);
+    }
   };
 
   return (
     <div className={css.weeks_wrapper}>
-      <ul className={css.weeks_list}>
+      <ul
+        className={css.weeks_list}
+        ref={itemsRef}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+      >
         {Array.from({ length: totalWeeks }, (_, i) => {
           const week = i + 1;
           const isActive = week === selectedWeek;
-          const isDisabled = week > currentWeek;
+          const isDisabled = week > maxAvailableWeek;
+
           return (
-            <li key={week} className={css.weeks_list_item}>
+            <li
+              key={week}
+              className={css.weeks_list_item}
+              ref={isActive ? activeRef : null}
+            >
               <button
                 disabled={isDisabled}
-                className={`${css.item_button} ${isActive ? css.active_butt : ""}  ${isDisabled ? css.disabled_butt : ""}`}
-                onClick={() => handleWeekClick(week)}
+                className={`${css.item_button} ${
+                  isActive ? css.active_butt : ""
+                } ${isDisabled ? css.disabled_butt : ""}`}
+                onClick={() => {
+                  if (isDragging) return;
+                  handleWeekClick(week);
+                }}
               >
                 <span className={css.item_title_number}>{week}</span>
                 <p className={css.item_title}>Тиждень</p>
