@@ -1,33 +1,30 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/lib/store/authStore";
 import styles from "./FeelingCheckCard.module.css";
+import { AddDiaryEntryModal } from "@/components/Diary/AddDiaryEntryModal/AddDiaryEntryModal";
 
 type Props = {
-  onOpenAddDiaryEntryModal?: () => void;
+  // onOpenAddDiaryEntryModal?: () => void;
   className?: string;
 };
 
-export default function FeelingCheckCard({
-  onOpenAddDiaryEntryModal,
-  className = "",
-}: Props) {
+export default function FeelingCheckCard({ className = "" }: Props) {
+  const [diaryEntryModal, setDiaryEntryModal] = useState(false);
   const router = useRouter();
   const { isAuthenticated } = useAuthStore();
+
+  const openModal = () => setDiaryEntryModal(true);
+  const closeModal = () => setDiaryEntryModal(false);
 
   const handleMakeEntry = () => {
     if (!isAuthenticated) {
       router.push("/auth/register");
       return;
     }
-
-    if (onOpenAddDiaryEntryModal) {
-      onOpenAddDiaryEntryModal();
-    } else {
-      console.info("Open AddDiaryEntryModal (not implemented)");
-    }
+    openModal();
   };
 
   return (
@@ -48,6 +45,8 @@ export default function FeelingCheckCard({
           </button>
         </div>
       </div>
+
+      {diaryEntryModal && <AddDiaryEntryModal onClose={closeModal} />}
     </section>
   );
 }
