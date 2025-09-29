@@ -1,0 +1,107 @@
+.profileWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+.avatarImage {
+  display: flex;
+  margin: 0 auto;
+  border-radius: 100%;
+  margin-bottom: 12px;
+}
+
+.infoPhotoUpload {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.userInfo {
+  text-align: center;
+  color: var(--color-scheme-text);
+}
+
+.userName{
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.userEmail{
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.uploadButton{
+  text-align: center;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-scheme-text);
+
+  border-bottom: 4px solid var(--opacity-neutral-darkest-15);
+  border-radius: 100px;
+  padding: 8px 20px;
+  max-width: 335px;
+  height: 38px;
+  background-color: var(--opacity-neutral-darkest-5);
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.uploadButton:hover,
+.uploadButton:focus {
+  border-bottom: 4px solid var(--color-scheme-border);
+  background-color: var(--color-scheme-background);
+}
+
+.hiddenInput {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .profileWrapper {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .avatarImage {
+    margin: 0;
+    border-radius: 100%;
+    margin-bottom: 12px;
+  }
+
+  .userInfo{
+    text-align: left;
+  }
+
+  .uploadButton{
+    width: 218px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .profileWrapper {
+    padding: 0 32px;
+  }
+
+  .userName{
+    font-size: 24px;
+  }
+
+  .userEmail{
+    font-size: 16px;
+  }
+
+  .uploadButton{
+    font-size: 16px;
+    height: 42px;
+  }
+}

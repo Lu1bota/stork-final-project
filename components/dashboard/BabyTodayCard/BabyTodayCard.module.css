@@ -1,0 +1,131 @@
+/* components/dashboard/BabyTodayCard.module.css */
+.card {
+  background: var(--color-scheme-foreground);
+  border-radius: 32px;
+  padding: 24px;
+  box-sizing: border-box;
+  color: var(--color-scheme-text);
+  font-family: var(--font-family);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 335px;
+  height: auto;
+}
+
+.header {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 140%;
+  letter-spacing: 0.01em;
+  color: var(--color-scheme-text);
+  margin: 0 0 16px 0;
+  user-select: none;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.imageWrapper {
+  width: 287px;
+  height: 216px;
+  border: 1px solid var(--color-scheme-border);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detailLabel {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--color-scheme-text);
+}
+
+.detailItem span {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+}
+
+.developmentText {
+  margin-top: 12px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--color-scheme-text);
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .card {
+    width: 704px;
+    height: auto;
+    padding: 24px;
+    overflow-y: auto;
+  }
+
+  .content {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .details {
+    justify-content: center;
+  }
+
+  .imageWrapper {
+    width: 257px;
+    height: 194px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .image {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .developmentText {
+    margin-top: 20px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1440px) {
+  .card {
+    width: 642px;
+    height: 421px;
+    padding: 24px;
+    overflow-y: auto;
+  }
+
+  .imageWrapper {
+    width: 257px;
+    height: 194px;
+  }
+
+  .detailLabel {
+    font-size: 16px;
+  }
+
+  .detailItem span {
+    font-size: 16px;
+  }
+
+  .developmentText {
+    font-size: 16px;
+  }
+}

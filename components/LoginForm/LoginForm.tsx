@@ -8,8 +8,7 @@ import Image from "next/image";
 import { login } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import GoogleAuthBtn from "@/components/auth/GoogleAuthBtn";
-
+import GoogleAuthBtn from "@/components/GoogleAuthBtn/GoogleAuthBtn";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -23,31 +22,31 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function LoginForm() {
-    const router = useRouter();
+  const router = useRouter();
 
   const handleSubmit = async (values: { email: string; password: string }) => {
     try {
       await login(values);
       router.push("/");
     } catch {
-      toast.error("Невірна пошта або пароль"); 
+      toast.error("Невірна пошта або пароль");
     }
   };
 
   return (
     <Container className={css.container}>
-      <Link href="/" className={css.logo}>
-        <Image
-          src="/logo/Frame_269.png"
-          alt="Лелека"
-          width={112}
-          height={48}
-          priority
-          className={css.logoIcon}
-        />
-      </Link>
+      <div className={css.left}>
+        <Link href="/" className={css.logo}>
+          <Image
+            src="/logo/Frame_269.png"
+            alt="Лелека"
+            width={112}
+            height={48}
+            priority
+            className={css.logoIcon}
+          />
+        </Link>
 
-      <div>
         <Formik
           initialValues={{
             email: "",
@@ -112,13 +111,15 @@ export default function LoginForm() {
           )}
         </Formik>
       </div>
-      <Image
-        className={css.img}
-        src="/auth/stork's_eggs.jpg"
-        alt="Stork's eggs illustration"
-        width={720}
-        height={900}
-      />
+      <div className={css.right}>
+        <Image
+          className={css.img}
+          src="/auth/stork's_eggs.jpg"
+          alt="Stork's eggs illustration"
+          width={720}
+          height={900}
+        />
+      </div>
     </Container>
   );
 }

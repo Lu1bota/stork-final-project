@@ -1,0 +1,32 @@
+/* app/Header.module.css */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-scheme-background);
+  height: 68px;
+}
+
+.logo {
+  width: 84px;
+  height: 36px;
+  user-select: none;
+  justify-content: center;
+}
+
+.burgerButton {
+  width: 32px;
+  height: 32px;
+  background: var(--opacity-transparent);
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 1440px) {
+  .header {
+    display: none;
+  }
+}

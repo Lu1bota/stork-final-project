@@ -5,6 +5,7 @@ export interface User {
     gender: 'boy' | 'girl' | 'null';
     dueDate?: string;
     photoUrl?: string;
+    photoURL?: string;
     createdAt?: string;
     updatedAt?: string;
 }

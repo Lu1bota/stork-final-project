@@ -8,7 +8,7 @@ import Image from "next/image";
 import { register } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import GoogleAuthBtn from "@/components/auth/GoogleAuthBtn";
+import GoogleAuthBtn from "@/components/GoogleAuthBtn/GoogleAuthBtn";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().max(32).required("Імʼя є обовʼязковим"),
@@ -31,7 +31,7 @@ export default function RegistrationForm() {
   }) => {
     try {
       await register(values);
-      router.push("/onboarding");
+      router.push("/profile/edit");
     } catch {
       toast.error("Ця пошта вже використовується");
     }
@@ -39,18 +39,18 @@ export default function RegistrationForm() {
 
   return (
     <Container className={css.container}>
-        <Link href="/" className={css.logo}>
-          <Image
-            src="/logo/Frame_269.png"
-            alt="Лелека"
-            width={112}
-            height={48}
-            priority
-            className={css.logoIcon}
-          />
-        </Link>
+      <div className={css.left}>
+      <Link href="/" className={css.logo}>
+        <Image
+          src="/logo/Frame_269.png"
+          alt="Лелека"
+          width={112}
+          height={48}
+          priority
+          className={css.logoIcon}
+        />
+      </Link>
 
-      <div>
         <Formik
           initialValues={{
             name: "",
@@ -143,13 +143,15 @@ export default function RegistrationForm() {
           )}
         </Formik>
       </div>
-      <Image
-        className={css.img}
-        src="/auth/storks_picture.jpg"
-        alt="Stork illustration"
-        width={720}
-        height={900}
-      />
+      <div className={css.right}>
+        <Image
+          className={css.img}
+          src="/auth/storks_picture.jpg"
+          alt="Stork illustration"
+          width={720}
+          height={900}
+        />
+      </div>
     </Container>
   );
 }

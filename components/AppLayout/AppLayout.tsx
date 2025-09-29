@@ -11,11 +11,9 @@ import { usePathname } from "next/navigation.js";
 
 interface AppLayoutProps {
   children: React.ReactNode;
-  showBreadcrumbs?: boolean;
-  breadcrumbsHomeLabel?: React.ReactNode;
 }
 
-export default function AppLayout({ children, showBreadcrumbs = true, breadcrumbsHomeLabel = "Лелека" }: AppLayoutProps) {
+export default function AppLayout({ children }: AppLayoutProps) {
   const pathname = usePathname();
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
@@ -46,7 +44,7 @@ export default function AppLayout({ children, showBreadcrumbs = true, breadcrumb
 
       <div className={css.content}>
         <div className={css.crumb}>
-          {showBreadcrumbs && <Breadcrumbs homeLabel={breadcrumbsHomeLabel} />}
+          <Breadcrumbs />
           {!hideGreeting && <GreetingBlock />}
         </div>
 
