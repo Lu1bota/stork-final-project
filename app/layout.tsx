@@ -4,8 +4,7 @@ import { Lato, Comfortaa } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import AuthProvider from "@/components/AuthProvider/AuthProvider";
-import BreadcrumbsGuard from "@/components/Breadcrumbs/BreadcrumbsGuard";
-import Container from "@/components/Container/Container";
+ 
 
 const fontsLato = Lato({
   variable: "--font-lato",
@@ -36,9 +35,7 @@ export default function RootLayout({
       <body className={`${fontsLato.variable} ${fontsComfortaa.variable}`}>
         <TanStackProvider>
           <AuthProvider>
-            <Container>
-              <BreadcrumbsGuard homeLabel="Лелека" />
-            </Container>
+            
             <main>{children}</main>
             <Toaster position="top-right" toastOptions={{ duration: 2000 }} />
           </AuthProvider>

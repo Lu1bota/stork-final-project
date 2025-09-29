@@ -30,26 +30,16 @@ export default function Breadcrumbs({
       : value.charAt(0).toUpperCase() + value.slice(1);
 
   const translateSegment = (segment: string) => {
-    // Поддержка вариантов из ТЗ (с заглавными) и URL-сегментов (нижний регистр)
-    switch (segment) {
-      case "Profile":
-      case "profile":
-        return "Профіль";
-      case "Diary":
-      case "diary":
-        return "Щоденник";
-      case "Journey":
-      case "journey":
-        return "Подорож";
-      case "My day":
-      case "my-day":
-      case "":
-        return "Мій день";
-      default: {
-        const norm = normalize(segment);
-        return capitalize ? toTitleCase(norm) : norm;
-      }
-    }
+    const key = normalize(segment).trim().toLowerCase();
+    const dict: Record<string, string> = {
+      "profile": "Профіль",
+      "diary": "Щоденник",
+      "journey": "Подорож",
+      "my day": "Мій день",
+      "my-day": "Мій день",
+      "": "Мій день",
+    };
+    return dict[key] ?? (capitalize ? toTitleCase(normalize(segment)) : normalize(segment));
   };
 
   let hrefAccumulator = "";
