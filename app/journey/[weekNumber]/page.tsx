@@ -84,9 +84,10 @@ type Props = {
 
 export default async function JourneyPage({ params }: Props) {
    const { weekNumber } = await params;
-  const selectedWeek = Number(weekNumber) || 1;
+  const selectedWeek = Number(weekNumber);
 
   return (
+    
     <AppLayout>
       <div className={css.journeyContainer}>
         <WeekSelector activeWeek={selectedWeek} />
