@@ -5,13 +5,11 @@ import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import styles from "./Breadcrumbs.module.css";
 
-
 export type BreadcrumbsProps = {
   className?: string;
   capitalize?: boolean;
   homeHref?: string;
   homeLabel?: ReactNode;
-  customLabels?: Record<string, ReactNode>;
 };
 
 export default function Breadcrumbs({
@@ -19,13 +17,30 @@ export default function Breadcrumbs({
   capitalize = true,
   homeHref = "/",
   homeLabel = "Мій день",
-  customLabels = {},
 }: BreadcrumbsProps) {
   const pathname = usePathname();
   const segments = (pathname || "/").split("/").filter(Boolean);
 
-  const makeLabel = (segment: string) =>
-    capitalize ? segment.charAt(0).toUpperCase() + segment.slice(1) : segment;
+  const normalize = (value: string) =>
+    decodeURIComponent(value).replace(/-/g, " ");
+
+  const toTitleCase = (value: string) =>
+    value.length === 0
+      ? value
+      : value.charAt(0).toUpperCase() + value.slice(1);
+
+  const translateSegment = (segment: string) => {
+    const key = normalize(segment).trim().toLowerCase();
+    const dict: Record<string, string> = {
+      "profile": "Профіль",
+      "diary": "Щоденник",
+      "journey": "Подорож",
+      "my day": "Мій день",
+      "my-day": "Мій день",
+      "": "Мій день",
+    };
+    return dict[key] ?? (capitalize ? toTitleCase(normalize(segment)) : normalize(segment));
+  };
 
   let hrefAccumulator = "";
 
@@ -36,36 +51,47 @@ export default function Breadcrumbs({
           <Link href={homeHref} className={`${styles.link} ${styles.home}`}>
             {homeLabel}
           </Link>
-        </li>
-        {segments.length > 0 && (
-          <li className={styles.sepItem}>
-            <span className={styles.sep}>
-              <svg className={styles.sepIcon} viewBox="0 0 24 24" aria-hidden>
-                <path d="M9 6l6 6-6 6" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <span className={styles.sep}>
+            <span className={styles.sepBox} aria-hidden>
+              <svg className={styles.sepGlyph} viewBox="0 0 24 24">
+                <use className={styles.sepUse} href="/sprite.svg#chevron_right" />
               </svg>
             </span>
-          </li>
-        )}
+          </span>
+        </li>
+        <li className={styles.item}>
+          {segments.length === 0 ? (
+            <span className={`${styles.link} ${styles.active}`} aria-current="page">Мій день</span>
+          ) : (
+            <>
+              <Link href="/" className={styles.link}>Мій день</Link>
+              <span className={styles.sep}>
+                <span className={styles.sepBox} aria-hidden>
+                  <svg className={styles.sepGlyph} viewBox="0 0 24 24">
+                    <use className={styles.sepUse} href="/sprite.svg#chevron_right" />
+                  </svg>
+                </span>
+              </span>
+            </>
+          )}
+        </li>
         {segments.map((seg, idx) => {
           hrefAccumulator += `/${seg}`;
           const isLast = idx === segments.length - 1;
-          const label = customLabels[seg] ?? makeLabel(seg); // кастомный label
-
           return (
             <li key={hrefAccumulator} className={styles.item}>
               {isLast ? (
-                <span className={`${styles.link} ${styles.active}`}>{label}</span>
+                <span className={`${styles.link} ${styles.active}`} aria-current="page">{translateSegment(seg)}</span>
               ) : (
                 <Link href={hrefAccumulator} className={styles.link}>
-                  {label}
+                  {translateSegment(seg)}
                 </Link>
               )}
-
               {!isLast && (
-                <span className={styles.sepItem}>
-                  <span className={styles.sep}>
-                    <svg className={styles.sepIcon} viewBox="0 0 24 24" aria-hidden>
-                      <path d="M9 6l6 6-6 6" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <span className={styles.sep}>
+                  <span className={styles.sepBox} aria-hidden>
+                    <svg className={styles.sepGlyph} viewBox="0 0 24 24">
+                      <use className={styles.sepUse} href="/sprite.svg#chevron_right" />
                     </svg>
                   </span>
                 </span>

@@ -64,6 +64,8 @@ export default function RegistrationForm() {
             <Form className={css.form}>
               <h1 className={css.title}>Реєстрація</h1>
 
+              {/* Тематические переключатели удалены */}
+
               <div className={css.fieldGroup}>
                 <label htmlFor="name" className={css.label}>
                   Імʼя*

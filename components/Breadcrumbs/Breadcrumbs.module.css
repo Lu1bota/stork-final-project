@@ -11,6 +11,8 @@
   gap: 12px;
 }
 
+.item { display: inline-flex; align-items: center; }
+
 .container { display: inline-block; }
 .list { min-height: 24px; }  
 
@@ -18,26 +20,43 @@
   font-family: var(--font-lato), system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-weight: 400;
   font-size: 14px; 
-  line-height: 160%;
+  line-height: 24px;
   letter-spacing: 0;
   text-align: center;
-  color: #7f7f7f;
+  color: #000;
   text-decoration: none;
+  min-width: 56px;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
 }
 
-.link:visited { color: #7f7f7f; background: transparent; opacity: 1; }
+.link:visited { color: inherit; background: transparent; opacity: 1; }
 
 .home {
   color: #000; /* Лелека */
+  font-weight: 700;
 }
 
 .home:visited { color: #000; background: transparent; opacity: 1; }
 
 .active { color: #7f7f7f; }
 
-.sepItem { padding: 0; display: inline-flex; }
-.sep { display: inline-flex; align-items: center; justify-content: center; }
-.sepIcon { width: 24px; height: 24px; }
+.sep { display: inline-flex; }
+.sepBox { width: 24px; height: 24px; position: relative; display: inline-flex; align-items: center; justify-content: center; }
+.sepGlyph {
+  position: static;
+  width: 24px;
+  height: 24px;
+  transform: translateY(1px);
+}
+.sepUse {
+  stroke: #000;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
 
 @media (min-width: 768px) {
   .list { gap: 16px; }

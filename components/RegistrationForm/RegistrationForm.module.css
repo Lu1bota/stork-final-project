@@ -22,8 +22,9 @@
   gap: 24px;
   justify-content: center;
   align-items: center;
-    padding-top: 140px;
-
+  height: 100vh;
+  background: var(--theme-bg);
+  color: var(--theme-text);
 }
 
 .fieldGroup {
@@ -92,17 +93,17 @@
 
 .submitBtn {
   border-style: none;
-  border-bottom: 4px solid var(--color-scheme-accent);
+  border-bottom: 4px solid var(--theme-accent);
   border-radius: 100px;
   padding: 10px 24px;
   width: 335px;
   height: 42px;
-  background-color: var(--color-scheme-foreground-alt);
+  background-color: var(--theme-btn-bg);
 
   font-weight: 500;
   font-size: 14px;
   line-height: 1.6;
-  color: var(--color-scheme-text);
+  color: var(--theme-btn-text);
   font-family: var(--font-family);
 }
 
@@ -111,7 +112,7 @@
   transition:
     background-color 0.3s ease,
     transform 0.2s ease;
-  background-color: var(--color-scheme-foreground);
+  background-color: var(--theme-muted);
   border-bottom: 4px solid var(--opacity-neutral-darkest-15);
 }
 
@@ -135,8 +136,8 @@
   font-family: var(--font-family);
 }
 
-.img,
-.right {
+
+.img {
   display: none;
 }
 
@@ -146,12 +147,12 @@
     width: 480px;
   }
 
-  .form {
-    padding-top: 197px;
-  }
-
   .submitBtn {
     width: 480px;
+  }
+
+  .img {
+    display: none;
   }
 }
 
@@ -190,22 +191,11 @@
     line-height: 1.6;
   }
 
-  .form {
-    padding: 0 56px;
-    padding-top: 177px;
-  }
-
-  .left {
-    padding: 0 64px;
-  }
-
-  .right {
-    display: block;
-  }
 
   .img {
     display: block;
     right: 0;
-    object-fit: contain;
+    position: absolute;
+    height: 100vh;
   }
 }
