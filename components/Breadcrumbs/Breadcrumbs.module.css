@@ -34,11 +34,16 @@
 .link:visited { color: inherit; background: transparent; opacity: 1; }
 
 .home {
-  color: #000; /* Лелека */
-  font-weight: 700;
+  /* Стили для "Лелека" по ТЗ */
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--color-scheme-text);
+  font-family: var(--font-family);
 }
 
-.home:visited { color: #000; background: transparent; opacity: 1; }
+.home:visited { color: var(--color-scheme-text); background: transparent; opacity: 1; }
 
 .active { color: #7f7f7f; }
 
