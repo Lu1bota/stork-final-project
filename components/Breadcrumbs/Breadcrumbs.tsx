@@ -30,17 +30,26 @@ export default function Breadcrumbs({
       : value.charAt(0).toUpperCase() + value.slice(1);
 
   const translateSegment = (segment: string) => {
-    const key = normalize(segment).trim().toLowerCase();
-    const dictionary: Record<string, string> = {
-      profile: "Профіль",
-      diary: "Щоденник",
-      journey: "Подорож",
-      auth: "Авторизація",
-      login: "Вхід",
-      register: "Реєстрація",
-    };
-    const translated = dictionary[key] ?? (capitalize ? toTitleCase(normalize(segment)) : normalize(segment));
-    return translated;
+    // Поддержка вариантов из ТЗ (с заглавными) и URL-сегментов (нижний регистр)
+    switch (segment) {
+      case "Profile":
+      case "profile":
+        return "Профіль";
+      case "Diary":
+      case "diary":
+        return "Щоденник";
+      case "Journey":
+      case "journey":
+        return "Подорож";
+      case "My day":
+      case "my-day":
+      case "":
+        return "Мій день";
+      default: {
+        const norm = normalize(segment);
+        return capitalize ? toTitleCase(norm) : norm;
+      }
+    }
   };
 
   let hrefAccumulator = "";
@@ -52,12 +61,28 @@ export default function Breadcrumbs({
           <Link href={homeHref} className={`${styles.link} ${styles.home}`}>
             {homeLabel}
           </Link>
-          {segments.length > 0 && (
-            <span className={styles.sep}>
-              <svg className={styles.sepIcon} viewBox="0 0 24 24" aria-hidden>
-                <path d="M9 6l6 6-6 6" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <span className={styles.sep}>
+            <span className={styles.sepBox} aria-hidden>
+              <svg className={styles.sepGlyph} viewBox="0 0 24 24">
+                <use className={styles.sepUse} href="/sprite.svg#chevron_right" />
               </svg>
             </span>
+          </span>
+        </li>
+        <li className={styles.item}>
+          {segments.length === 0 ? (
+            <span className={`${styles.link} ${styles.active}`} aria-current="page">Мій день</span>
+          ) : (
+            <>
+              <Link href="/" className={styles.link}>Мій день</Link>
+              <span className={styles.sep}>
+                <span className={styles.sepBox} aria-hidden>
+                  <svg className={styles.sepGlyph} viewBox="0 0 24 24">
+                    <use className={styles.sepUse} href="/sprite.svg#chevron_right" />
+                  </svg>
+                </span>
+              </span>
+            </>
           )}
         </li>
         {segments.map((seg, idx) => {
@@ -74,9 +99,11 @@ export default function Breadcrumbs({
               )}
               {!isLast && (
                 <span className={styles.sep}>
-                  <svg className={styles.sepIcon} viewBox="0 0 24 24" aria-hidden>
-                    <path d="M9 6l6 6-6 6" fill="none" stroke="#000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <span className={styles.sepBox} aria-hidden>
+                    <svg className={styles.sepGlyph} viewBox="0 0 24 24">
+                      <use className={styles.sepUse} href="/sprite.svg#chevron_right" />
+                    </svg>
+                  </span>
                 </span>
               )}
             </li>
