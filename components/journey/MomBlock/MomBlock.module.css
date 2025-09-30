@@ -1,9 +1,8 @@
 .mom_container {
-  width: 100%;
-  max-width: 311px;
+  max-width: 335px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: 24px;
   margin: 0 auto;
@@ -23,7 +22,6 @@
   flex-direction: column;
   gap: 8px;
   width: 100%;
-  max-width: 311px;
   margin: 0 auto;
 }
 
@@ -35,7 +33,6 @@
   flex-direction: column;
   gap: 8px;
   width: 100%;
-  max-width: 311px;
   margin: 0 auto;
 }
 
@@ -111,61 +108,72 @@
   width: 24px;
   height: 24px;
 }
+.custom_tasks {
+  max-width: 335px;
+}
 
 @media screen and (min-width: 768px) {
   .mom_container {
     max-width: 704px;
   }
 
-  .mom_card {
-    width: 100%;
-    max-width: 704px;
-  }
-
-  .mom_card_feelings {
-    width: 100%;
+  .custom_tasks {
     max-width: 704px;
   }
 }
 
 @media screen and (min-width: 1440px) {
   .mom_container {
-    max-width: 1064px;
+    width: 1064px;
+    padding: 0 24px;
     flex-direction: row;
     gap: 24px;
   }
 
   .mom_card_feelings {
-    width: 100%;
-    max-width: 704px;
+    width: 650px;
+    max-height: 194px;
   }
 
   .mom_card {
-    width: 100%;
-    max-width: 704px;
-    max-height: 322px;
+    width: 650px;
+    height: 322px;
+  }
+
+  .mom_cardText_container {
+    height: 72px;
     overflow-y: auto;
   }
 
-  .mom_card::-webkit-scrollbar {
+  .comfort_tips_container {
+    display: flex;
+    gap: 8px;
+    max-height: 232px;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .comfort_tips_container::-webkit-scrollbar,
+  .mom_cardText_container::-webkit-scrollbar {
     width: 10px;
   }
 
-  .mom_card::-webkit-scrollbar-thumb {
+  .comfort_tips_container::-webkit-scrollbar-thumb,
+  .mom_cardText_container::-webkit-scrollbar-thumb {
     background: #ffcbd3;
     border-radius: 4px;
-    width: 10px;
-    height: 56px;
   }
 
-  .mom_card::-webkit-scrollbar-track {
+  .comfort_tips_container::-webkit-scrollbar-track,
+  .mom_cardText_container::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     width: 6px;
     margin: 12px 0;
   }
 
-  .mom_card::-webkit-scrollbar-button {
+  .comfort_tips_container::-webkit-scrollbar-button,
+  .mom_cardText_container::-webkit-scrollbar-button {
     display: none;
   }
 

@@ -3,16 +3,13 @@
 .info_wrapper {
   border: 0px solid var(--color-scheme-border);
   border-radius: 32px;
-  width: 90vw;
   max-width: 335px;
   padding: 24px;
   background: var(--color-scheme-foreground);
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   font-family: var(--font-lato);
   font-weight: 400;
   font-size: 14px;
@@ -21,10 +18,8 @@
 }
 
 .comparison {
-  height: 416px;
   width: 100%;
   margin-bottom: 32px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,7 +43,6 @@
 .detailed_descr_fact_box {
   width: 100%;
   max-width: 287px;
-  margin-bottom: 24px;
 }
 
 .detailed_descr_wrapper {
@@ -58,6 +52,7 @@
 }
 
 .fact_box_wrapper {
+  margin-top: 16px;
   padding: 12px;
   border-radius: 12px;
   background: var(--color-scheme-foreground-alt);
@@ -110,11 +105,9 @@
     margin-right: auto;
     margin-bottom: 73px;
     margin-left: auto;
-
     flex-direction: row;
     align-items: flex-start;
     gap: 32px;
-
     font-size: 16px;
   }
 

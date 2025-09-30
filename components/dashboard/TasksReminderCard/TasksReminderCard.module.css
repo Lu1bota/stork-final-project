@@ -48,7 +48,7 @@
 }
 
 .listWrapper {
-  max-height: 320px;
+  /* max-height: 320px; */
   overflow-y: auto;
   padding-right: 6px;
 }

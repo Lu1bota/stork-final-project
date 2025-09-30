@@ -4,6 +4,7 @@ import { MomDetails } from "@/types/weeks";
 
 interface MomBlockProps {
   data: MomDetails;
+  className?: string;
 }
 
 export default function MomBBlock({ data }: MomBlockProps) {
@@ -19,12 +20,15 @@ export default function MomBBlock({ data }: MomBlockProps) {
               </div>
             ))}
           </div>
-          <p className={css.mom_cardText}>{data.feelings.sensationDescr}</p>
+          <div className={css.mom_cardText_container}>
+            <p className={css.mom_cardText}>{data.feelings.sensationDescr}</p>
+          </div>
         </div>
 
         {/* --- Поради для вашого комфорту --- */}
         <div className={css.mom_card}>
           <h2 className={css.mom_cardTitle}>Поради для вашого комфорту</h2>
+          <div className={css.comfort_tips_container}>
           {data.comfortTips.map((tip, idx) => (
             <div key={idx} className={css.mom_tip}>
               <div className={css.mom_iconcontainer}>
@@ -44,11 +48,12 @@ export default function MomBBlock({ data }: MomBlockProps) {
             </div>
           ))}
         </div>
+        </div>
       </div>
 
       {/* --- Важливі завдання --- */}
       <div>
-        <TasksReminderCard />
+        <TasksReminderCard className={css.custom_tasks}/>
       </div>
     </div>
   );

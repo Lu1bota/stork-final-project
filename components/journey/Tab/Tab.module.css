@@ -1,73 +1,63 @@
 .tab_wrapper {
-    border-radius: 100px;
-    padding: 4px;
-    width: 90vw;
-    max-width: 335px;
-    margin-bottom: 16px;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-
-    background: var(--color-scheme-foreground);
+  border-radius: 100px;
+  padding: 4px;
+  max-width: 335px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+  background: var(--color-scheme-foreground);
 }
 
 .tab_button {
-    border: 1px solid var(--opacity-transparent);
-    border-radius: 100px;
-    padding: 10px 12px;
-    width: 163px;
-    height: 42px;
-    background: var(--opacity-transparent);
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease-in-out;
-
-    font-family: var(--font-lato);
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 160%;
-    color: var(--color-scheme-text);
-    text-align: center;
+  border: 1px solid var(--opacity-transparent);
+  border-radius: 100px;
+  padding: 10px 12px;
+  width: 163px;
+  height: 42px;
+  background: var(--opacity-transparent);
+  cursor: pointer;
+  transition:
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--font-lato);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 160%;
+  color: var(--color-scheme-text);
+  text-align: center;
 }
 
-.active {
-    border-radius: 100px;
-    padding: 10px 12px;
-    width: 163px;
-    height: 42px;
-
-    text-align: center;
-    background: var(--color-scheme-foreground-alt);
+.tab_button.active {
+  background: var(--color-scheme-foreground-alt);
+  color: var(--color-scheme-text);
 }
-
 
 /* TABLET */
 
 @media only screen and (min-width: 768px) {
-    .tab_wrapper {
-        max-width: 704px;
-    }
+  .tab_wrapper {
+    max-width: 704px;
+  }
 
-    .tab_button {
-        width: 348px;
-    }
+  .tab_button {
+    width: 348px;
+  }
 }
-
 
 /* DESKTOP */
 
 @media only screen and (min-width: 1440px) {
-    .tab_wrapper {
-        margin-top: 0;
-        margin-right: auto;
-        margin-left: auto;
-        width: 572px;
-    }
+  .tab_wrapper {
+    margin-top: 0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 572px;
+  }
 
-    .tab_button {
-        width: 285px;
-        font-size: 16px;
-    }
+  .tab_button {
+    width: 285px;
+    font-size: 16px;
+  }
 }

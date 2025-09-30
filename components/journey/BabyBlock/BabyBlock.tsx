@@ -16,6 +16,12 @@ export default function BabyBlock({ baby }: BabyBlockProps) {
           alt={`Розмір малюка на ${baby.week} тижні`}
           width={232}
           height={379}
+          priority
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src =
+              "https://ftp.goit.study/img/lehlehka/6895ce04a5c677999ed2af25.webp";
+          }}
         />
         <p className={css.comparison_descr}>{baby.analogy}</p>
       </div>
