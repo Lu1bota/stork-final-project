@@ -1,8 +1,16 @@
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .logo {
   width: 105px;
   height: 72px;
   display: flex;
   align-items: center;
+  padding-top: 22px;
 }
 
 .title {
@@ -22,9 +30,7 @@
   gap: 24px;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: var(--theme-bg);
-  color: var(--theme-text);
+  padding-top: 140px;
 }
 
 .fieldGroup {
@@ -93,17 +99,17 @@
 
 .submitBtn {
   border-style: none;
-  border-bottom: 4px solid var(--theme-accent);
+  border-bottom: 4px solid var(--color-scheme-accent);
   border-radius: 100px;
   padding: 10px 24px;
   width: 335px;
-  height: 42px;
-  background-color: var(--theme-btn-bg);
+  height: 41px;
+  background-color: var(--color-scheme-foreground-alt);
 
-  font-weight: 500;
+  font-weight: 400;
   font-size: 14px;
-  line-height: 1.6;
-  color: var(--theme-btn-text);
+  line-height: 1.5;
+  color: var(--color-scheme-text);
   font-family: var(--font-family);
 }
 
@@ -112,7 +118,7 @@
   transition:
     background-color 0.3s ease,
     transform 0.2s ease;
-  background-color: var(--theme-muted);
+  background-color: var(--color-scheme-foreground);
   border-bottom: 4px solid var(--opacity-neutral-darkest-15);
 }
 
@@ -136,8 +142,8 @@
   font-family: var(--font-family);
 }
 
-
-.img {
+.img,
+.right {
   display: none;
 }
 
@@ -147,12 +153,12 @@
     width: 480px;
   }
 
-  .submitBtn {
-    width: 480px;
+  .form {
+    padding-top: 197px;
   }
 
-  .img {
-    display: none;
+  .submitBtn {
+    width: 480px;
   }
 }
 
@@ -161,6 +167,10 @@
   .container {
     display: flex;
     flex-direction: row;
+  }
+
+  .logo {
+    padding-top: 22px;
   }
 
   .title {
@@ -191,11 +201,22 @@
     line-height: 1.6;
   }
 
+  .form {
+    padding: 0 56px;
+    padding-top: 177px;
+  }
+
+  .left {
+    padding: 0 64px;
+  }
+
+  .right {
+    display: block;
+  }
 
   .img {
     display: block;
     right: 0;
-    position: absolute;
-    height: 100vh;
+    object-fit: contain;
   }
 }
