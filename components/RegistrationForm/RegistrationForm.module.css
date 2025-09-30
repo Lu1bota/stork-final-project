@@ -1,3 +1,10 @@
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .logo {
   width: 105px;
   height: 72px;
@@ -22,8 +29,7 @@
   gap: 24px;
   justify-content: center;
   align-items: center;
-    padding-top: 140px;
-
+  padding-top: 140px;
 }
 
 .fieldGroup {
@@ -151,7 +157,7 @@
   }
 
   .submitBtn {
-    width: 480px; 
+    width: 480px;
   }
 }
 
@@ -160,6 +166,10 @@
   .container {
     display: flex;
     flex-direction: row;
+  }
+
+  .logo {
+    padding-top: 22px;
   }
 
   .title {
