@@ -1,13 +1,25 @@
 .form {
     display: flex;
     flex-direction: column;
-    font-family: var(--font-lato);
+    font-family: var(--font-family);
     font-weight: 400;
     font-size: 14px;
     line-height: 1.5;
     box-sizing: border-box;
     height: auto;
     gap: 24;
+}
+
+.from_modal_title {
+    margin-bottom: 20px;
+
+    font-family: var(--second-family);
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #000;
 }
 
 .fieldWrap {
@@ -34,11 +46,15 @@
     box-sizing: border-box;
     min-height: 37px;
 }
-.input:focus, .textarea:focus {
+
+.input:focus,
+.textarea:focus {
     border: 2px solid var(--color-pastel-pink);
     outline: none;
 }
-.input::placeholder, .textarea::placeholder {
+
+.input::placeholder,
+.textarea::placeholder {
     color: var(--opacity-neutral-darkest-60);
 }
 
@@ -75,7 +91,7 @@
     padding: 4px 10px;
     background-color: var(--opacity-neutral-darkest-5);
     font-weight: 400;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 1.5;
     color: var(--color-neutral-darkest);
 }
@@ -161,6 +177,7 @@
     border-radius: 12px;
     padding: 12px;
     font-size: 14px;
+    font-family: "Lato", sans-serif;
     width: 100%;
     height: 250px;
     background: var(--opacity-neutral-darkest-5);
@@ -194,12 +211,22 @@
     color: var(--color-red);
 }
 
-.inputError::placeholder, .placeholderError {
+.inputError::placeholder,
+.placeholderError {
     color: var(--color-red);
 }
 
+@media only screen and (min-width: 768px) {
+    .from_modal_title {
+        margin-bottom: 48px;
+    }
+}
+
 @media screen and (min-width: 1440px) {
-    .form, .textarea, .input {
+
+    .form,
+    .textarea,
+    .input {
         font-size: 16px;
     }
 
@@ -210,5 +237,16 @@
     .button {
         margin: 0 auto;
         width: 268px;
+
+        font-size: 16px;
     }
+
+    .selectedEmotionTag {
+        font-size: 14px;
+    }
+
+    .from_modal_title {
+        font-size: 48px;
+    }
+
 }

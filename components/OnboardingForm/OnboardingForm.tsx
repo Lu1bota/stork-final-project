@@ -12,15 +12,16 @@ import styles from "./OnboardingForm.module.css";
 import Image from "next/image";
 import Select, { SingleValue } from "react-select";
 import { updateMe } from "@/lib/api/clientApi";
+import Link from "next/link";
 
 /* ---------- локальні опції статі ---------- */
 type Gender = "boy" | "girl" | "null";
 type GenderOption = { value: Gender; label: string };
 
 const genderOptions: ReadonlyArray<GenderOption> = [
-  { value: "boy",  label: "Хлопчик"  },
+  { value: "boy", label: "Хлопчик" },
   { value: "girl", label: "Дівчинка" },
-  { value: "null", label: "Ще не знаю"  },
+  { value: "null", label: "Ще не знаю" },
 ];
 
 /* ---------- формат dd-MM-yyyy для бекенду ---------- */
@@ -48,7 +49,9 @@ function GenderSelect({ options }: { options: ReadonlyArray<GenderOption> }) {
   const id = useId();
   return (
     <div className={styles.field}>
-      <label htmlFor={id} className={styles.label}>Стать дитини</label>
+      <label htmlFor={id} className={styles.label}>
+        Стать дитини
+      </label>
 
       <Field name="gender">
         {({ field, form, meta }: FieldProps<Gender | "">) => {
@@ -63,7 +66,7 @@ function GenderSelect({ options }: { options: ReadonlyArray<GenderOption> }) {
                 className={wrapper}
                 classNamePrefix="react-select"
                 options={options as GenderOption[]}
-                value={options.find(o => o.value === field.value) ?? null}
+                value={options.find((o) => o.value === field.value) ?? null}
                 onChange={(opt: SingleValue<GenderOption>) =>
                   form.setFieldValue(field.name, opt?.value ?? "")
                 }
@@ -96,12 +99,17 @@ export default function OnboardingForm() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   // межі дат: сьогодні ... +10 місяців
-  const today = new Date(); today.setHours(0, 0, 0, 0);
-  const maxDueDate = new Date(today); maxDueDate.setMonth(maxDueDate.getMonth() + 10);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const maxDueDate = new Date(today);
+  maxDueDate.setMonth(maxDueDate.getMonth() + 10);
 
   const validationSchema = Yup.object({
     gender: Yup.string()
-      .oneOf(genderOptions.map(o => o.value), "Оберіть стать дитини")
+      .oneOf(
+        genderOptions.map((o) => o.value),
+        "Оберіть стать дитини"
+      )
       .required("Оберіть стать дитини"),
     dueDate: Yup.date()
       .nullable()
@@ -115,30 +123,43 @@ export default function OnboardingForm() {
   useEffect(() => {
     if (avatarFile) {
       const url = URL.createObjectURL(avatarFile);
-      setPreviewUrl(prev => { if (prev) URL.revokeObjectURL(prev); return url; });
+      setPreviewUrl((prev) => {
+        if (prev) URL.revokeObjectURL(prev);
+        return url;
+      });
       return () => URL.revokeObjectURL(url);
     }
-    setPreviewUrl(prev => { if (prev) URL.revokeObjectURL(prev); return null; });
+    setPreviewUrl((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return null;
+    });
   }, [avatarFile]);
 
   const mutation = useMutation<unknown, Error, FormData>({
     mutationFn: (fd) => updateMe(fd),
-    onSuccess: () => { toast.success("Дані збережено"); router.push("/"); },
-    onError:   () => { toast.error("Помилка при збереженні даних!"); },
+    onSuccess: () => {
+      toast.success("Дані збережено");
+      router.push("/");
+    },
+    onError: () => {
+      toast.error("Помилка при збереженні даних!");
+    },
   });
 
   return (
     <div className={styles.page}>
       <div className={styles.left}>
         <div className={styles.navbar}>
-          <Image
-            src="/logo/Frame_269.png"
-            alt="Лелека"
-            width={285}
-            height={87}
-            style={{ width: 95, height: "auto" }}
-            priority
-          />
+          <Link href="/">
+            <Image
+              src="/logo/Frame_269.png"
+              alt="Лелека"
+              width={285}
+              height={87}
+              style={{ width: 95, height: "auto" }}
+              priority
+            />
+          </Link>
         </div>
 
         <h1 className={styles.title}>Давайте познайомимось ближче</h1>
@@ -148,7 +169,8 @@ export default function OnboardingForm() {
           validationSchema={validationSchema}
           onSubmit={(values) => {
             const fd = new FormData();
-            if (values.dueDate) fd.append("dueDate", formatDueDate(values.dueDate));
+            if (values.dueDate)
+              fd.append("dueDate", formatDueDate(values.dueDate));
             fd.append("gender", values.gender as Gender);
             if (avatarFile) fd.append("photoURL", avatarFile);
             mutation.mutate(fd);
@@ -216,7 +238,9 @@ export default function OnboardingForm() {
                       <DatePicker
                         id="dueDate"
                         selected={field.value}
-                        onChange={(date: Date | null) => form.setFieldValue(field.name, date)}
+                        onChange={(date: Date | null) =>
+                          form.setFieldValue(field.name, date)
+                        }
                         onBlur={() => form.setFieldTouched(field.name, true)}
                         dateFormat="dd.MM.yyyy"
                         placeholderText="Оберіть дату"
@@ -229,11 +253,19 @@ export default function OnboardingForm() {
                       />
                     )}
                   </Field>
-                  <ErrorMessage name="dueDate" component="div" className={styles.error} />
+                  <ErrorMessage
+                    name="dueDate"
+                    component="div"
+                    className={styles.error}
+                  />
                 </div>
               </div>
 
-              <button type="submit" className={styles.button} disabled={mutation.isPending}>
+              <button
+                type="submit"
+                className={styles.button}
+                disabled={mutation.isPending}
+              >
                 {mutation.isPending ? "Збереження..." : "Зберегти"}
               </button>
             </Form>
