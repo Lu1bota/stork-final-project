@@ -1,0 +1,15 @@
+.journeyContainer {
+  width: 335px;
+}
+
+@media screen and (min-width: 768px) {
+  .journeyContainer {
+    width: 740px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .journeyContainer {
+    width: 1064px;
+  }
+}

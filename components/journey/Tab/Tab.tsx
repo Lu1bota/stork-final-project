@@ -2,22 +2,22 @@
 import css from "./Tab.module.css";
 
 interface TabProps {
-  activeTab: "Малюк" | "Мама";
-  onTabChange: (newTab: "Малюк" | "Мама") => void;
+  activeTab: "baby" | "mom";
+  onTabChange: (newTab: "baby" | "mom") => void;
 }
 
 export default function Tab({ activeTab, onTabChange }: TabProps) {
   return (
     <div className={css.tab_wrapper}>
       <button
-        className={`${css.tab_button} ${activeTab === "Малюк" ? css.active : ""}`}
-        onClick={() => onTabChange("Малюк")}
+        className={`${css.tab_button} ${activeTab === "baby" ? css.active : ""}`}
+        onClick={() => onTabChange("baby")}
       >
         Розвиток малюка
       </button>
       <button
-        className={`${css.tab_button} ${activeTab === "Мама" ? css.active : ""}`}
-        onClick={() => onTabChange("Мама")}
+        className={`${css.tab_button} ${activeTab === "mom" ? css.active : ""}`}
+        onClick={() => onTabChange("mom")}
       >
         Тіло мами
       </button>
