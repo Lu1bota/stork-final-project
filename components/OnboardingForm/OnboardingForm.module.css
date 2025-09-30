@@ -1,6 +1,10 @@
 .page {
   display: flex;
   flex-direction: column;
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .left {
@@ -55,7 +59,7 @@
 
   .image {
     display: block;
-    max-width: 100%;
+    /* max-width: 100%; */
     height: auto;
     object-fit: contain;
   }
