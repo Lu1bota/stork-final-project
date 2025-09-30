@@ -26,7 +26,7 @@ export default function LoginForm() {
 
   const handleSubmit = async (values: { email: string; password: string }) => {
     try {
-      await login(values);
+      await login(values); 
       router.push("/");
     } catch {
       toast.error("Невірна пошта або пароль");
