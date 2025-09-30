@@ -52,7 +52,7 @@ export default function MomBBlock({ data }: MomBlockProps) {
       </div>
 
       {/* --- Важливі завдання --- */}
-      <div>
+      <div className={css.task_container}>
         <TasksReminderCard className={css.custom_tasks}/>
       </div>
     </div>

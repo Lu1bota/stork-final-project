@@ -8,6 +8,7 @@ interface BabyBlockProps {
 
 export default function BabyBlock({ baby }: BabyBlockProps) {
   return (
+    <div className={css.baby_container}>
     <div className={css.info_wrapper}>
       <div className={css.comparison}>
         <Image
@@ -45,6 +46,7 @@ export default function BabyBlock({ baby }: BabyBlockProps) {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+      </div>
   );
 }

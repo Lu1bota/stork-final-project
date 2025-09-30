@@ -108,6 +108,11 @@
   width: 24px;
   height: 24px;
 }
+
+.task_container {
+  padding-bottom: 24px;
+}
+
 .custom_tasks {
   max-width: 335px;
 }
