@@ -17,6 +17,10 @@
   color: var(--color-scheme-text);
 }
 
+.baby_container {
+  padding-bottom: 24px;
+}
+
 .comparison {
   width: 100%;
   margin-bottom: 32px;
