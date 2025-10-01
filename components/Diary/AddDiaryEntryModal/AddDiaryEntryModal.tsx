@@ -14,7 +14,7 @@ export const AddDiaryEntryModal = ({
   entryToEdit,
 }: AddDiaryEntryModalProps) => {
   return (
-    <Modal title={title} onClose={onClose}>
+    <Modal title={title} onClose={onClose} modalType="addDiaryEntryModalTitle">
       <AddDiaryEntryForm onSuccess={onClose} entryToEdit={entryToEdit} />
     </Modal>
   );
