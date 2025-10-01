@@ -212,27 +212,43 @@ export const getEmotions = async (): Promise<Emotion[]> => {
 // WEEKS
 
 export const getPublicWeekInfo = async (): Promise<WeekInfo> => {
-  const { data } = await nextServer.get<WeekInfo>("/weeks/public");
-  return data;
+  try {
+    const { data } = await nextServer.get<WeekInfo>("/weeks/public");
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const getPrivateWeekInfo = async (): Promise<WeekInfo> => {
-  const { data } = await nextServer.get<WeekInfo>("/weeks/info", {
-    headers: getAuthHeaders(),
-  });
-  return data;
+  try {
+    const { data } = await nextServer.get<WeekInfo>("/weeks/info", {
+      headers: getAuthHeaders(),
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const getBabyDetails = async (week: number): Promise<BabyDetails> => {
-  const { data } = await nextServer.get<BabyDetails>(`/weeks/${week}/baby`, {
-    headers: getAuthHeaders(),
-  });
-  return data;
+  try {
+    const { data } = await nextServer.get<BabyDetails>(`/weeks/${week}/baby`, {
+      headers: getAuthHeaders(),
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const getMomDetails = async (week: number): Promise<MomDetails> => {
-  const { data } = await nextServer.get<MomDetails>(`/weeks/${week}/mom`, {
-    headers: getAuthHeaders(),
-  });
-  return data;
+  try {
+    const { data } = await nextServer.get<MomDetails>(`/weeks/${week}/mom`, {
+      headers: getAuthHeaders(),
+    });
+    return data;
+  } catch (error) {
+    throw error;
+  }
 };
