@@ -65,7 +65,7 @@ function getIconByCategory(category: string) {
             return "fork_spoon";
         case "Активність":
             return "fitness_center";
-        case "Відпочинок та комфорт":
+        case "Відпочинок":
             return "chair";
         default:
             return "info";
