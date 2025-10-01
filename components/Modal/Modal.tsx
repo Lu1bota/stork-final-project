@@ -10,6 +10,7 @@ interface ModalProps {
   title?: string;
   onClose: () => void;
   className?: string;
+  modalType?: string;
 }
 
 export default function Modal({
@@ -17,6 +18,7 @@ export default function Modal({
   title,
   onClose,
   className,
+  modalType,
 }: ModalProps) {
   const [isClosing, setIsClosing] = useState(false);
 
@@ -64,7 +66,10 @@ export default function Modal({
         })}
         onAnimationEnd={handleAnimationEnd}
       >
-        <h2 id="modal-title" className={css.title}>
+        <h2
+          id="modal-title"
+          className={clsx(css.title, modalType && css[modalType])}
+        >
           {title}
         </h2>
         <button

@@ -46,7 +46,9 @@ export default function FeelingCheckCard({ className = "" }: Props) {
         </div>
       </div>
 
-      {diaryEntryModal && <AddDiaryEntryModal onClose={closeModal} />}
+      {diaryEntryModal && (
+        <AddDiaryEntryModal title="Новий запис" onClose={closeModal} />
+      )}
     </section>
   );
 }

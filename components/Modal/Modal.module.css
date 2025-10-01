@@ -41,6 +41,17 @@
   margin-bottom: 48px;
 }
 
+.addDiaryEntryModalTitle {
+  font-family: var(--second-family);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: var(--color-scheme-text);
+  margin-bottom: 20px;
+}
+
 .closeBtn {
   position: absolute;
   top: 20px;
@@ -64,6 +75,10 @@
     top: 32px;
     right: 32px;
   }
+
+  .addDiaryEntryModalTitle {
+    margin-bottom: 48px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
@@ -75,6 +90,11 @@
   .title {
     font-size: 48px;
   }
+
+  .addDiaryEntryModalTitle {
+    font-size: 48px;
+  }
+
 }
 
 @keyframes scale-in-center {
