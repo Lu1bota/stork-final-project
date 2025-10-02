@@ -148,6 +148,7 @@
   .mom_cardText_container {
     height: 72px;
     overflow-y: auto;
+    padding-right: 8px;
   }
 
   .comfort_tips_container {
@@ -156,11 +157,12 @@
     max-height: 232px;
     flex-direction: column;
     overflow-y: auto;
+    padding-right: 8px;
   }
 
   .comfort_tips_container::-webkit-scrollbar,
   .mom_cardText_container::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
   }
 
   .comfort_tips_container::-webkit-scrollbar-thumb,
@@ -173,7 +175,7 @@
   .mom_cardText_container::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-    width: 6px;
+    width: 4px;
     margin: 12px 0;
   }
 
