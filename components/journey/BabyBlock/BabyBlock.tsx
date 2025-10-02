@@ -24,13 +24,13 @@ export default function BabyBlock({ baby }: BabyBlockProps) {
               "https://ftp.goit.study/img/lehlehka/6895ce04a5c677999ed2af25.webp";
           }}
         />
-        <p className={css.comparison_descr}>{baby.analogy}</p>
+        <p className={css.comparison_descr}>Ваш малюк зараз розміром з {baby.analogy}</p>
       </div>
       <div className={css.detailed_descr_fact_box}>
         <div className={css.detailed_descr_wrapper}>
           <p className={css.detailed_descr}>{baby.development}</p>
           <p className={css.detailed_descr}>{baby.activity}</p>
-          <p className={css.detailed_descr}>{baby.fact}</p>
+          {/* <p className={css.detailed_descr}>{baby.fact}</p> */}
         </div>
         <div className={css.fact_box_wrapper}>
           <div className={css.title_wrapper}>
