@@ -6,6 +6,8 @@ import { useAuthStore } from "@/lib/store/authStore";
 import { getTasks, createTask, setTaskCompleted } from "@/lib/api/clientApi";
 import { Task } from "@/types/task";
 import AddTaskModal from "@/components/AddTaskModal/AddTaskModal";
+import Loader from "@/components/Loader/Loader";
+import ErrorView from "@/components/ErrorPage/ErrorPage";
 import styles from "./TasksReminderCard.module.css";
 
 type Props = {
@@ -45,6 +47,7 @@ export default function TasksReminderCard({
 
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [isLoadingList, setIsLoadingList] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -57,6 +60,8 @@ export default function TasksReminderCard({
       }
 
       setIsLoadingList(true);
+      setIsError(false);
+
       try {
         const data = await getTasks();
         if (mounted) {
@@ -64,6 +69,7 @@ export default function TasksReminderCard({
         }
       } catch (err) {
         console.error("Error loading tasks:", err);
+        if (mounted) setIsError(true);
       } finally {
         if (mounted) setIsLoadingList(false);
       }
@@ -107,7 +113,6 @@ export default function TasksReminderCard({
   };
 
   const toggleTask = async (task: Task) => {
-    // Оптимистичное обновление UI
     setTasks((prev) =>
       prev.map((t) =>
         t._id === task._id ? { ...t, completed: !t.completed } : t
@@ -120,7 +125,6 @@ export default function TasksReminderCard({
         prev.map((t) => (t._id === task._id ? updatedTask : t))
       );
     } catch (err) {
-      // Откат изменений при ошибке
       setTasks((prev) =>
         prev.map((t) =>
           t._id === task._id ? { ...t, completed: task.completed } : t
@@ -129,6 +133,9 @@ export default function TasksReminderCard({
       console.error("Toggle task error:", err);
     }
   };
+
+  if (isLoadingList) return <Loader />;
+  if (isError) return <ErrorView />;
 
   return (
     <>
@@ -152,9 +159,7 @@ export default function TasksReminderCard({
         </div>
 
         <div className={styles.content}>
-          {isLoadingList ? (
-            <div className={styles.loader}>Завантаження завдань...</div>
-          ) : tasks.length === 0 ? (
+          {tasks.length === 0 ? (
             <div className={styles.emptyTask}>
               <span>Наразі немає жодних завдань</span> <br />
               Створіть мершій нове завдання!
@@ -249,7 +254,7 @@ export default function TasksReminderCard({
           )}
         </div>
 
-        {tasks.length === 0 && !isLoadingList && (
+        {tasks.length === 0 && (
           <button
             className={styles.bottomCreateBtn}
             onClick={handleCreateNewTask}
