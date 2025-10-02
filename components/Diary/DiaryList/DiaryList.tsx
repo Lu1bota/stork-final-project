@@ -6,16 +6,23 @@ import { getDiaryEntries } from "@/lib/api/clientApi";
 import { DiaryEntryCard } from "../DiaryEntryCard/DiaryEntryCard"
 import { DiaryEntryDetails } from "../DiaryEntryDetails/DiaryEntryDetails";
 import { AddDiaryEntryModal } from "../AddDiaryEntryModal/AddDiaryEntryModal";
-import css from "./DiaryList.module.css"
+import css from "./DiaryList.module.css";
 
-type DiaryListProps = {
-    isMobile: boolean,
-};
-
-export const DiaryList = ({ isMobile }: DiaryListProps) => {
+export const DiaryList = () => {
+    const [isMobile, setIsMobile] = useState<boolean | null>(null);
     
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 1440);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+
+
     const [selectedEntryId, setSelectedEntryId] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+
 
     const { data: entries } = useQuery({
         queryKey: ['diaryEntries'], 
@@ -63,11 +70,10 @@ export const DiaryList = ({ isMobile }: DiaryListProps) => {
                         </svg>
                     </button>
                 </div>
-                {hasEntries && <ul className={css.entriesList}>
+                {hasEntries && (<ul className={css.entriesList}>
                     {entries.map((entry) => (
                         <li key={entry._id} className={`${css.card} ${selectedEntryId === entry._id ? css.activeCard : ''}`}>
-                            {isMobile ? (
-                                
+                            {isMobile ? (                                
                                 <Link href={`/diary/${entry._id}`} className={css.linkWrapper}>
                                     <DiaryEntryCard entryCard={entry} />
                                 </Link>
@@ -78,7 +84,12 @@ export const DiaryList = ({ isMobile }: DiaryListProps) => {
                             )}
                         </li>
                     ))}
-                </ul>}
+                </ul>)}
+                {isMobile && !hasEntries && (
+                    <div className={css.emptyMessage}>
+                        <DiaryEntryDetails noEntryMessage="Наразі записи у щоденнику відсутні" />
+                    </div>
+                )}
             </div>
             
             {!isMobile && (

@@ -7,7 +7,8 @@ import css from "./AppLayout.module.css";
 import Sidebar from "../Sidebar/Sidebar";
 import Header from "../Header/Header";
 import GreetingBlock from "../dashboard/GreetingBlock/GreetingBlock";
-import { usePathname } from "next/navigation.js";
+import { usePathname } from "next/navigation";
+import { useBreadcrumbsStore } from "@/lib/store/useBreadcrumbsStore";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -19,6 +20,8 @@ export default function AppLayout({ children, showBreadcrumbs = true, breadcrumb
   const pathname = usePathname();
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+
+  const entryTitle = useBreadcrumbsStore((state) => state.entryTitle);
 
   useEffect(() => {
     const handleResize = () => {
@@ -46,7 +49,7 @@ export default function AppLayout({ children, showBreadcrumbs = true, breadcrumb
 
       <div className={css.content}>
         <div className={css.crumb}>
-          {showBreadcrumbs && <Breadcrumbs homeLabel={breadcrumbsHomeLabel} />}
+          {showBreadcrumbs && <Breadcrumbs homeLabel={breadcrumbsHomeLabel} entryTitle={entryTitle} />}
           {!hideGreeting && <GreetingBlock />}
         </div>
 

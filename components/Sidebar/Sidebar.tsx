@@ -29,8 +29,8 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
   const handleLogout = () => {
     logout();
-    router.push("/auth/login");
-  }
+    router.push("/");
+  };
 
   const navHref = (href: string) => (isAuth ? href : "/auth/register");
 
@@ -41,7 +41,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className={css.content}>
           <div className={css.top}>
             <div className={css.headerRow}>
-              <Link href='/' aria-label="Go to Мій день" onClick={onClose}>
+              <Link href="/" aria-label="Go to Мій день" onClick={onClose}>
                 <Image
                   className={css.logoImg}
                   src="/logo/Frame_269.png"
