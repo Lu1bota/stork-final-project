@@ -2,24 +2,27 @@
 
 import React from "react";
 import Image from "next/image";
-import { useBabyDetails } from "@/hooks/useBabyDetails";
+import { useQuery } from "@tanstack/react-query";
+import { getPrivateWeekInfo, getPublicWeekInfo } from "@/lib/api/clientApi";
+import { useAuthStore } from "@/lib/store/authStore";
 import type { BabyDetails } from "@/types/weeks";
 import css from "./BabyTodayCard.module.css";
 import Loader from "@/components/Loader/Loader";
 import ErrorView from "@/components/ErrorPage/ErrorPage";
 
 export default function BabyTodayCard() {
-  const { data, isLoading, isError, refetch } = useBabyDetails();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  const babyData = data as BabyDetails | undefined;
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ["babyToday", isAuthenticated],
+    queryFn: () =>
+      isAuthenticated ? getPrivateWeekInfo() : getPublicWeekInfo(),
+  });
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  const babyData = data?.baby as BabyDetails | undefined;
 
-  if (isError) {
-    return <ErrorView />;
-  }
+  if (isLoading) return <Loader />;
+  if (isError) return <ErrorView />;
 
   if (!babyData) {
     return (
