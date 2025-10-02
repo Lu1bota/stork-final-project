@@ -10,6 +10,7 @@ export type BreadcrumbsProps = {
   capitalize?: boolean;
   homeHref?: string;
   homeLabel?: ReactNode;
+  entryTitle?: string;
 };
 
 export default function Breadcrumbs({
@@ -17,6 +18,7 @@ export default function Breadcrumbs({
   capitalize = true,
   homeHref = "/",
   homeLabel = "Мій день",
+  entryTitle,
 }: BreadcrumbsProps) {
   const pathname = usePathname();
   const segments = (pathname || "/").split("/").filter(Boolean);
@@ -67,10 +69,19 @@ export default function Breadcrumbs({
         {segments.map((seg, idx) => {
           hrefAccumulator += `/${seg}`;
           const isLast = idx === segments.length - 1;
+
+          const isEntryId =
+            segments.length >= 2 &&
+            segments[segments.length - 2] === 'diary' &&
+            isLast &&
+            !!entryTitle;
+          
           return (
             <li key={hrefAccumulator} className={styles.item}>
               {isLast ? (
-                <span className={`${styles.link} ${styles.active}`} aria-current="page">{translateSegment(seg)}</span>
+                <span className={`${styles.link} ${styles.active}`} aria-current="page">
+                  {isEntryId ? entryTitle : translateSegment(seg)}
+                </span>
               ) : (
                 <Link href={hrefAccumulator} className={styles.link}>
                   {translateSegment(seg)}
