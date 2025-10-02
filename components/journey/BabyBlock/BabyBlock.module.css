@@ -31,13 +31,20 @@
   gap: 16px;
 }
 
+.image_wrapper {
+  width: 257px;
+  height: 194px;
+  position: relative;
+}
+
 .comparison_img {
   display: block;
   width: 100%;
+  height: 100%;
   object-fit: cover;
   border: 1px solid var(--color-scheme-border);
-  border-radius: 24px;
   overflow: hidden;
+  border-radius: 24px;
 }
 
 .comparison_descr {
@@ -95,6 +102,11 @@
     min-width: 656px;
   }
 
+  .image_wrapper {
+    width: 656px;
+    height: 379px;
+  }
+
   .detailed_descr_fact_box {
     min-width: 656px;
   }
@@ -120,6 +132,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .image_wrapper {
+    width: 461px;
+    height: 419px;
   }
 
   .detailed_descr_fact_box {

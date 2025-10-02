@@ -10,20 +10,22 @@ export default function BabyBlock({ baby }: BabyBlockProps) {
   return (
     <div className={css.baby_container}>
     <div className={css.info_wrapper}>
-      <div className={css.comparison}>
+        <div className={css.comparison}>
+          <div className={css.image_wrapper}>
         <Image
           src={baby.image}
-          className={css.comparison_img}
           alt={`Розмір малюка на ${baby.week} тижні`}
-          width={232}
-          height={379}
-          priority
+              width={656}
+              height={419}
+              priority
+              className={css.comparison_img}
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.src =
               "https://ftp.goit.study/img/lehlehka/6895ce04a5c677999ed2af25.webp";
           }}
-        />
+            />
+            </div>
         <p className={css.comparison_descr}>{baby.analogy}</p>
       </div>
       <div className={css.detailed_descr_fact_box}>
