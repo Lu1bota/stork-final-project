@@ -9,7 +9,6 @@ import AddTaskModal from "@/components/AddTaskModal/AddTaskModal";
 import Loader from "@/components/Loader/Loader";
 import ErrorView from "@/components/ErrorPage/ErrorPage";
 import styles from "./TasksReminderCard.module.css";
-import toast from "react-hot-toast";
 
 type Props = {
   initialTasks?: Task[];
@@ -108,17 +107,9 @@ export default function TasksReminderCard({
   };
 
   const handleModalSubmit = async (values: { title: string; date: Date }) => {
-    try {
-      const dateString = values.date.toISOString().slice(0, 10);
-      const newTask = await createTask({
-        title: values.title,
-        date: dateString,
-      });
-      setTasks((prev) => [...prev, newTask]);
-      toast.success("Завдання успішно створено!");
-    } catch {
-      toast.error("Помилка при створенні завдання!");
-    }
+    const dateString = values.date.toISOString().slice(0, 10);
+    const newTask = await createTask({ title: values.title, date: dateString });
+    setTasks((prev) => [...prev, newTask]);
   };
 
   const toggleTask = async (task: Task) => {
