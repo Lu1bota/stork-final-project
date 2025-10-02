@@ -1,14 +1,4 @@
 .diaryContainer {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    align-items: center;
-}
-
-@media screen and (min-width: 1440px) {
-    .diaryContainer {
-        flex-direction: row;
-        gap: 32px;
-        justify-content: flex-start;
-    }
+    gap: 32px;
 }
