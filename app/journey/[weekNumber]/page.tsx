@@ -4,15 +4,14 @@ import JourneyDetails from "@/components/journey/JourneyDetails/JourneyDetails";
 import css from "./page.module.css";
 
 type Props = {
-  params: { weekNumber: string };
+  params: Promise<{ weekNumber: string }>;
 };
 
 export default async function JourneyPage({ params }: Props) {
-   const { weekNumber } = await params;
+  const { weekNumber } = await params;
   const selectedWeek = Number(weekNumber);
 
   return (
-    
     <AppLayout>
       <div className={css.journeyContainer}>
         <WeekSelector activeWeek={selectedWeek} />

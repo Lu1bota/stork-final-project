@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getPrivateWeekInfo } from "@/lib/api/clientApi";
-
+import Loader from "@/components/Loader/Loader";
 
 export default function JourneyPage() {
   const router = useRouter();
@@ -19,8 +19,6 @@ export default function JourneyPage() {
     };
     redirectToCurrentWeek();
   }, [router]);
+
+  return <Loader />;
 }
-
-
-
-
