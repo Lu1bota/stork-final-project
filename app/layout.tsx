@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import { Lato, Comfortaa } from "next/font/google";
+import { Comfortaa } from "next/font/google";
 import "./globals.css";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 import AuthProvider from "@/components/AuthProvider/AuthProvider";
- 
-
-const fontsLato = Lato({
-  variable: "--font-lato",
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "700", "900"],
-  display: "swap",
-});
+import { lato } from "./fonts";
 
 const fontsComfortaa = Comfortaa({
   variable: "--font-comfortaa",
@@ -32,10 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fontsLato.variable} ${fontsComfortaa.variable}`}>
+      <body className={`${lato.variable} ${fontsComfortaa.variable}`}>
         <TanStackProvider>
           <AuthProvider>
-            
             <main>{children}</main>
             <Toaster position="top-right" toastOptions={{ duration: 2000 }} />
           </AuthProvider>
